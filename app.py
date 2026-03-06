@@ -1,6 +1,7 @@
 """
 Streamlit Chat UI for the Banking Knowledge AI System.
 Displays: answers, citations, evidence paths, graph visualization, confidence scores.
+Features: RBAC login, document filtering, streaming answers.
 """
 
 import json
@@ -26,6 +27,13 @@ from src.ingestion.embedder import VectorStore
 from src.graph.kg_builder import KnowledgeGraph
 from src.retrieval.hybrid_retriever import HybridRetriever
 from src.generation.aggregator import generate_response
+from src.auth.rbac import (
+    authenticate,
+    get_accessible_docs,
+    get_access_level,
+    AccessLevel,
+    UserProfile,
+)
 
 
 # ── Page config ──
@@ -34,6 +42,57 @@ st.set_page_config(
     page_icon="🏦",
     layout="wide",
 )
+
+# ── Access level display helpers ──
+_ACCESS_BADGES = {
+    1: ("🟢", "Public"),
+    2: ("🟡", "Confidential"),
+    3: ("🔴", "Restricted"),
+}
+
+
+def _access_badge(level: int) -> str:
+    """Return emoji + label for a given access level."""
+    emoji, label = _ACCESS_BADGES.get(level, ("⚪", "Unknown"))
+    return f"{emoji} {label}"
+
+
+def _render_login_page():
+    """Render the login page and return True if authenticated."""
+    st.title("🏦 Banking Knowledge AI")
+    st.caption("Graph-grounded, hallucination-resistant knowledge assistant")
+    st.divider()
+
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.subheader("🔐 Login")
+        st.markdown(
+            "Sign in with your credentials to access the banking knowledge base."
+        )
+
+        with st.form("login_form"):
+            username = st.text_input("Username")
+            password = st.text_input("Password", type="password")
+            submitted = st.form_submit_button("Login", use_container_width=True)
+
+        if submitted:
+            user = authenticate(username, password)
+            if user:
+                st.session_state.user = user
+                st.session_state.messages = []  # fresh chat on login
+                st.rerun()
+            else:
+                st.error("Invalid username or password.")
+
+        with st.expander("Demo accounts"):
+            st.markdown(
+                "| Username | Password | Role | Access |\n"
+                "|---|---|---|---|\n"
+                "| `teller` | `teller123` | Bank Teller | 🟢 Public |\n"
+                "| `risk_analyst` | `risk123` | Risk Analyst | 🟡 Confidential |\n"
+                "| `compliance` | `comp123` | Compliance Officer | 🟡 Confidential |\n"
+                "| `cro` | `cro123` | Chief Risk Officer | 🔴 Restricted |"
+            )
 
 
 @st.cache_resource
@@ -80,6 +139,21 @@ def _render_citations(citations: list[dict], msg_idx: int):
         st.markdown(
             f'<div id="cite-{msg_idx}-{i}" style="padding: 4px 0;">'
             f'{emoji} <b>[{i}]</b> {c["doc_name"]} | {c["section_path"]} '
+            f'(score: {c["relevance_score"]:.3f})</div>',
+            unsafe_allow_html=True,
+        )
+
+
+def _render_citations_with_badges(citations: list[dict], msg_idx: int):
+    """Render citations with RBAC access-level badges."""
+    for i, c in enumerate(citations, 1):
+        emoji = "📊" if c.get("element_type") == "table" else "📄"
+        doc_name = c["doc_name"]
+        level = get_access_level(doc_name)
+        badge = _access_badge(level)
+        st.markdown(
+            f'<div id="cite-{msg_idx}-{i}" style="padding: 4px 0;">'
+            f'{emoji} <b>[{i}]</b> {doc_name} {badge} | {c["section_path"]} '
             f'(score: {c["relevance_score"]:.3f})</div>',
             unsafe_allow_html=True,
         )
@@ -194,6 +268,13 @@ def _render_graph_explorer(kg: KnowledgeGraph):
 
 
 def main():
+    # ── Login gate ──
+    if "user" not in st.session_state:
+        _render_login_page()
+        return
+
+    user: UserProfile = st.session_state.user
+
     st.title("🏦 Banking Knowledge AI")
     st.caption("Graph-grounded, hallucination-resistant knowledge assistant")
 
@@ -209,6 +290,16 @@ def main():
 
     # ── Sidebar ──
     with st.sidebar:
+        # ── User profile card ──
+        st.markdown("---")
+        st.markdown(f"### {user.level_label}")
+        st.markdown(f"**{user.display_name}** · `{user.role}`")
+        if st.button("🚪 Logout", use_container_width=True):
+            for key in list(st.session_state.keys()):
+                del st.session_state[key]
+            st.rerun()
+        st.markdown("---")
+
         st.header("⚙️ Settings")
 
         mode = st.radio(
@@ -229,8 +320,22 @@ def main():
             help="8B model is more retrieval-dependent — graph advantage becomes more visible",
         )
 
+        # ── Document filter (RBAC-aware) ──
+        accessible_docs = get_accessible_docs(user)
+        doc_options = ["All accessible documents"] + [
+            f"{d}  {_access_badge(get_access_level(d))}" for d in accessible_docs
+        ]
+        selected_doc_display = st.selectbox("📄 Document Filter", doc_options, index=0)
+        # Extract raw doc name from display string (strip badge)
+        if selected_doc_display == "All accessible documents":
+            doc_filter = None
+        else:
+            doc_filter = selected_doc_display.split("  ")[0].strip()
+
         show_evidence = st.toggle("Show Evidence Details", value=True)
         show_graph_info = st.toggle("Show Graph Info", value=False)
+        stream_answers = st.toggle("Stream Answers", value=True,
+                                   help="Show tokens as they arrive from the LLM")
 
         st.divider()
         st.header("📊 System Info")
@@ -241,6 +346,7 @@ def main():
             st.metric("Graph Edges", stats["total_edges"])
             if stats.get("node_types"):
                 st.json(stats["node_types"])
+        st.metric("Accessible Docs", f"{len(accessible_docs)} / 30")
 
         mode_label = "🔗 Hybrid (Vector + Graph)" if use_graph else "📊 Vector-Only"
         st.info(f"Mode: {mode_label}")
@@ -286,8 +392,10 @@ def main():
             col_a, col_b = st.columns(2)
 
             with st.spinner("Running A/B comparison..."):
-                retrieval_vector = retriever.retrieve(query=prompt, top_k=top_k, use_graph=False)
-                retrieval_hybrid = retriever.retrieve(query=prompt, top_k=top_k, use_graph=True)
+                retrieval_vector = retriever.retrieve(query=prompt, top_k=top_k, use_graph=False,
+                                                      user_access_level=user.access_level, doc_filter=doc_filter)
+                retrieval_hybrid = retriever.retrieve(query=prompt, top_k=top_k, use_graph=True,
+                                                      user_access_level=user.access_level, doc_filter=doc_filter)
                 resp_vector = generate_response(query=prompt, retrieval=retrieval_vector, config=config, model_override=llm_model)
                 resp_hybrid = generate_response(query=prompt, retrieval=retrieval_hybrid, config=config, model_override=llm_model)
 
@@ -394,7 +502,92 @@ def main():
                         query=prompt,
                         top_k=top_k,
                         use_graph=use_graph,
+                        user_access_level=user.access_level,
+                        doc_filter=doc_filter,
                     )
+
+                if stream_answers:
+                    # Streaming path — tokens rendered as they arrive
+                    stream_resp = generate_response(
+                        query=prompt,
+                        retrieval=retrieval,
+                        config=config,
+                        model_override=llm_model,
+                        stream=True,
+                    )
+
+                    raw_stream = stream_resp.get("stream")
+                    citations = stream_resp.get("citations", [])
+                    conf = stream_resp.get("confidence", 0)
+
+                    if raw_stream is None:
+                        # Evidence insufficient — no stream, just the refusal answer
+                        answer = stream_resp.get("answer", "Insufficient evidence.")
+                        st.markdown(answer)
+                    else:
+                        # Wrap the provider-specific stream into a plain text generator
+                        def _token_iter(raw):
+                            """Yield text tokens from either Groq (OpenAI) or Ollama streams."""
+                            for chunk in raw:
+                                # Groq / OpenAI-compatible
+                                if hasattr(chunk, "choices"):
+                                    delta = chunk.choices[0].delta
+                                    if delta and delta.content:
+                                        yield delta.content
+                                # Ollama dict stream
+                                elif isinstance(chunk, dict):
+                                    msg = chunk.get("message", {})
+                                    if msg.get("content"):
+                                        yield msg["content"]
+
+                        answer = st.write_stream(_token_iter(raw_stream))
+
+                    msg_idx = len(st.session_state.messages)
+
+                    # Confidence badge
+                    if conf > 0.7:
+                        st.success(f"Confidence: {conf:.2f} ✓")
+                    elif conf > 0.4:
+                        st.warning(f"Confidence: {conf:.2f} ⚠")
+                    else:
+                        st.error(f"Confidence: {conf:.2f} — Low evidence")
+
+                    # Citations with access badges
+                    if citations and show_evidence:
+                        with st.expander("📎 Citations", expanded=True):
+                            _render_citations_with_badges(citations, msg_idx)
+
+                    # Evidence paths
+                    if show_evidence and retrieval.results:
+                        _has_paths = any(r.evidence_path for r in retrieval.results)
+                        if _has_paths:
+                            with st.expander("🗺️ Evidence Paths"):
+                                for r in retrieval.results:
+                                    if r.evidence_path:
+                                        path_str = " → ".join(
+                                            f"[{s['from_type']}]{s['from'][:25]} --{s['relation']}--> [{s['to_type']}]{s['to'][:25]}"
+                                            for s in r.evidence_path
+                                        )
+                                        st.markdown(f"**{r.doc_name}**: {path_str}")
+
+                    # Graph info
+                    if show_graph_info and use_graph:
+                        with st.expander("🔗 Graph Traversal Info"):
+                            st.markdown(f"**Query entities detected:** {', '.join(retrieval.query_entities) or 'None'}")
+                            st.markdown(f"**Evidence sufficient:** {retrieval.evidence_sufficient}")
+                            if retrieval.subgraph:
+                                st.metric("Subgraph nodes", len(retrieval.subgraph.get("nodes", [])))
+                                st.metric("Subgraph edges", len(retrieval.subgraph.get("edges", [])))
+
+                    # Save to chat history
+                    st.session_state.messages.append({
+                        "role": "assistant",
+                        "content": answer if isinstance(answer, str) else str(answer),
+                        "citations": citations,
+                    })
+
+                else:
+                    # Non-streaming path (original behavior)
                     response = generate_response(
                         query=prompt,
                         retrieval=retrieval,
@@ -402,59 +595,72 @@ def main():
                         model_override=llm_model,
                     )
 
-                # Display answer
-                answer = response.get("answer", "No response generated.")
-                citations = response.get("citations", [])
-                msg_idx = len(st.session_state.messages)
+                    # Display answer
+                    answer = response.get("answer", "No response generated.")
+                    citations = response.get("citations", [])
+                    msg_idx = len(st.session_state.messages)
 
-                if citations:
-                    st.markdown(_linkify_citations(answer, msg_idx), unsafe_allow_html=True)
-                else:
-                    st.markdown(answer)
+                    if citations:
+                        st.markdown(_linkify_citations(answer, msg_idx), unsafe_allow_html=True)
+                    else:
+                        st.markdown(answer)
 
-                # Confidence badge
-                conf = response.get("confidence", 0)
-                if conf > 0.7:
-                    st.success(f"Confidence: {conf:.2f} ✓")
-                elif conf > 0.4:
-                    st.warning(f"Confidence: {conf:.2f} ⚠")
-                else:
-                    st.error(f"Confidence: {conf:.2f} — Low evidence")
+                    # Confidence badge
+                    conf = response.get("confidence", 0)
+                    if conf > 0.7:
+                        st.success(f"Confidence: {conf:.2f} ✓")
+                    elif conf > 0.4:
+                        st.warning(f"Confidence: {conf:.2f} ⚠")
+                    else:
+                        st.error(f"Confidence: {conf:.2f} — Low evidence")
 
-                # Citations
-                if citations and show_evidence:
-                    with st.expander("📎 Citations", expanded=True):
-                        _render_citations(citations, msg_idx)
+                    # Citations with access badges
+                    if citations and show_evidence:
+                        with st.expander("📎 Citations", expanded=True):
+                            _render_citations_with_badges(citations, msg_idx)
 
-                # Evidence details
-                if show_evidence:
-                    retrieval_results = response.get("retrieval_results", [])
-                    if retrieval_results:
-                        with st.expander("🔍 Retrieved Evidence"):
-                            for i, r in enumerate(retrieval_results, 1):
-                                st.markdown(f"**Evidence {i}** (Score: {r['final_score']:.3f})")
-                                st.markdown(f"*Source: {r['doc_name']} | {' > '.join(r['section_path'])}*")
-                                st.code(r["content"][:300] + ("..." if len(r["content"]) > 300 else ""))
-                                if r.get("connected_entities"):
-                                    st.caption(f"Connected entities: {', '.join(r['connected_entities'])}")
-                                st.divider()
+                    # Evidence details
+                    if show_evidence:
+                        retrieval_results = response.get("retrieval_results", [])
+                        if retrieval_results:
+                            with st.expander("🔍 Retrieved Evidence"):
+                                for i, r in enumerate(retrieval_results, 1):
+                                    st.markdown(f"**Evidence {i}** (Score: {r['final_score']:.3f})")
+                                    st.markdown(f"*Source: {r['doc_name']} | {' > '.join(r['section_path'])}*")
+                                    st.code(r["content"][:300] + ("..." if len(r["content"]) > 300 else ""))
+                                    if r.get("connected_entities"):
+                                        st.caption(f"Connected entities: {', '.join(r['connected_entities'])}")
+                                    st.divider()
 
-                # Graph info
-                if show_graph_info and use_graph:
-                    with st.expander("🔗 Graph Traversal Info"):
-                        st.markdown(f"**Query entities detected:** {', '.join(retrieval.query_entities) or 'None'}")
-                        st.markdown(f"**Evidence sufficient:** {retrieval.evidence_sufficient}")
-                        if retrieval.subgraph:
-                            st.metric("Subgraph nodes", len(retrieval.subgraph.get("nodes", [])))
-                            st.metric("Subgraph edges", len(retrieval.subgraph.get("edges", [])))
+                    # Evidence paths
+                    if show_evidence and retrieval.results:
+                        _has_paths = any(r.evidence_path for r in retrieval.results)
+                        if _has_paths:
+                            with st.expander("🗺️ Evidence Paths"):
+                                for r in retrieval.results:
+                                    if r.evidence_path:
+                                        path_str = " → ".join(
+                                            f"[{s['from_type']}]{s['from'][:25]} --{s['relation']}--> [{s['to_type']}]{s['to'][:25]}"
+                                            for s in r.evidence_path
+                                        )
+                                        st.markdown(f"**{r.doc_name}**: {path_str}")
 
-                # Save to chat history
-                st.session_state.messages.append({
-                    "role": "assistant",
-                    "content": answer,
-                    "citations": citations,
-                    "evidence_details": retrieval_results[:3] if show_evidence else None,
-                })
+                    # Graph info
+                    if show_graph_info and use_graph:
+                        with st.expander("🔗 Graph Traversal Info"):
+                            st.markdown(f"**Query entities detected:** {', '.join(retrieval.query_entities) or 'None'}")
+                            st.markdown(f"**Evidence sufficient:** {retrieval.evidence_sufficient}")
+                            if retrieval.subgraph:
+                                st.metric("Subgraph nodes", len(retrieval.subgraph.get("nodes", [])))
+                                st.metric("Subgraph edges", len(retrieval.subgraph.get("edges", [])))
+
+                    # Save to chat history
+                    st.session_state.messages.append({
+                        "role": "assistant",
+                        "content": answer,
+                        "citations": citations,
+                        "evidence_details": retrieval_results[:3] if show_evidence else None,
+                    })
 
 
 if __name__ == "__main__":

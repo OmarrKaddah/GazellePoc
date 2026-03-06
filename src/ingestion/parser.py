@@ -5,11 +5,16 @@ Extracts sections, paragraphs, tables, and figures with full metadata.
 
 import json
 import hashlib
+import warnings
 from pathlib import Path
 from typing import Optional
 from dataclasses import dataclass, field, asdict
 
 from docling.document_converter import DocumentConverter
+
+# Module-level tracker for parse failures —
+# lets build_index.py report skipped documents.
+PARSE_FAILURES: list[tuple[str, str]] = []
 
 
 @dataclass
@@ -261,7 +266,8 @@ def parse_all_documents(docs_dir: str | Path, output_dir: Optional[str | Path] =
             try:
                 elements = parse_document_fallback(doc_file)
             except Exception as e2:
-                print(f"    Fallback also failed: {e2}. Skipping.")
+                warnings.warn(f"Both parsers failed for {doc_file.name}: {e2}. Skipping.")
+                PARSE_FAILURES.append((doc_file.name, str(e2)))
                 continue
 
         all_elements.extend(elements)
@@ -274,5 +280,12 @@ def parse_all_documents(docs_dir: str | Path, output_dir: Optional[str | Path] =
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump([e.to_dict() for e in all_elements], f, ensure_ascii=False, indent=2)
         print(f"Saved {len(all_elements)} elements to {output_path}")
+
+    # ── Report any parse failures ──
+    if PARSE_FAILURES:
+        warnings.warn(
+            f"{len(PARSE_FAILURES)} document(s) failed to parse: "
+            + ", ".join(name for name, _ in PARSE_FAILURES)
+        )
 
     return all_elements

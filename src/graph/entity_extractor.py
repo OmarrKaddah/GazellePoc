@@ -5,6 +5,8 @@ Extracts banking entities from chunks: loan types, limits, currencies, roles, co
 
 import json
 import re
+import time
+import warnings
 from typing import Optional
 from dataclasses import dataclass, field, asdict
 
@@ -13,6 +15,10 @@ from openai import OpenAI
 from config import get_config, Config, LLMConfig
 from src.ingestion.chunker import Chunk
 import ollama as ollama_client
+
+# Module-level tracker for chunks that failed entity extraction
+# after all retries — lets build_index.py report the loss.
+FAILED_EXTRACTIONS: list[str] = []
 
 
 @dataclass
@@ -93,7 +99,7 @@ def _call_llm(llm_config: LLMConfig, system_msg: str, user_msg: str, temperature
                 {"role": "system", "content": system_msg},
                 {"role": "user", "content": user_msg},
             ],
-            options={"temperature": temperature},
+            options={"temperature": temperature, "num_predict": max_tokens},
         )
         return response["message"]["content"]
     else:
@@ -169,16 +175,32 @@ def extract_entities_from_chunk(
 
     prompt = EXTRACTION_PROMPT.format(chunk_text=chunk.content)
 
-    try:
-        raw_text = _call_llm(
-            llm_config,
-            system_msg="You are a precise banking entity extractor. Output only valid JSON.",
-            user_msg=prompt,
-        )
-        data = _extract_json_from_response(raw_text)
-    except Exception as e:
-        print(f"  LLM extraction failed for chunk {chunk.chunk_id}: {e}")
-        return [], []
+    # ── FIX: retry with exponential backoff for transient LLM failures ──
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            raw_text = _call_llm(
+                llm_config,
+                system_msg="You are a precise banking entity extractor. Output only valid JSON.",
+                user_msg=prompt,
+            )
+            data = _extract_json_from_response(raw_text)
+            break  # success
+        except Exception as e:
+            if attempt < max_retries - 1:
+                wait = 2 ** (attempt + 1)  # 2, 4, 8 seconds
+                warnings.warn(
+                    f"Entity extraction attempt {attempt+1}/{max_retries} failed "
+                    f"for chunk {chunk.chunk_id}: {e}. Retrying in {wait}s..."
+                )
+                time.sleep(wait)
+            else:
+                warnings.warn(
+                    f"Entity extraction FAILED after {max_retries} attempts "
+                    f"for chunk {chunk.chunk_id}: {e}. Returning empty."
+                )
+                FAILED_EXTRACTIONS.append(chunk.chunk_id)
+                return [], []
 
     # Convert to Entity objects
     entities: list[Entity] = []

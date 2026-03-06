@@ -27,6 +27,9 @@ class KnowledgeGraph:
         self.config = config or get_config()
         self.graph = nx.DiGraph()
         self.entity_id_map: dict[str, str] = {}  # original entity_id -> graph node_id
+        # Counters for silent-failure visibility
+        self._dropped_relations: int = 0
+        self._orphan_entities: int = 0
 
     @property
     def num_nodes(self) -> int:
@@ -172,6 +175,9 @@ class KnowledgeGraph:
                     node_id,
                     relation_type="mentions_entity",
                 )
+            elif entity.source_chunk_id:
+                # Entity's source chunk isn't in the graph — orphan node
+                self._orphan_entities += 1
 
         # Add explicit relations between entities
         for rel in relations:
@@ -183,7 +189,13 @@ class KnowledgeGraph:
                     target_node,
                     relation_type=rel.relation_type,
                 )
+            else:
+                self._dropped_relations += 1
 
+        if self._dropped_relations:
+            print(f"  ⚠ {self._dropped_relations} relations dropped (missing source/target entity)")
+        if self._orphan_entities:
+            print(f"  ⚠ {self._orphan_entities} orphan entities (source chunk not in graph)")
         print(f"Added entities and relations. Graph: {self.num_nodes} nodes, {self.num_edges} edges")
 
     def add_cross_document_links(self):
@@ -346,6 +358,8 @@ class KnowledgeGraph:
             "total_edges": self.num_edges,
             "node_types": node_types,
             "edge_types": edge_types,
+            "dropped_relations": self._dropped_relations,
+            "orphan_entities": self._orphan_entities,
         }
 
     # ── Visualization ──────────────────────────────────────────────

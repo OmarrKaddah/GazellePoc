@@ -110,7 +110,7 @@ class HybridRetriever:
         query: str,
         top_k: Optional[int] = None,
         use_graph: bool = True,
-        user_role: Optional[str] = None,
+        user_access_level: Optional[int] = None,
         doc_filter: Optional[str] = None,
     ) -> RetrievalResponse:
         """
@@ -120,7 +120,9 @@ class HybridRetriever:
             query: User's question
             top_k: Number of final results (default from config)
             use_graph: Whether to use graph expansion (set False for baseline comparison)
-            user_role: User role for policy filtering (None = no filtering)
+            user_access_level: Integer access level (1=Public,2=Confidential,3=Restricted).
+                               Only chunks with access_level <= this value are returned.
+                               None = no filtering (backwards-compatible).
             doc_filter: Filter to specific document
         """
         top_k = top_k or self.rc.rerank_top_k
@@ -130,6 +132,7 @@ class HybridRetriever:
             query=query,
             top_k=self.rc.top_k,
             doc_filter=doc_filter,
+            max_access_level=user_access_level,
         )
 
         # Build initial result objects from vector search
@@ -173,6 +176,15 @@ class HybridRetriever:
                     # Get chunk content from graph
                     node_data = self.kg.graph.nodes.get(graph_chunk_id, {})
                     content = node_data.get("content", "")
+
+                    # RBAC: skip graph-discovered chunks the user cannot access
+                    # Uses authoritative DOCUMENT_ACCESS_MAP, not stored metadata
+                    if user_access_level is not None:
+                        from src.auth.rbac import get_access_level as _get_al
+                        doc_name = node_data.get("doc_name", "")
+                        if _get_al(doc_name) > user_access_level:
+                            continue
+
                     if content:
                         # Use cached embedding for fast similarity
                         cached_emb = self.vector_store.get_cached_embedding(graph_chunk_id)
@@ -207,12 +219,43 @@ class HybridRetriever:
                     ]
                     result.connected_entities = entity_neighbors[:5]
 
-        # ── Step 4: Policy filtering ──
-        # Simplified: metadata-based filtering
-        # In production, this would check role_can_access edges in the policy graph
-        if user_role:
-            for cid, result in list(results_map.items()):
-                result.policy_score = self._compute_policy_score(result, user_role)
+        # ── Step 3b: Wire evidence paths ──
+        # For each result with connected entities, find shortest graph path
+        # from the chunk to its connected entity nodes (auditable reasoning).
+        if self.kg and use_graph:
+            for cid, result in results_map.items():
+                if result.connected_entities and self.kg.graph.has_node(cid):
+                    paths: list[dict] = []
+                    for entity_name in result.connected_entities:
+                        # Resolve entity name → node id (entities are keyed by name)
+                        entity_node = None
+                        for neighbor in list(self.kg.graph.successors(cid)) + list(self.kg.graph.predecessors(cid)):
+                            nd = self.kg.graph.nodes.get(neighbor, {})
+                            if nd.get("node_type") == "entity" and nd.get("name") == entity_name:
+                                entity_node = neighbor
+                                break
+                        if entity_node:
+                            trail = self.kg.get_evidence_path(cid, entity_node)
+                            paths.extend(trail)
+                    result.evidence_path = paths
+
+        # ── Step 4: RBAC hard gate ──
+        # Authoritative access check using DOCUMENT_ACCESS_MAP.
+        # This is the single enforcement point — any chunk whose document
+        # requires a higher access level than the user's is REMOVED entirely,
+        # regardless of how it was discovered (vector search or graph traversal).
+        if user_access_level is not None:
+            from src.auth.rbac import get_access_level
+            inaccessible = [
+                cid for cid, r in results_map.items()
+                if get_access_level(r.doc_name) > user_access_level
+            ]
+            for cid in inaccessible:
+                del results_map[cid]
+
+            # Set policy_score for surviving results
+            for cid, result in results_map.items():
+                result.policy_score = 1.0  # confirmed accessible
 
         # ── Step 5: Compute final scores ──
         alpha = self.rc.alpha
@@ -256,15 +299,17 @@ class HybridRetriever:
             subgraph=subgraph,
         )
 
-    def _compute_policy_score(self, result: RetrievalResult, user_role: str) -> float:
+    def _compute_policy_score(self, result: RetrievalResult, user_access_level: int) -> float:
         """
-        Compute policy compliance score.
-        MVP: simple role-based check via metadata.
-        Full version: traverse policy graph.
+        Compute policy compliance score based on RBAC access levels.
+        Returns 1.0 if the user can access the chunk, 0.0 otherwise.
+        Chunks without an explicit access level default to PUBLIC (1).
         """
-        # For now, all chunks are accessible (score = 1.0)
-        # To restrict, add role_visibility tags to chunks during ingestion
-        return 1.0
+        from src.auth.rbac import get_access_level
+        chunk_level = get_access_level(result.doc_name)
+        if chunk_level <= user_access_level:
+            return 1.0
+        return 0.0
 
     def _compute_confidence(self, results: list[RetrievalResult]) -> float:
         """

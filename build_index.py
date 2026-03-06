@@ -11,11 +11,12 @@ import os
 from pathlib import Path
 
 from config import get_config
-from src.ingestion.parser import parse_all_documents
+from src.ingestion.parser import parse_all_documents, PARSE_FAILURES
 from src.ingestion.chunker import chunk_elements, Chunk
 from src.ingestion.embedder import VectorStore
-from src.graph.entity_extractor import extract_entities_from_chunks, align_entities
+from src.graph.entity_extractor import extract_entities_from_chunks, align_entities, FAILED_EXTRACTIONS
 from src.graph.kg_builder import KnowledgeGraph
+from src.auth.rbac import get_access_level
 
 
 def main():
@@ -57,6 +58,15 @@ def main():
     )
     print(f"  Total chunks: {len(chunks)}")
     print(f"  Types: { {t: sum(1 for c in chunks if c.element_type == t) for t in set(c.element_type for c in chunks)} }")
+
+    # ── Step 2b: Stamp RBAC access levels onto chunk metadata ──
+    for chunk in chunks:
+        chunk.metadata["access_level"] = get_access_level(chunk.doc_name)
+    level_counts = {}
+    for c in chunks:
+        lvl = c.metadata["access_level"]
+        level_counts[lvl] = level_counts.get(lvl, 0) + 1
+    print(f"  Access levels: {level_counts}  (1=Public, 2=Confidential, 3=Restricted)")
 
     # Save chunks for later loading
     chunks_path = parsed_dir / "chunks.json"
@@ -100,6 +110,62 @@ def main():
     print(f"  Relations: {len(relations)}")
     print(f"  Graph nodes: {stats['total_nodes']}")
     print(f"  Graph edges: {stats['total_edges']}")
+
+    # ── Health Check ──
+    print(f"\n{'─' * 60}")
+    print("  HEALTH CHECK")
+    print(f"{'─' * 60}")
+
+    max_tok = config.chunking.max_chunk_tokens
+    oversized_chunks = [c for c in chunks if c.token_estimate > max_tok]
+    danger_zone = [c for c in chunks if c.token_estimate > 7500]
+
+    # Documents with zero entities
+    doc_names = set(c.doc_name for c in chunks)
+    entity_docs = set(e.source_doc for e in entities)
+    docs_without_entities = doc_names - entity_docs
+
+    issues_found = 0
+
+    if PARSE_FAILURES:
+        issues_found += 1
+        print(f"  ⚠ Parse failures:         {len(PARSE_FAILURES)} doc(s) skipped")
+        for name, err in PARSE_FAILURES:
+            print(f"      • {name}: {err[:80]}")
+
+    if oversized_chunks:
+        issues_found += 1
+        print(f"  ⚠ Oversized chunks:       {len(oversized_chunks)} chunk(s) > {max_tok} tokens")
+        for c in oversized_chunks[:5]:
+            print(f"      • {c.doc_name} [{c.element_type}] = {c.token_estimate} tokens")
+
+    if danger_zone:
+        issues_found += 1
+        print(f"  ⚠ Embedding danger zone:  {len(danger_zone)} chunk(s) > 7500 tokens (near model limit)")
+
+    if FAILED_EXTRACTIONS:
+        issues_found += 1
+        rate = len(FAILED_EXTRACTIONS) / max(len(chunks), 1) * 100
+        print(f"  ⚠ Entity extraction fails: {len(FAILED_EXTRACTIONS)}/{len(chunks)} chunks ({rate:.1f}%)")
+
+    if docs_without_entities:
+        issues_found += 1
+        print(f"  ⚠ Docs without entities:  {len(docs_without_entities)}")
+        for dn in sorted(docs_without_entities):
+            print(f"      • {dn}")
+
+    if stats.get("dropped_relations", 0) > 0:
+        issues_found += 1
+        print(f"  ⚠ Dropped relations:      {stats['dropped_relations']}")
+
+    if stats.get("orphan_entities", 0) > 0:
+        issues_found += 1
+        print(f"  ⚠ Orphan entities:        {stats['orphan_entities']}")
+
+    if issues_found == 0:
+        print("  ✓ All clear — no silent failures detected.")
+
+    print(f"{'─' * 60}")
     print(f"\nTo launch the app:")
     print(f"  streamlit run app.py")
     print("=" * 60)

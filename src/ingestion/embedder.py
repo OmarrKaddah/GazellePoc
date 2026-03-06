@@ -4,6 +4,7 @@ Embeds chunks using Ollama (dev) or local model (prod) and stores in Qdrant.
 """
 
 import json
+import warnings
 from pathlib import Path
 from typing import Optional
 
@@ -16,10 +17,16 @@ from qdrant_client.models import (
     Filter,
     FieldCondition,
     MatchValue,
+    Range,
 )
 
 from config import get_config, Config
 from src.ingestion.chunker import Chunk
+
+
+# nomic-embed-text context limit = 8192 tokens.  Conservative safety margin.
+_EMBED_TOKEN_LIMIT = 7500
+_EMBED_CHAR_LIMIT = _EMBED_TOKEN_LIMIT * 3  # inverse of the //3 heuristic
 
 
 class Embedder:
@@ -31,6 +38,17 @@ class Embedder:
     def embed(self, text: str, max_retries: int = 3) -> list[float]:
         """Embed a single text string with retry logic for transient failures."""
         import time
+
+        # ── FIX: guard against inputs that exceed the model context window ──
+        est_tokens = max(len(text) // 3, len(text.split()))
+        if est_tokens > _EMBED_TOKEN_LIMIT:
+            warnings.warn(
+                f"Embedding input too long ({est_tokens} est. tokens, "
+                f"{len(text)} chars). Truncating to ~{_EMBED_TOKEN_LIMIT} tokens "
+                f"to avoid silent Ollama truncation."
+            )
+            text = text[:_EMBED_CHAR_LIMIT]
+
         if self.config.embedding.provider == "ollama":
             for attempt in range(max_retries):
                 try:
@@ -123,6 +141,7 @@ class VectorStore:
                 "source_element_ids": chunk.source_element_ids,
                 "language": chunk.language,
                 "token_estimate": chunk.token_estimate,
+                "access_level": chunk.metadata.get("access_level", 1),
             }
             #points heya fundamnetal unit of storage in qdrant vectordb
             #points contain an id, the embedding vector, and a payload (metadata) 
@@ -151,10 +170,15 @@ class VectorStore:
         top_k: int = 10,
         doc_filter: Optional[str] = None,
         element_type_filter: Optional[str] = None,
+        max_access_level: Optional[int] = None,
     ) -> list[dict]:
         """
         Search for similar chunks.
         Returns list of dicts with 'score', 'content', and all payload fields.
+
+        Args:
+            max_access_level: If set, only return chunks with access_level <= this value.
+                              1 = Public only, 2 = Public+Confidential, 3 = all.
         """
         query_embedding = self._embedder.embed(query)
 
@@ -164,6 +188,8 @@ class VectorStore:
             conditions.append(FieldCondition(key="doc_name", match=MatchValue(value=doc_filter)))
         if element_type_filter:
             conditions.append(FieldCondition(key="element_type", match=MatchValue(value=element_type_filter)))
+        if max_access_level is not None:
+            conditions.append(FieldCondition(key="access_level", range=Range(lte=max_access_level)))
 
         search_filter = Filter(must=conditions) if conditions else None
 
