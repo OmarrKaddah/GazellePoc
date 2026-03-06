@@ -1,0 +1,152 @@
+[
+  {
+    "query_id": "mh01",
+    "question": "If the FX Trading Desk VaR breaches 100% of its limit, who ultimately receives the report and what training must the desk staff have completed?",
+    "expected_docs": ["Market_Risk_Framework_2025", "HR_Training_Policy_2025", "Treasury_Operations_Manual_2025"],
+    "reasoning_type": "multi_hop",
+    "reasoning_chain": "VaR breach → CRO notification (Market Risk) → FX Trading Desk staff → specialized training requirements (HR Policy) → CTO certification",
+    "expected_entities": ["CRO", "FX Trading Desk", "VaR", "Chief Treasury Officer", "market risk certification"],
+    "hops_required": 3,
+    "language": "en"
+  },
+  {
+    "query_id": "mh02",
+    "question": "A correspondent bank is flagged by the sanctions screening system. Trace the full chain: who handles the alert, who must approve the investigation, and what ongoing monitoring applies to the relationship?",
+    "expected_docs": ["Sanctions_Compliance_Policy_2025", "AML_Policy_2025", "Payment_Systems_Policy_2025", "Compliance_Monitoring_Program_2025"],
+    "reasoning_type": "multi_hop",
+    "reasoning_chain": "Sanctions alert → Sanctions Officer → CCO → correspondent banking enhanced DD (AML) → payment systems correspondent risk (Payment) → compliance testing scope (CMTP)",
+    "expected_entities": ["Sanctions Officer", "CCO", "correspondent banking", "BACC", "AML Policy Section 2.2"],
+    "hops_required": 4,
+    "language": "en"
+  },
+  {
+    "query_id": "mh03",
+    "question": "If the Bank's CET1 ratio drops to 10%, what specific recovery actions are triggered, who chairs the emergency meetings, and how does this affect the investment portfolio?",
+    "expected_docs": ["Recovery_Resolution_Plan_2025", "Stress_Testing_Framework_2025", "Capital_Adequacy_Policy_2025", "Investment_Policy_2025"],
+    "reasoning_type": "multi_hop",
+    "reasoning_chain": "CET1 < 10% → Board emergency meeting (Recovery Plan) → capital restoration → Investment Stop-Loss Protocol may activate (Investment Policy) → ALCO reviews HQLA (Treasury)",
+    "expected_entities": ["CET1", "Board of Directors", "Recovery Plan", "Investment Stop-Loss Protocol", "ALCO"],
+    "hops_required": 4,
+    "language": "en"
+  },
+  {
+    "query_id": "mh04",
+    "question": "A fraud case is discovered involving a senior dealer on the FX Trading Desk. What are the consequences for their deferred compensation, who investigates, and what reporting obligations exist?",
+    "expected_docs": ["Fraud_Prevention_Policy_2025", "Remuneration_Policy_2025", "HR_Training_Policy_2025", "Operational_Risk_Framework_2025"],
+    "reasoning_type": "multi_hop",
+    "reasoning_chain": "FX desk fraud → FPU investigation (Fraud) → HR disciplinary (HR) → malus/clawback on deferred comp (Remuneration) → operational risk loss reporting (OpRisk)",
+    "expected_entities": ["Fraud Prevention Unit", "BRemC", "malus", "clawback", "Material Risk Takers", "BACC"],
+    "hops_required": 4,
+    "language": "en"
+  },
+  {
+    "query_id": "mh05",
+    "question": "The Bank wants to deploy an AI chatbot for customer service. What approvals are needed across model risk, consumer protection, digital banking, and data governance?",
+    "expected_docs": ["Model_Risk_Management_2025", "Consumer_Protection_Policy_2025", "Digital_Banking_Policy_2025", "Data_Governance_Policy_2025"],
+    "reasoning_type": "multi_hop",
+    "reasoning_chain": "AI chatbot → model governance MRC approval (Model Risk) → suitability validation (Consumer Protection) → DBC approval (Digital Banking) → data retention requirements (Data Governance)",
+    "expected_entities": ["Model Risk Committee", "Digital Banking Committee", "Consumer Protection Policy", "Data Governance Policy", "explainability"],
+    "hops_required": 4,
+    "language": "en"
+  },
+  {
+    "query_id": "mh06",
+    "question": "If a Tier-1 cloud vendor suffers a data breach affecting customer data, trace all notification requirements, committee escalations, and regulatory reporting obligations.",
+    "expected_docs": ["Vendor_Risk_Management_2025", "IT_Security_Policy_2025", "Data_Governance_Policy_2025", "BCM_Policy_2025", "Operational_Risk_Framework_2025"],
+    "reasoning_type": "multi_hop",
+    "reasoning_chain": "Cloud vendor breach → 24hr vendor notification (Vendor) → cybersecurity incident response (IT Security) → data breach notification (Data Governance) → CMT activation if >4hrs (BCM) → operational risk escalation (OpRisk)",
+    "expected_entities": ["Tier-1", "CRO", "Crisis Management Team", "Central Bank", "ORC", "IT Security Policy Section 4.2"],
+    "hops_required": 5,
+    "language": "en"
+  },
+  {
+    "query_id": "mh07",
+    "question": "How does a climate-related credit loss flow through the Bank's financial reporting? Trace it from the physical risk assessment to the IFRS 9 provision and stress test impact.",
+    "expected_docs": ["Climate_Risk_Framework_2025", "Credit_Risk_Policy_2025", "IFRS9_ECL_Policy_2025", "Stress_Testing_Framework_2025"],
+    "reasoning_type": "multi_hop",
+    "reasoning_chain": "Physical risk → collateral discount (Credit Risk) → SICR assessment (IFRS 9 staging) → ECL forward-looking overlay (IFRS 9) → stress test climate scenario (Stress Testing)",
+    "expected_entities": ["physical risk", "collateral valuation", "SICR", "ECL", "NGFS scenarios", "BRC"],
+    "hops_required": 4,
+    "language": "en"
+  },
+  {
+    "query_id": "mh08",
+    "question": "A digital loan originated through the mobile app defaults after 90 days. Trace the full lifecycle: what model scored it, what credit policy governs it, how is the loss provisioned, and where does the fraud check happen?",
+    "expected_docs": ["Digital_Banking_Policy_2025", "Model_Risk_Management_2025", "Credit_Risk_Policy_2025", "IFRS9_ECL_Policy_2025", "Fraud_Prevention_Policy_2025"],
+    "reasoning_type": "multi_hop",
+    "reasoning_chain": "Digital loan → automated credit scoring model (Model Risk) → credit policy (Credit Risk) → 90+ days = Stage 3 (IFRS 9) → fraud check at origination (Fraud Prevention)",
+    "expected_entities": ["credit scoring model", "Model Risk Committee", "Stage 3", "credit impaired", "real-time fraud check"],
+    "hops_required": 5,
+    "language": "en"
+  },
+  {
+    "query_id": "mh09",
+    "question": "The LCR drops to 105%. What immediate actions does Treasury take, which committees are notified, and if it stays below 110% for a week, what recovery plan provisions apply?",
+    "expected_docs": ["Liquidity_Policy_2025", "Treasury_Operations_Manual_2025", "Recovery_Resolution_Plan_2025", "Stress_Testing_Framework_2025"],
+    "reasoning_type": "multi_hop",
+    "reasoning_chain": "LCR 105% → HQLA review by ALCO (Treasury) → Contingency Funding Plan (Liquidity Policy) → recovery trigger at LCR<110% (Recovery Plan) → ALCO convenes within 48hrs",
+    "expected_entities": ["LCR", "ALCO", "Contingency Funding Plan", "Recovery Plan", "Treasury", "CRO"],
+    "hops_required": 4,
+    "language": "en"
+  },
+  {
+    "query_id": "mh10",
+    "question": "Who are all the permanent members or invitees of the Board Risk Committee, and what specific reports does each submit to the BRC?",
+    "expected_docs": ["Governance_Policy_2025", "Market_Risk_Framework_2025", "Capital_Adequacy_Policy_2025", "Climate_Risk_Framework_2025", "Model_Risk_Management_2025", "Stress_Testing_Framework_2025"],
+    "reasoning_type": "multi_hop",
+    "reasoning_chain": "BRC membership (Governance) → CRO submits market risk dashboard (Market Risk) + model risk dashboard (Model Risk) + stress test results (Stress Testing) + climate risk (Climate) + capital adequacy (Capital)",
+    "expected_entities": ["Board Risk Committee", "CRO", "VaR", "Model Risk Dashboard", "Climate Risk Officer", "stress test results"],
+    "hops_required": 6,
+    "language": "en"
+  },
+  {
+    "query_id": "mh11",
+    "question": "A related party (Board member's spouse) wants an FX margin trading account. What are all the policies that apply and who must approve?",
+    "expected_docs": ["Related_Party_Policy_2025", "Consumer_Protection_Policy_2025", "FX_Policy_2025", "Credit_Risk_Policy_2025", "Governance_Policy_2025"],
+    "reasoning_type": "multi_hop",
+    "reasoning_chain": "Related party → independent Board approval (Related Party) → FX margin = Complex product → suitability check (Consumer Protection) → arms-length terms (Related Party) → FX policy limits (FX Policy)",
+    "expected_entities": ["related party", "independent directors", "Complex product", "suitability assessment", "FX margin trading"],
+    "hops_required": 4,
+    "language": "en"
+  },
+  {
+    "query_id": "mh12",
+    "question": "Describe the complete audit trail for AML compliance: who tests it, how often, what happens with findings, and how does internal audit provide assurance?",
+    "expected_docs": ["Compliance_Monitoring_Program_2025", "AML_Policy_2025", "Internal_Audit_Charter_2025", "Governance_Policy_2025"],
+    "reasoning_type": "multi_hop",
+    "reasoning_chain": "AML compliance testing (CMTP semi-annual) → findings in GRC system → remediation tracking by CCO → BACC reporting → Internal Audit annual assurance → Board reporting",
+    "expected_entities": ["CMTP", "CCO", "GRC system", "BACC", "Internal Audit", "Critical findings"],
+    "hops_required": 4,
+    "language": "en"
+  },
+  {
+    "query_id": "mh13",
+    "question": "If the Bank's external credit rating is downgraded by 2 notches, what cascading effects occur across capital planning, liquidity management, and recovery planning?",
+    "expected_docs": ["Recovery_Resolution_Plan_2025", "Capital_Adequacy_Policy_2025", "Liquidity_Policy_2025", "Stress_Testing_Framework_2025", "Investment_Policy_2025"],
+    "reasoning_type": "multi_hop",
+    "reasoning_chain": "2-notch downgrade → Recovery Plan trigger → capital actions (Capital Adequacy) → liquidity stress (Liquidity) → collateral haircuts increase → ALCO emergency meeting",
+    "expected_entities": ["credit rating downgrade", "Recovery Plan", "CET1", "LCR", "ALCO", "Board of Directors"],
+    "hops_required": 5,
+    "language": "en"
+  },
+  {
+    "query_id": "mh14",
+    "question": "Trace the full outsourcing chain for card payment processing: who is the vendor, what tier are they, what monitoring applies, and what happens if their service disrupts for more than 4 hours?",
+    "expected_docs": ["Payment_Systems_Policy_2025", "Vendor_Risk_Management_2025", "Outsourcing_Policy_2025", "BCM_Policy_2025"],
+    "reasoning_type": "multi_hop",
+    "reasoning_chain": "Card payments → PayTech Solutions (Payment Systems) → Tier-1 vendor (Vendor Risk) → semi-annual review → disruption >4hrs triggers CMT (BCM) → outsourcing exit strategy (Outsourcing)",
+    "expected_entities": ["PayTech Solutions", "Tier-1", "CMT", "PCI-DSS", "BCM Policy", "exit strategy"],
+    "hops_required": 4,
+    "language": "en"
+  },
+  {
+    "query_id": "mh15",
+    "question": "What is the complete succession planning chain for the Chief Risk Officer position, including who oversees it, what certifications are required, and what fit-and-proper checks apply?",
+    "expected_docs": ["HR_Training_Policy_2025", "Governance_Policy_2025", "Remuneration_Policy_2025"],
+    "reasoning_type": "multi_hop",
+    "reasoning_chain": "CRO succession → Board Governance Committee oversight (HR) → Key Management Personnel (HR) → certifications FRM/CFA (HR) → fit-and-proper checks (HR Section 3) → Board Nomination Committee (Governance)",
+    "expected_entities": ["CRO", "Board Governance Committee", "Key Management Personnel", "FRM", "Board Nomination Committee", "fit-and-proper"],
+    "hops_required": 3,
+    "language": "en"
+  }
+]

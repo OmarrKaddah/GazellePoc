@@ -1,0 +1,29 @@
+# ── Core ──
+langchain>=0.3.0
+langchain-community>=0.3.0
+langchain-groq>=0.2.0
+langchain-qdrant>=0.2.0
+openai>=1.50.0
+ollama>=0.4.0
+
+# ── Document Parsing ──
+docling>=2.5.0
+python-docx>=1.1.0
+
+# ── Vector DB ──
+qdrant-client>=1.12.0
+
+# ── Graph ──
+networkx>=3.2
+
+# ── NER / Entity Extraction ──
+gliner>=0.2.0
+
+# ── UI ──
+streamlit>=1.40.0
+
+# ── Data Processing ──
+pandas>=2.1.0
+
+# ── Evaluation ──
+rouge-score>=0.1.2

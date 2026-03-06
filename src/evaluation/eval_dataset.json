@@ -1,0 +1,152 @@
+[
+  {
+    "query_id": "q01",
+    "question": "What is the maximum Net Open Position limit as a percentage of Tier 1 capital?",
+    "expected_answer": "The aggregate NOP shall not exceed 25% of Tier 1 capital. Individual currency positions shall not exceed 15%.",
+    "source_doc": "FX_Policy_2025",
+    "source_section": "2. Exposure Limits > 2.1 Net Open Position Limits",
+    "reasoning_type": "single_hop",
+    "language": "en",
+    "expected_entities": ["NOP", "Tier 1 capital", "25%", "15%"]
+  },
+  {
+    "query_id": "q02",
+    "question": "What is the maximum single FX transaction amount for a corporate client?",
+    "expected_answer": "USD 5,000,000",
+    "source_doc": "FX_Policy_2025",
+    "source_section": "2. Exposure Limits > 2.1 Net Open Position Limits",
+    "reasoning_type": "table_lookup",
+    "language": "en",
+    "expected_entities": ["Corporate", "5,000,000", "USD"]
+  },
+  {
+    "query_id": "q03",
+    "question": "What happens if cumulative FX trading losses exceed 5% of allocated trading capital?",
+    "expected_answer": "All open proprietary positions must be closed and trading suspended pending management review.",
+    "source_doc": "FX_Policy_2025",
+    "source_section": "2. Exposure Limits > 2.2 Stop-Loss Limits",
+    "reasoning_type": "conditional",
+    "language": "en",
+    "expected_entities": ["5%", "stop-loss", "proprietary positions"]
+  },
+  {
+    "query_id": "q04",
+    "question": "What is the maximum LTV ratio for a commercial mortgage?",
+    "expected_answer": "70%, with minimum collateral coverage of 143%.",
+    "source_doc": "Credit_Risk_Policy_2025",
+    "source_section": "4. Collateral Requirements > 4.1 Loan-to-Value Ratios",
+    "reasoning_type": "table_lookup",
+    "language": "en",
+    "expected_entities": ["Mortgage — Commercial", "70%", "143%"]
+  },
+  {
+    "query_id": "q05",
+    "question": "Who must approve a credit facility of EGP 50,000,000?",
+    "expected_answer": "The Head Office Credit Committee, which handles facilities up to EGP 100,000,000 with full risk assessment required.",
+    "source_doc": "Credit_Risk_Policy_2025",
+    "source_section": "2. Lending Authorities > 2.1 Approval Matrix",
+    "reasoning_type": "table_lookup",
+    "language": "en",
+    "expected_entities": ["Head Office Credit Committee", "100,000,000", "EGP"]
+  },
+  {
+    "query_id": "q06",
+    "question": "If a borrower's debt-to-income ratio exceeds 40%, what additional approval is required?",
+    "expected_answer": "The loan must be escalated to the Regional Credit Committee regardless of the facility amount.",
+    "source_doc": "Credit_Risk_Policy_2025",
+    "source_section": "4. Collateral Requirements > 4.2 Conditional Approval Criteria",
+    "reasoning_type": "conditional",
+    "language": "en",
+    "expected_entities": ["debt-to-income", "40%", "Regional Credit Committee"]
+  },
+  {
+    "query_id": "q07",
+    "question": "What are the requirements for FX-denominated credit facilities in terms of both credit and FX risk?",
+    "expected_answer": "They are subject to both the Credit Risk Policy and the FX Policy. FX exposure must be included in the NOP calculation, and combined risk shall not exceed 30% of Tier 1 capital.",
+    "source_doc": "Credit_Risk_Policy_2025",
+    "source_section": "6. FX-Denominated Credit Facilities",
+    "reasoning_type": "cross_reference",
+    "language": "en",
+    "expected_entities": ["FX Policy", "NOP", "30%", "Tier 1 capital"]
+  },
+  {
+    "query_id": "q08",
+    "question": "Can a corporate client execute an FX transaction of USD 10,000,000 in a single trade?",
+    "expected_answer": "No. The maximum single transaction for a corporate client is USD 5,000,000 as per the FX exposure limits table.",
+    "source_doc": "FX_Policy_2025",
+    "source_section": "2. Exposure Limits > 2.1 Net Open Position Limits",
+    "reasoning_type": "multi_hop",
+    "language": "en",
+    "expected_entities": ["Corporate", "5,000,000", "10,000,000"]
+  },
+  {
+    "query_id": "q09",
+    "question": "What is the escalation process when an operational loss exceeds EGP 5,000,000?",
+    "expected_answer": "The incident must be escalated to the Board Risk Committee within 24 hours.",
+    "source_doc": "Operational_Risk_Framework_2025",
+    "source_section": "3. Incident Escalation",
+    "reasoning_type": "conditional",
+    "language": "en",
+    "expected_entities": ["5,000,000", "Board Risk Committee", "24 hours"]
+  },
+  {
+    "query_id": "q10",
+    "question": "ما هو الحد الأقصى لصافي المركز المفتوح كنسبة من رأس المال الأساسي؟",
+    "expected_answer": "يجب ألا يتجاوز إجمالي صافي المركز المفتوح 25% من رأس المال الأساسي (Tier 1). ويجب ألا تتجاوز مراكز العملات الفردية 15%.",
+    "source_doc": "FX_Policy_2025",
+    "source_section": "2. Exposure Limits > 2.1 Net Open Position Limits",
+    "reasoning_type": "single_hop",
+    "language": "ar",
+    "expected_entities": ["NOP", "25%", "15%", "Tier 1"]
+  },
+  {
+    "query_id": "q11",
+    "question": "What are the IFRS 9 staging requirements for loan provisioning?",
+    "expected_answer": "Stage 1: 12-month ECL. Stage 2: Lifetime ECL when credit risk increases significantly. Stage 3: Lifetime ECL for impaired loans.",
+    "source_doc": "Credit_Risk_Policy_2025",
+    "source_section": "5. متطلبات التوفير",
+    "reasoning_type": "single_hop",
+    "language": "en",
+    "expected_entities": ["IFRS 9", "Stage 1", "Stage 2", "Stage 3", "ECL"]
+  },
+  {
+    "query_id": "q12",
+    "question": "If a corporate client has an existing credit exposure of EGP 15,000,000 and wants a new FX facility, what additional reviews are required?",
+    "expected_answer": "A comprehensive exposure review must be conducted (existing exposure exceeds EGP 10M threshold). The FX facility must comply with both the Credit Risk Policy and FX Policy. Combined credit and FX risk must not exceed 30% of Tier 1 capital.",
+    "source_doc": "Credit_Risk_Policy_2025",
+    "source_section": "4.2 Conditional Approval Criteria AND 6. FX-Denominated Credit Facilities",
+    "reasoning_type": "multi_hop",
+    "language": "en",
+    "expected_entities": ["15,000,000", "10,000,000", "comprehensive exposure review", "30%", "FX Policy"]
+  },
+  {
+    "query_id": "q13",
+    "question": "What is the review frequency for internal fraud risk?",
+    "expected_answer": "Monthly. It is classified as High risk and owned by the Compliance Department.",
+    "source_doc": "Operational_Risk_Framework_2025",
+    "source_section": "2. Risk Categories",
+    "reasoning_type": "table_lookup",
+    "language": "en",
+    "expected_entities": ["Internal Fraud", "Monthly", "Compliance Department", "High"]
+  },
+  {
+    "query_id": "q14",
+    "question": "If an operational risk event causes a loss of EGP 8,000,000 and also affects credit operations, what policies apply?",
+    "expected_answer": "The loss exceeds EGP 5M so it must be escalated to the Board Risk Committee within 24 hours. Since it affects credit operations, it must also be assessed under Credit Risk Policy Section 4.2. Combined operational and credit loss exceeds EGP 10M, triggering a comprehensive review.",
+    "source_doc": "Operational_Risk_Framework_2025",
+    "source_section": "3. Incident Escalation AND 4. Integration with Credit and FX Risk",
+    "reasoning_type": "multi_hop",
+    "language": "en",
+    "expected_entities": ["8,000,000", "Board Risk Committee", "Credit Risk Policy", "10,000,000"]
+  },
+  {
+    "query_id": "q15",
+    "question": "What is the maximum related party exposure as a percentage of Tier 1 capital?",
+    "expected_answer": "10% of Tier 1 capital. All related party facilities must be approved by the Board of Directors.",
+    "source_doc": "Credit_Risk_Policy_2025",
+    "source_section": "3. Concentration Limits > 3.1 Related Party Lending",
+    "reasoning_type": "single_hop",
+    "language": "en",
+    "expected_entities": ["related party", "10%", "Board of Directors"]
+  }
+]
