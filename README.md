@@ -558,23 +558,4 @@ Docling requires Python 3.11/3.12. On Python 3.13 it may fail — downgrade Pyth
 
 ---
 
-## 13. Production Mode
-
-The system has a production configuration designed for fully on-premises deployment (no external APIs). Set `GP_ENV=prod` in `.env`.
-
-| Component | Dev | Prod |
-|-----------|-----|------|
-| Main LLM | Groq API (llama-3.3-70b) | vLLM on-prem (Qwen2.5-72B-AWQ) |
-| Fast LLM | Groq API (llama-3.1-8b) | vLLM on-prem (Qwen2.5-7B) |
-| Embeddings | Ollama (nomic-embed-text, 768d) | Local BGE-M3 (1024d) |
-| Vector DB | Qdrant in-memory | Qdrant Docker |
-| Graph DB | NetworkX (file-backed JSON) | Neo4j |
-
-Production setup requires additional infrastructure configuration in `config.py` (`_init_prod` method) — specifically the machine hostnames for the vLLM servers.
-
----
-
-## License
-
-University graduation project. Not licensed for commercial use.
 
