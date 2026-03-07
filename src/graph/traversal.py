@@ -47,9 +47,10 @@ def _stem(word: str) -> str:
 def extract_query_entities_simple(query: str, kg: KnowledgeGraph) -> list[str]:
     """
     Entity matching: find KG entity nodes that match terms in the query.
-    Uses multi-strategy matching: exact substring, token overlap, and key term matching.
+    Uses the pre-built inverted index for fast lookups, then applies
+    multi-strategy matching: exact substring, token overlap, and key term matching.
     """
-    matches = []
+    matches_set: set[str] = set()
     query_lower = query.lower()
     query_tokens = set(query_lower.split())
     # Remove stop words for better matching
@@ -67,53 +68,62 @@ def extract_query_entities_simple(query: str, kg: KnowledgeGraph) -> list[str]:
     query_keywords = query_tokens - stop_words
     query_stems = {_stem(w) for w in query_keywords}
 
-    for node_id, data in kg.graph.nodes(data=True):
-        if data.get("node_type") != "entity":
+    # ── Fast path: use inverted index to get candidates ──
+    has_index = bool(kg._entity_token_index)
+
+    if has_index:
+        # Collect candidate entity node IDs from the token index
+        candidates: set[str] = set()
+        for kw in query_keywords:
+            stem = _stem(kw)
+            candidates.update(kg._entity_token_index.get(stem, set()))
+            candidates.update(kg._entity_token_index.get(kw, set()))
+        # Also check full-name index for substring matches
+        for name, node_ids in kg._entity_name_index.items():
+            if len(name) > 2 and name in query_lower:
+                matches_set.update(node_ids)
+    else:
+        # Fallback: all entity nodes (graph loaded without index)
+        candidates = {
+            n for n, d in kg.graph.nodes(data=True)
+            if d.get("node_type") == "entity"
+        }
+
+    # ── Apply matching strategies on candidates only ──
+    for node_id in candidates:
+        if node_id in matches_set:
             continue
+        data = kg.graph.nodes.get(node_id, {})
         name = data.get("name", "").lower().strip()
         if not name or len(name) < 2:
             continue
 
         # Strategy 1: Entity name appears as substring in query
         if len(name) > 2 and name in query_lower:
-            matches.append(node_id)
+            matches_set.add(node_id)
             continue
 
         # Strategy 2: Query keywords match entity name tokens (≥ 50% overlap)
-        #             Uses both exact and stemmed forms for robustness
         name_tokens = set(name.split()) - stop_words
         if name_tokens and query_keywords:
             overlap = name_tokens & query_keywords
-            # Also try stemmed matching (e.g., "loans" matches "loan")
             name_stems = {_stem(w) for w in name_tokens}
             stem_overlap = name_stems & query_stems
             best_overlap = max(len(overlap), len(stem_overlap))
             if best_overlap >= max(1, len(name_tokens) * 0.5):
-                matches.append(node_id)
+                matches_set.add(node_id)
                 continue
 
         # Strategy 3: Entity type + partial name match for known banking terms
         etype = data.get("entity_type", "")
-        matched = False
         if etype in ("organization", "role", "regulation", "product"):
-            # Check if any significant word (or its stem) from entity name is in query
-            significant_words = name_tokens - stop_words
+            significant_words = name_tokens - stop_words if 'name_tokens' in dir() else set()
             for w in significant_words:
                 if len(w) > 3 and (w in query_lower or _stem(w) in query_stems):
-                    matches.append(node_id)
-                    matched = True
+                    matches_set.add(node_id)
                     break
-        if matched:
-            continue
 
-        # Strategy 4: Check entity mentions / aliases
-        for mention in data.get("mentions", []):
-            mention_lower = mention.lower().strip()
-            if mention_lower != name and len(mention_lower) > 2 and mention_lower in query_lower:
-                matches.append(node_id)
-                break
-
-    return matches
+    return list(matches_set)
 
 
 def graph_retrieve(

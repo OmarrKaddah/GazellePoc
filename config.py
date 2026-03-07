@@ -4,7 +4,9 @@ Switch between dev (Groq + local Ollama) and prod (fully on-prem vLLM).
 """
 
 import os
+import threading
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Optional
 
 
@@ -154,13 +156,29 @@ class Config:
         self.chunking = ChunkingConfig()
 
 
+# ── .env loader (single source of truth) ──
+def _load_dotenv():
+    """Load .env file if present. Called once before config init."""
+    env_path = Path(".env")
+    if env_path.exists():
+        for line in env_path.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                k, v = line.split("=", 1)
+                v = v.strip().strip('"').strip("'")  # handle quoted values
+                os.environ.setdefault(k.strip(), v)
+
+
 # ── Singleton ──
 _config: Optional[Config] = None
+_config_lock = threading.Lock()
 
 
 def get_config(env: Optional[str] = None) -> Config:
-    """Get or create the global config."""
+    """Get or create the global config (thread-safe)."""
     global _config
-    if _config is None or (env and _config.env != env):
-        _config = Config(env=env or os.environ.get("GP_ENV", "dev"))
+    with _config_lock:
+        if _config is None or (env and _config.env != env):
+            _load_dotenv()
+            _config = Config(env=env or os.environ.get("GP_ENV", "dev"))
     return _config

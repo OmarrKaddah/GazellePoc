@@ -145,8 +145,11 @@ def parse_document(doc_path: str | Path) -> list[ParsedElement]:
                     )
                     elements.append(elem)
                     element_index += 1
-            except Exception:
-                pass
+            except Exception as e:
+                warnings.warn(
+                    f"Table extraction failed in {doc_name} "
+                    f"(section: {' > '.join(current_section_path) or 'root'}): {e}"
+                )
 
     return elements
 
@@ -250,6 +253,7 @@ def parse_all_documents(docs_dir: str | Path, output_dir: Optional[str | Path] =
     Optionally saves parsed output as JSON.
     """
     docs_dir = Path(docs_dir)
+    PARSE_FAILURES.clear()  # Reset from previous runs
     all_elements: list[ParsedElement] = []
 
     doc_files = list(docs_dir.glob("*.docx")) + list(docs_dir.glob("*.doc"))

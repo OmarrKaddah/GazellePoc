@@ -30,6 +30,10 @@ class KnowledgeGraph:
         # Counters for silent-failure visibility
         self._dropped_relations: int = 0
         self._orphan_entities: int = 0
+        # Inverted index: stemmed token -> set of entity node IDs
+        self._entity_token_index: dict[str, set[str]] = {}
+        # Inverted index: full normalized name -> entity node ID
+        self._entity_name_index: dict[str, list[str]] = {}
 
     @property
     def num_nodes(self) -> int:
@@ -339,7 +343,52 @@ class KnowledgeGraph:
         with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
         self.graph = nx.node_link_graph(data, directed=True)
+        self.build_entity_index()
         print(f"Loaded graph: {self.num_nodes} nodes, {self.num_edges} edges")
+
+    def build_entity_index(self):
+        """
+        Build inverted indexes for fast entity matching at query time.
+        Called after load() or after add_entities().
+        """
+        self._entity_token_index.clear()
+        self._entity_name_index.clear()
+
+        for node_id, data in self.graph.nodes(data=True):
+            if data.get("node_type") != "entity":
+                continue
+            name = data.get("name", "").lower().strip()
+            if not name or len(name) < 2:
+                continue
+
+            # Full name index
+            self._entity_name_index.setdefault(name, []).append(node_id)
+
+            # Token-level index (stemmed)
+            tokens = set(name.split())
+            for token in tokens:
+                if len(token) > 1:
+                    stem = self._stem_token(token)
+                    self._entity_token_index.setdefault(stem, set()).add(node_id)
+
+            # Also index mentions
+            for mention in data.get("mentions", []):
+                ml = mention.lower().strip()
+                if ml and ml != name:
+                    self._entity_name_index.setdefault(ml, []).append(node_id)
+                    for t in ml.split():
+                        if len(t) > 1:
+                            self._entity_token_index.setdefault(self._stem_token(t), set()).add(node_id)
+
+    @staticmethod
+    def _stem_token(word: str) -> str:
+        """Minimal suffix stripping for index building."""
+        if len(word) <= 3:
+            return word
+        for suffix in ("ies", "ing", "tion", "ment", "ness", "ed", "es", "s"):
+            if word.endswith(suffix) and len(word) - len(suffix) >= 3:
+                return word[:-len(suffix)] if suffix != "ies" else word[:-3] + "y"
+        return word
 
     def get_stats(self) -> dict:
         """Get graph statistics."""

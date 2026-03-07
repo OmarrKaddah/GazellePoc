@@ -20,15 +20,6 @@ from src.auth.rbac import get_access_level
 
 
 def main():
-    # Load env vars from .env if present
-    env_path = Path(".env")
-    if env_path.exists():
-        for line in env_path.read_text().splitlines():
-            line = line.strip()
-            if line and not line.startswith("#") and "=" in line:
-                key, val = line.split("=", 1)
-                os.environ[key.strip()] = val.strip()
-
     config = get_config()
 
     print("=" * 60)

@@ -7,23 +7,20 @@ Features: RBAC login, document filtering, streaming answers.
 import json
 import os
 import re
+import html as html_mod
 import tempfile
 import streamlit as st
 import streamlit.components.v1 as components
 from pathlib import Path
 
-# Load .env before importing config
-env_path = Path(".env")
-if env_path.exists():
-    for line in env_path.read_text().splitlines():
-        line = line.strip()
-        if line and not line.startswith("#") and "=" in line:
-            k, v = line.split("=", 1)
-            os.environ.setdefault(k.strip(), v.strip())
-
 from config import get_config
 from src.ingestion.chunker import Chunk
 from src.ingestion.embedder import VectorStore
+
+try:
+    import ollama as _ollama_client
+except ImportError:
+    _ollama_client = None
 from src.graph.kg_builder import KnowledgeGraph
 from src.retrieval.hybrid_retriever import HybridRetriever
 from src.generation.aggregator import generate_response
@@ -34,6 +31,46 @@ from src.auth.rbac import (
     AccessLevel,
     UserProfile,
 )
+
+
+# ── Available-model discovery ──
+
+
+def _discover_models(config) -> list[dict]:
+    """
+    Build a list of selectable LLM models.
+
+    Each entry: {"label": "display name", "model": "raw model id",
+                 "provider": "groq" | "ollama_chat"}
+    Order: configured models first, then any extra Ollama models.
+    """
+    seen: set[str] = set()
+    models: list[dict] = []
+
+    def _add(model: str, provider: str):
+        key = f"{provider}::{model}"
+        if key in seen:
+            return
+        seen.add(key)
+        tag = "Groq" if provider == "groq" else "Ollama" if "ollama" in provider else provider
+        models.append({"label": f"{model}  ({tag})", "model": model, "provider": provider})
+
+    # 1. Configured models (always shown)
+    _add(config.main_llm.model, config.main_llm.provider)
+    if config.fast_llm.model != config.main_llm.model or config.fast_llm.provider != config.main_llm.provider:
+        _add(config.fast_llm.model, config.fast_llm.provider)
+
+    # 2. Locally installed Ollama models
+    if _ollama_client is not None:
+        try:
+            for m in _ollama_client.list().models:
+                name = getattr(m, "model", "") or getattr(m, "name", "")
+                if name:
+                    _add(name, "ollama_chat")
+        except Exception:
+            pass  # Ollama server not running — skip
+
+    return models
 
 
 # ── Page config ──
@@ -110,7 +147,8 @@ def init_system():
     # Load graph
     kg = KnowledgeGraph(config)
     kg.load(graph_path)
-    print(f"Loaded graph: {kg.get_stats()['total_nodes']} nodes, {kg.get_stats()['total_edges']} edges")
+    stats = kg.get_stats()
+    print(f"Loaded graph: {stats['total_nodes']} nodes, {stats['total_edges']} edges")
 
     # Load chunks and embed
     with open(chunks_path, "r", encoding="utf-8") as f:
@@ -125,11 +163,13 @@ def init_system():
 
 
 def _linkify_citations(text: str, msg_idx: int) -> str:
-    """Replace [1], [2], etc. in answer text with clickable anchor links."""
+    """Replace [1], [2], etc. in answer text with clickable anchor links.
+    HTML-escapes the LLM output first to prevent XSS."""
+    safe_text = html_mod.escape(text)
     def _replace_citation(match):
         num = match.group(1)
         return f'<a href="#cite-{msg_idx}-{num}" style="color: #4A90D9; text-decoration: none; font-weight: bold;">[{num}]</a>'
-    return re.sub(r'\[(\d+)\]', _replace_citation, text)
+    return re.sub(r'\[(\d+)\]', _replace_citation, safe_text)
 
 
 def _render_citations(citations: list[dict], msg_idx: int):
@@ -313,12 +353,18 @@ def main():
 
         top_k = st.slider("Results to retrieve", 2, 15, 5)
 
-        llm_model = st.selectbox(
+        available_models = _discover_models(config)
+        model_labels = [m["label"] for m in available_models]
+        sel_idx = st.selectbox(
             "Answer Generation Model",
-            ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"],
+            range(len(model_labels)),
+            format_func=lambda i: model_labels[i],
             index=0,
-            help="8B model is more retrieval-dependent — graph advantage becomes more visible",
+            help="Pick any configured Groq or locally-installed Ollama model",
         )
+        _sel = available_models[sel_idx]
+        llm_model = _sel["model"]
+        llm_provider = _sel["provider"]
 
         # ── Document filter (RBAC-aware) ──
         accessible_docs = get_accessible_docs(user)
@@ -396,8 +442,8 @@ def main():
                                                       user_access_level=user.access_level, doc_filter=doc_filter)
                 retrieval_hybrid = retriever.retrieve(query=prompt, top_k=top_k, use_graph=True,
                                                       user_access_level=user.access_level, doc_filter=doc_filter)
-                resp_vector = generate_response(query=prompt, retrieval=retrieval_vector, config=config, model_override=llm_model)
-                resp_hybrid = generate_response(query=prompt, retrieval=retrieval_hybrid, config=config, model_override=llm_model)
+                resp_vector = generate_response(query=prompt, retrieval=retrieval_vector, config=config, model_override=llm_model, provider_override=llm_provider)
+                resp_hybrid = generate_response(query=prompt, retrieval=retrieval_hybrid, config=config, model_override=llm_model, provider_override=llm_provider)
 
             with col_a:
                 st.subheader("📊 Vector-Only")
@@ -513,6 +559,7 @@ def main():
                         retrieval=retrieval,
                         config=config,
                         model_override=llm_model,
+                        provider_override=llm_provider,
                         stream=True,
                     )
 
@@ -534,11 +581,11 @@ def main():
                                     delta = chunk.choices[0].delta
                                     if delta and delta.content:
                                         yield delta.content
-                                # Ollama dict stream
-                                elif isinstance(chunk, dict):
-                                    msg = chunk.get("message", {})
-                                    if msg.get("content"):
-                                        yield msg["content"]
+                                # Ollama stream (Pydantic ChatResponse objects)
+                                elif hasattr(chunk, "message"):
+                                    content = getattr(chunk.message, "content", "")
+                                    if content:
+                                        yield content
 
                         answer = st.write_stream(_token_iter(raw_stream))
 
@@ -593,6 +640,7 @@ def main():
                         retrieval=retrieval,
                         config=config,
                         model_override=llm_model,
+                        provider_override=llm_provider,
                     )
 
                     # Display answer

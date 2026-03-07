@@ -79,14 +79,8 @@ TEXT CHUNK:
 JSON OUTPUT:"""
 
 
-def _get_llm_client(llm_config: LLMConfig):
-    """Create an OpenAI-compatible client for any provider."""
-    if llm_config.provider == "ollama_chat":
-        return None  # Use ollama library directly
-    return OpenAI(
-        api_key=llm_config.api_key or "not-needed",
-        base_url=llm_config.base_url,
-    )
+# Re-use OpenAI-compatible clients across calls (keyed by base_url)
+_client_cache: dict[str, OpenAI] = {}
 
 
 def _call_llm(llm_config: LLMConfig, system_msg: str, user_msg: str, temperature: float = 0.0, max_tokens: int = 1500) -> str:
@@ -101,12 +95,15 @@ def _call_llm(llm_config: LLMConfig, system_msg: str, user_msg: str, temperature
             ],
             options={"temperature": temperature, "num_predict": max_tokens},
         )
-        return response["message"]["content"]
+        return response.message.content
     else:
-        client = OpenAI(
-            api_key=llm_config.api_key or "not-needed",
-            base_url=llm_config.base_url,
-        )
+        base_url = llm_config.base_url or ""
+        if base_url not in _client_cache:
+            _client_cache[base_url] = OpenAI(
+                api_key=llm_config.api_key or "not-needed",
+                base_url=llm_config.base_url,
+            )
+        client = _client_cache[base_url]
         response = client.chat.completions.create(
             model=llm_config.model,
             messages=[
@@ -144,6 +141,10 @@ def _extract_json_from_response(text: str) -> dict:
         except json.JSONDecodeError:
             pass
 
+    warnings.warn(
+        f"All JSON parse attempts failed for LLM response. "
+        f"Preview: {text[:200]!r}"
+    )
     return {"entities": [], "relations": []}
 
 
@@ -255,6 +256,7 @@ def extract_entities_from_chunks(
     use_fast_llm: bool = True,
 ) -> tuple[list[Entity], list[Relation]]:
     """Batch extract entities from all chunks."""
+    FAILED_EXTRACTIONS.clear()  # Reset from previous runs
     config = config or get_config()
     all_entities: list[Entity] = []
     all_relations: list[Relation] = []
@@ -271,28 +273,91 @@ def extract_entities_from_chunks(
     return all_entities, all_relations
 
 
+def _simple_stem(word: str) -> str:
+    """Minimal suffix stripping for entity alignment."""
+    if len(word) <= 3:
+        return word
+    for suffix in ("ies", "ing", "tion", "ment", "ness", "ed", "es", "s"):
+        if word.endswith(suffix) and len(word) - len(suffix) >= 3:
+            if suffix == "ies":
+                return word[:-3] + "y"
+            return word[:-len(suffix)]
+    return word
+
+
+def _tokenize_and_stem(name: str) -> set[str]:
+    """Normalize, tokenize, and stem an entity name for fuzzy comparison."""
+    normalized = re.sub(r'\s+', ' ', name.lower().strip())
+    tokens = set(normalized.split())
+    return {_simple_stem(t) for t in tokens if len(t) > 1}
+
+
 def align_entities(entities: list[Entity], similarity_threshold: float = 0.85) -> dict[str, str]:
     """
-    Simple entity alignment: merge entities that refer to the same concept.
+    Entity alignment: merge entities that refer to the same concept.
+    
+    Two-pass approach:
+    1. Exact normalized string match (fast)
+    2. Jaccard similarity on stemmed tokens (catches plural/suffix variants)
     
     Returns a mapping of entity_id -> canonical_entity_id.
-    Uses exact name matching + normalized string matching.
-    For full version, would use embedding similarity.
     """
     canonical_map: dict[str, str] = {}  # entity_id -> canonical_id
     name_to_canonical: dict[str, str] = {}  # normalized_name -> canonical_id
+    # For fuzzy pass: canonical_name -> (canonical_id, stemmed_tokens)
+    canonical_stems: dict[str, tuple[str, set[str]]] = {}
 
+    # ── Pass 1: Exact normalized match ──
     for entity in entities:
-        # Normalize: lowercase, strip whitespace, collapse spaces
         normalized = re.sub(r'\s+', ' ', entity.name.lower().strip())
 
         if normalized in name_to_canonical:
-            # Already seen this exact name — map to canonical
             canonical_map[entity.entity_id] = name_to_canonical[normalized]
         else:
-            # New canonical entity
             canonical_map[entity.entity_id] = entity.entity_id
             name_to_canonical[normalized] = entity.entity_id
+            canonical_stems[normalized] = (entity.entity_id, _tokenize_and_stem(normalized))
+
+    # ── Pass 2: Fuzzy Jaccard on stemmed tokens ──
+    # Only for entities that became their own canonical in Pass 1
+    own_canonical = [
+        e for e in entities if canonical_map[e.entity_id] == e.entity_id
+    ]
+    canonical_names_list = list(canonical_stems.keys())
+
+    for entity in own_canonical:
+        normalized = re.sub(r'\s+', ' ', entity.name.lower().strip())
+        my_stems = canonical_stems[normalized][1]
+        if not my_stems:
+            continue
+
+        best_match_id = None
+        best_sim = 0.0
+
+        for canon_name, (canon_id, canon_stems_set) in canonical_stems.items():
+            if canon_name == normalized or not canon_stems_set:
+                continue
+            # Jaccard similarity on stemmed tokens
+            intersection = len(my_stems & canon_stems_set)
+            union = len(my_stems | canon_stems_set)
+            if union == 0:
+                continue
+            sim = intersection / union
+            if sim >= similarity_threshold and sim > best_sim:
+                best_sim = sim
+                best_match_id = canon_id
+
+        if best_match_id is not None:
+            # Merge: remap this entity and all its dependents to the match
+            old_id = entity.entity_id
+            canonical_map[old_id] = best_match_id
+            # Also remap anything that pointed to old_id
+            for eid, cid in canonical_map.items():
+                if cid == old_id:
+                    canonical_map[eid] = best_match_id
+            # Remove from canonical_stems so it doesn't match others
+            if normalized in canonical_stems:
+                del canonical_stems[normalized]
 
     merged_count = len(entities) - len(set(canonical_map.values()))
     print(f"Entity alignment: {len(entities)} entities → {len(set(canonical_map.values()))} canonical ({merged_count} merged)")

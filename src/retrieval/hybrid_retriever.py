@@ -299,18 +299,6 @@ class HybridRetriever:
             subgraph=subgraph,
         )
 
-    def _compute_policy_score(self, result: RetrievalResult, user_access_level: int) -> float:
-        """
-        Compute policy compliance score based on RBAC access levels.
-        Returns 1.0 if the user can access the chunk, 0.0 otherwise.
-        Chunks without an explicit access level default to PUBLIC (1).
-        """
-        from src.auth.rbac import get_access_level
-        chunk_level = get_access_level(result.doc_name)
-        if chunk_level <= user_access_level:
-            return 1.0
-        return 0.0
-
     def _compute_confidence(self, results: list[RetrievalResult]) -> float:
         """
         Compute overall retrieval confidence.
@@ -325,6 +313,6 @@ class HybridRetriever:
 
         # Diversity bonus: how many different documents contribute
         unique_docs = len(set(r.doc_name for r in results))
-        diversity_bonus = min(unique_docs / 3.0, 0.2)  # Max 0.2 bonus
+        diversity_bonus = 0.2 * min(unique_docs / 3.0, 1.0)  # Scales: 1 doc=0.067, 2=0.133, 3+=0.2
 
         return min(avg_top_score + diversity_bonus, 1.0)

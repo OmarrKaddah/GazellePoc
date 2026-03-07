@@ -140,7 +140,7 @@ def chunk_elements(
     Strategy:
     - Headings mesh standalone chunks (they provide section context).
     - Paragraphs are grouped by section leghayet max_chunk_tokens is reached.
-    - Tables are never split
+    - Tables are kept as single chunks when possible; oversized tables are split by rows.
     - Each chunk carries full section path for citation.
     """
     chunks: list[Chunk] = []
