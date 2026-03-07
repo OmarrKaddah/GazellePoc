@@ -96,7 +96,7 @@ def _access_badge(level: int) -> str:
 
 def _render_login_page():
     """Render the login page and return True if authenticated."""
-    st.title("🏦 Banking Knowledge AI")
+    st.title("Banking Knowledge Chatbot")
     st.caption("Graph-grounded, hallucination-resistant knowledge assistant")
     st.divider()
 
