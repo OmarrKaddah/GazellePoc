@@ -37,6 +37,7 @@ def _estimate_tokens(text: str) -> int:
     Currently simple heurtic ma bein statistical estimates of bpe (byte pair encoding)
     #English bpe tends to average 4 chars per token, while Arabic can be closer to 2.
     #3 is middle ground beinhom later use same tokenzier as embedding model for more accurate estimate and chunking
+    idk law hatefre2 bas hanshoof 
 
     
     '''
@@ -47,7 +48,7 @@ def _estimate_tokens(text: str) -> int:
     return max(len(text) // 3, len(text.split()))
 
 
-# Hard ceiling: chunks must never exceed the embedding model context window.
+#chunks must never exceed the embedding model context window.
 # nomic-embed-text = 8192 tokens.  We use 7500 as a safety margin.
 _EMBEDDING_TOKEN_LIMIT = 7500
 

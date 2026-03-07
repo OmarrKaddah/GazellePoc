@@ -90,9 +90,9 @@ class UserProfile:
     @property
     def level_label(self) -> str:
         return {
-            AccessLevel.PUBLIC: "🟢 Public",
-            AccessLevel.CONFIDENTIAL: "🟡 Confidential",
-            AccessLevel.RESTRICTED: "🔴 Restricted",
+            AccessLevel.PUBLIC: "Public",
+            AccessLevel.CONFIDENTIAL: "Confidential",
+            AccessLevel.RESTRICTED: "Restricted",
         }[self.access_level]
 
 

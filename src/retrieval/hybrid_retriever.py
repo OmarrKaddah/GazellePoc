@@ -90,7 +90,7 @@ class HybridRetriever:
     2. Query entity extraction + graph seeding
     3. Graph traversal expansion
     4. Policy filtering
-    5. Hybrid scoring: α * vector + β * graph + γ * policy
+    5. Hybrid scoring: α * vector + β * graph + γ * policy //// Removed later wtf are these weights
     6. Evidence sufficiency check
     """
 
