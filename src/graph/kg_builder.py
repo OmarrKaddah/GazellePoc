@@ -5,13 +5,17 @@ Builds the dual-layer graph: text-based KG + cross-modal (table) KG.
 
 import json
 from pathlib import Path
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
 
 import networkx as nx
 
 from config import get_config, Config
 from src.ingestion.chunker import Chunk
 from src.graph.entity_extractor import Entity, Relation
+from src.graph.neo4j_store import Neo4jGraphStore
+
+if TYPE_CHECKING:
+    from pyvis.network import Network
 
 
 class KnowledgeGraph:
@@ -26,6 +30,9 @@ class KnowledgeGraph:
     def __init__(self, config: Optional[Config] = None):
         self.config = config or get_config()
         self.graph = nx.DiGraph()
+        self._neo4j: Optional[Neo4jGraphStore] = None
+        if self.config.graph.backend == "neo4j":
+            self._neo4j = Neo4jGraphStore(self.config)
         self.entity_id_map: dict[str, str] = {}  # original entity_id -> graph node_id
         # Counters for silent-failure visibility
         self._dropped_relations: int = 0
@@ -329,7 +336,11 @@ class KnowledgeGraph:
         return evidence
 
     def save(self, path: str | Path):
-        """Save graph to JSON."""
+        """Save graph to JSON and optionally sync to Neo4j backend."""
+        if self._neo4j is not None:
+            self._neo4j.replace_from_networkx(self.graph)
+            print("Synced graph to Neo4j")
+
         path = Path(path)
         path.parent.mkdir(parents=True, exist_ok=True)
         data = nx.node_link_data(self.graph)
@@ -338,11 +349,14 @@ class KnowledgeGraph:
         print(f"Saved graph to {path}")
 
     def load(self, path: str | Path):
-        """Load graph from JSON."""
-        path = Path(path)
-        with open(path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        self.graph = nx.node_link_graph(data, directed=True)
+        """Load graph from Neo4j backend when configured, else JSON."""
+        if self._neo4j is not None:
+            self.graph = self._neo4j.load_as_networkx()
+        else:
+            path = Path(path)
+            with open(path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            self.graph = nx.node_link_graph(data, directed=True)
         self.build_entity_index()
         print(f"Loaded graph: {self.num_nodes} nodes, {self.num_edges} edges")
 
@@ -429,7 +443,7 @@ class KnowledgeGraph:
         height: str = "750px",
         width: str = "100%",
         notebook: bool = False,
-    ) -> "pyvis.network.Network":
+    ) -> "Network":
         """
         Convert the NetworkX KG to an interactive PyVis network.
 

@@ -46,6 +46,7 @@ class GraphConfig:
     neo4j_uri: str = "bolt://localhost:7687"
     neo4j_user: str = "neo4j"
     neo4j_password: str = "password"
+    neo4j_database: str = "neo4j"
     max_hops: int = 2
     similarity_threshold: float = 0.85
 
@@ -127,7 +128,13 @@ class Config:
             model="nomic-embed-text",
         )
         self.vector_db = VectorDBConfig(use_in_memory=True)
-        self.graph = GraphConfig(backend="networkx")
+        self.graph = GraphConfig(
+            backend=os.environ.get("GRAPH_BACKEND", "networkx"),
+            neo4j_uri=os.environ.get("NEO4J_URI", "bolt://localhost:7687"),
+            neo4j_user=os.environ.get("NEO4J_USER", "neo4j"),
+            neo4j_password=os.environ.get("NEO4J_PASSWORD", "password"),
+            neo4j_database=os.environ.get("NEO4J_DATABASE", "neo4j"),
+        )
         self.retrieval = RetrievalConfig()
         self.chunking = ChunkingConfig()
 
@@ -151,7 +158,13 @@ class Config:
             dimensions=1024,
         )
         self.vector_db = VectorDBConfig(use_in_memory=False)
-        self.graph = GraphConfig(backend="neo4j")
+        self.graph = GraphConfig(
+            backend=os.environ.get("GRAPH_BACKEND", "neo4j"),
+            neo4j_uri=os.environ.get("NEO4J_URI", "bolt://localhost:7687"),
+            neo4j_user=os.environ.get("NEO4J_USER", "neo4j"),
+            neo4j_password=os.environ.get("NEO4J_PASSWORD", "password"),
+            neo4j_database=os.environ.get("NEO4J_DATABASE", "neo4j"),
+        )
         self.retrieval = RetrievalConfig()
         self.chunking = ChunkingConfig()
 

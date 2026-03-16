@@ -323,11 +323,14 @@ def align_entities(entities: list[Entity], similarity_threshold: float = 0.85) -
     own_canonical = [
         e for e in entities if canonical_map[e.entity_id] == e.entity_id
     ]
-    canonical_names_list = list(canonical_stems.keys())
 
     for entity in own_canonical:
+        # Another entity may already have merged this canonical during this pass.
+        if canonical_map.get(entity.entity_id) != entity.entity_id:
+            continue
+
         normalized = re.sub(r'\s+', ' ', entity.name.lower().strip())
-        my_stems = canonical_stems[normalized][1]
+        my_stems = _tokenize_and_stem(normalized)
         if not my_stems:
             continue
 
