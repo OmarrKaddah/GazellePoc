@@ -1,0 +1,5369 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "node_type": "chunk",
+      "layer": "text",
+      "element_type": "text",
+      "doc_name": "AML_Policy_2025",
+      "section_path": [],
+      "content": "[AML_Policy_2025]\n\nAnti-Money Laundering and Counter-Terrorism Financing Policy\n\nDocument ID: POL-AML-2025-004\n\nEffective Date: January 1, 2025\n\nClassification: Strictly Confidential",
+      "language": "en",
+      "id": "391a57a2f5f19847"
+    },
+    {
+      "node_type": "document",
+      "layer": "text",
+      "name": "AML_Policy_2025",
+      "id": "doc::AML_Policy_2025"
+    },
+    {
+      "node_type": "chunk",
+      "layer": "text",
+      "element_type": "text",
+      "doc_name": "AML_Policy_2025",
+      "section_path": [
+        "1. Regulatory Framework"
+      ],
+      "content": "[AML_Policy_2025 | 1. Regulatory Framework]\n\nThis policy is issued in compliance with Central Bank Circular No. 2024/AML/012 and the Anti-Money Laundering Law No. 80 of 2002 (as amended). The Bank must maintain a risk-based approach to AML/CTF in accordance with FATF Recommendations.",
+      "language": "en",
+      "id": "2ea2b89179db03dd"
+    },
+    {
+      "node_type": "section",
+      "layer": "text",
+      "name": "1. Regulatory Framework",
+      "doc_name": "AML_Policy_2025",
+      "depth": 1,
+      "id": "section::AML_Policy_2025::1. Regulatory Framework"
+    },
+    {
+      "node_type": "chunk",
+      "layer": "text",
+      "element_type": "text",
+      "doc_name": "AML_Policy_2025",
+      "section_path": [
+        "2. Customer Due Diligence (CDD)",
+        "2.1 Standard CDD"
+      ],
+      "content": "[AML_Policy_2025 | 2. Customer Due Diligence (CDD) > 2.1 Standard CDD]\n\nStandard CDD must be performed for all new customers. This includes identity verification, beneficial ownership identification, and understanding the purpose of the business relationship. For individual accounts, a valid national ID or passport is required along with proof of address dated within the last 3 months.",
+      "language": "en",
+      "id": "96e4353bcd420be1"
+    },
+    {
+      "node_type": "section",
+      "layer": "text",
+      "name": "2. Customer Due Diligence (CDD)",
+      "doc_name": "AML_Policy_2025",
+      "depth": 1,
+      "id": "section::AML_Policy_2025::2. Customer Due Diligence (CDD)"
+    },
+    {
+      "node_type": "section",
+      "layer": "text",
+      "name": "2.1 Standard CDD",
+      "doc_name": "AML_Policy_2025",
+      "depth": 2,
+      "id": "section::AML_Policy_2025::2. Customer Due Diligence (CDD) > 2.1 Standard CDD"
+    },
+    {
+      "node_type": "chunk",
+      "layer": "text",
+      "element_type": "text",
+      "doc_name": "AML_Policy_2025",
+      "section_path": [
+        "2. Customer Due Diligence (CDD)",
+        "2.2 Enhanced Due Diligence (EDD)"
+      ],
+      "content": "[AML_Policy_2025 | 2. Customer Due Diligence (CDD) > 2.2 Enhanced Due Diligence (EDD)]\n\nEnhanced Due Diligence is mandatory for: (a) Politically Exposed Persons (PEPs), (b) customers from high-risk jurisdictions as defined in Appendix A of the Country Risk Assessment, (c) correspondent banking relationships, and (d) any customer with transactions flagged by the Transaction Monitoring System (TMS). EDD requires approval from the Compliance Committee (see Governance Policy, Section 3.2 for committee composition).",
+      "language": "en",
+      "id": "28e7dda967b3e03f"
+    },
+    {
+      "node_type": "section",
+      "layer": "text",
+      "name": "2.2 Enhanced Due Diligence (EDD)",
+      "doc_name": "AML_Policy_2025",
+      "depth": 2,
+      "id": "section::AML_Policy_2025::2. Customer Due Diligence (CDD) > 2.2 Enhanced Due Diligence (EDD)"
+    },
+    {
+      "node_type": "chunk",
+      "layer": "text",
+      "element_type": "text",
+      "doc_name": "AML_Policy_2025",
+      "section_path": [
+        "3. Transaction Monitoring",
+        "3.1 Monitoring Thresholds"
+      ],
+      "content": "[AML_Policy_2025 | 3. Transaction Monitoring > 3.1 Monitoring Thresholds]\n\nAll cash transactions exceeding EGP 300,000 (or equivalent in foreign currency, calculated using the daily FX rates published by the Treasury Department as per FX Policy Section 3) must be reported to the Money Laundering Reporting Officer (MLRO). Multiple transactions by the same customer aggregating to EGP 500,000 within a 30-day rolling window must trigger an automatic alert.",
+      "language": "en",
+      "id": "3b869b27f851e316"
+    },
+    {
+      "node_type": "section",
+      "layer": "text",
+      "name": "3. Transaction Monitoring",
+      "doc_name": "AML_Policy_2025",
+      "depth": 1,
+      "id": "section::AML_Policy_2025::3. Transaction Monitoring"
+    },
+    {
+      "node_type": "section",
+      "layer": "text",
+      "name": "3.1 Monitoring Thresholds",
+      "doc_name": "AML_Policy_2025",
+      "depth": 2,
+      "id": "section::AML_Policy_2025::3. Transaction Monitoring > 3.1 Monitoring Thresholds"
+    },
+    {
+      "node_type": "chunk",
+      "layer": "text",
+      "element_type": "text",
+      "doc_name": "AML_Policy_2025",
+      "section_path": [
+        "3. Transaction Monitoring",
+        "3.2 Suspicious Activity Reporting"
+      ],
+      "content": "[AML_Policy_2025 | 3. Transaction Monitoring > 3.2 Suspicious Activity Reporting]\n\nIF a transaction is flagged as suspicious by the TMS, THEN the branch must file a preliminary report to the MLRO within 24 hours. IF the MLRO confirms the suspicion, THEN a Suspicious Transaction Report (STR) must be filed with the Financial Intelligence Unit (FIU) within 3 business days. The MLRO reports to the Chief Risk Officer (CRO) who has ultimate responsibility for AML compliance oversight (see Risk Governance Policy, Section 2.1).",
+      "language": "en",
+      "id": "39ae210e0e657198"
+    },
+    {
+      "node_type": "section",
+      "layer": "text",
+      "name": "3.2 Suspicious Activity Reporting",
+      "doc_name": "AML_Policy_2025",
+      "depth": 2,
+      "id": "section::AML_Policy_2025::3. Transaction Monitoring > 3.2 Suspicious Activity Reporting"
+    },
+    {
+      "node_type": "chunk",
+      "layer": "text",
+      "element_type": "text",
+      "doc_name": "AML_Policy_2025",
+      "section_path": [
+        "4. Sanctions Screening"
+      ],
+      "content": "[AML_Policy_2025 | 4. Sanctions Screening]\n\nAll customers and transactions must be screened against: UN Security Council sanctions lists, OFAC SDN list, EU sanctions lists, and local Central Bank restricted lists. Sanctions screening must occur at onboarding, periodically (at least quarterly), and for every wire transfer. Any positive match must freeze the transaction and be escalated to the Compliance Committee within 2 hours.",
+      "language": "en",
+      "id": "a12cd8599687e560"
+    },
+    {
+      "node_type": "section",
+      "layer": "text",
+      "name": "4. Sanctions Screening",
+      "doc_name": "AML_Policy_2025",
+      "depth": 1,
+      "id": "section::AML_Policy_2025::4. Sanctions Screening"
+    },
+    {
+      "node_type": "chunk",
+      "layer": "text",
+      "element_type": "text",
+      "doc_name": "AML_Policy_2025",
+      "section_path": [
+        "5. Record Retention"
+      ],
+      "content": "[AML_Policy_2025 | 5. Record Retention]\n\nAll CDD records must be retained for a minimum of 5 years after the end of the customer relationship. Transaction records must be retained for 10 years. STR-related records must be retained indefinitely until cleared by the FIU. These requirements align with the Bank's Data Governance Policy (POL-DG-2025-009, Section 4).",
+      "language": "en",
+      "id": "8bf9a4b958e97838"
+    },
+    {
+      "node_type": "section",
+      "layer": "text",
+      "name": "5. Record Retention",
+      "doc_name": "AML_Policy_2025",
+      "depth": 1,
+      "id": "section::AML_Policy_2025::5. Record Retention"
+    },
+    {
+      "node_type": "chunk",
+      "layer": "text",
+      "element_type": "text",
+      "doc_name": "AML_Policy_2025",
+      "section_path": [
+        "6. العقوبات والمخالفات"
+      ],
+      "content": "[AML_Policy_2025 | 6. العقوبات والمخالفات]\n\nأي موظف يخالف أحكام سياسة مكافحة غسل الأموال يتعرض لإجراءات تأديبية وفقاً لسياسة الموارد البشرية. في حالة المخالفات الجسيمة، يتم إبلاغ الجهات الرقابية المختصة. يتحمل مدير المخاطر التنفيذي (CRO) المسؤولية النهائية عن الامتثال لمتطلبات مكافحة غسل الأموال.",
+      "language": "ar",
+      "id": "aeb57c8ebbfd060d"
+    },
+    {
+      "node_type": "section",
+      "layer": "text",
+      "name": "6. العقوبات والمخالفات",
+      "doc_name": "AML_Policy_2025",
+      "depth": 1,
+      "id": "section::AML_Policy_2025::6. العقوبات والمخالفات"
+    },
+    {
+      "node_type": "chunk",
+      "layer": "text",
+      "element_type": "text",
+      "doc_name": "Governance_Policy_2025",
+      "section_path": [],
+      "content": "[Governance_Policy_2025]\n\nCorporate Governance and Committee Structure\n\nDocument ID: POL-GOV-2025-005\n\nEffective Date: January 1, 2025",
+      "language": "en",
+      "id": "069f23d83f3d1a05"
+    },
+    {
+      "node_type": "document",
+      "layer": "text",
+      "name": "Governance_Policy_2025",
+      "id": "doc::Governance_Policy_2025"
+    },
+    {
+      "node_type": "chunk",
+      "layer": "text",
+      "element_type": "text",
+      "doc_name": "Governance_Policy_2025",
+      "section_path": [
+        "1. Board of Directors"
+      ],
+      "content": "[Governance_Policy_2025 | 1. Board of Directors]\n\nThe Board of Directors consists of 11 members including 4 independent directors. The Board meets at least quarterly and has ultimate oversight responsibility for all risk management activities. The Board delegates operational risk management to the following committees.",
+      "language": "en",
+      "id": "50991272f918f291"
+    },
+    {
+      "node_type": "section",
+      "layer": "text",
+      "name": "1. Board of Directors",
+      "doc_name": "Governance_Policy_2025",
+      "depth": 1,
+      "id": "section::Governance_Policy_2025::1. Board of Directors"
+    },
+    {
+      "node_type": "chunk",
+      "layer": "text",
+      "element_type": "text",
+      "doc_name": "Governance_Policy_2025",
+      "section_path": [
+        "2. Risk Management Committees",
+        "2.1 Board Risk Committee (BRC)"
+      ],
+      "content": "[Governance_Policy_2025 | 2. Risk Management Committees > 2.1 Board Risk Committee (BRC)]\n\nThe Board Risk Committee consists of 5 Board members (minimum 3 independent). It meets monthly and reviews: aggregate risk exposure reports, risk appetite framework compliance, and capital adequacy assessments. The BRC has authority to impose temporary trading halts on any business unit when risk limits are breached (see FX Policy Section 2.2 and Credit Risk Policy Section 3).",
+      "language": "en",
+      "id": "3941b121a2970ea3"
+    },
+    {
+      "node_type": "section",
+      "layer": "text",
+      "name": "2. Risk Management Committees",
+      "doc_name": "Governance_Policy_2025",
+      "depth": 1,
+      "id": "section::Governance_Policy_2025::2. Risk Management Committees"
+    },
+    {
+      "node_type": "section",
+      "layer": "text",
+      "name": "2.1 Board Risk Committee (BRC)",
+      "doc_name": "Governance_Policy_2025",
+      "depth": 2,
+      "id": "section::Governance_Policy_2025::2. Risk Management Committees > 2.1 Board Risk Committee (BRC)"
+    },
+    {
+      "node_type": "chunk",
+      "layer": "text",
+      "element_type": "text",
+      "doc_name": "Governance_Policy_2025",
+      "section_path": [
+        "2. Risk Management Committees",
+        "2.2 Executive Risk Committee (ERC)"
+      ],
+      "content": "[Governance_Policy_2025 | 2. Risk Management Committees > 2.2 Executive Risk Committee (ERC)]\n\nThe Executive Risk Committee is chaired by the CEO and includes: CRO, CFO, Chief Compliance Officer (CCO), Head of Treasury, and Head of Credit. It meets weekly and oversees day-to-day risk management. The ERC approves risk limit changes up to 10% of existing limits; changes exceeding 10% require BRC approval.",
+      "language": "en",
+      "id": "03fd0ef9ccfce38b"
+    },
+    {
+      "node_type": "section",
+      "layer": "text",
+      "name": "2.2 Executive Risk Committee (ERC)",
+      "doc_name": "Governance_Policy_2025",
+      "depth": 2,
+      "id": "section::Governance_Policy_2025::2. Risk Management Committees > 2.2 Executive Risk Committee (ERC)"
+    },
+    {
+      "node_type": "chunk",
+      "layer": "text",
+      "element_type": "text",
+      "doc_name": "Governance_Policy_2025",
+      "section_path": [
+        "3. Specialized Committees",
+        "3.1 Credit Committee Structure"
+      ],
+      "content": "[Governance_Policy_2025 | 3. Specialized Committees > 3.1 Credit Committee Structure]\n\nCredit approval follows a tiered committee structure: Branch Credit Committee (up to EGP 5M), Regional Credit Committee (up to EGP 25M), Head Office Credit Committee (up to EGP 100M), Board of Directors (above EGP 100M). See Credit Risk Policy Section 2.1 for detailed approval matrix and conditions.",
+      "language": "en",
+      "id": "8c9bed3427e5c833"
+    },
+    {
+      "node_type": "section",
+      "layer": "text",
+      "name": "3. Specialized Committees",
+      "doc_name": "Governance_Policy_2025",
+      "depth": 1,
+      "id": "section::Governance_Policy_2025::3. Specialized Committees"
+    },
+    {
+      "node_type": "section",
+      "layer": "text",
+      "name": "3.1 Credit Committee Structure",
+      "doc_name": "Governance_Policy_2025",
+      "depth": 2,
+      "id": "section::Governance_Policy_2025::3. Specialized Committees > 3.1 Credit Committee Structure"
+    },
+    {
+      "node_type": "chunk",
+      "layer": "text",
+      "element_type": "text",
+      "doc_name": "Governance_Policy_2025",
+      "section_path": [
+        "3. Specialized Committees",
+        "3.2 Compliance Committee"
+      ],
+      "content": "[Governance_Policy_2025 | 3. Specialized Committees > 3.2 Compliance Committee]\n\nThe Compliance Committee is chaired by the CCO and includes: MLRO, Head of Legal, Head of Internal Audit, and a Board-appointed independent member. It meets bi-weekly and oversees: AML/CTF compliance (see AML Policy), sanctions screening, regulatory reporting, and customer complaints. The Compliance Committee reports to the BRC.",
+      "language": "en",
+      "id": "ef9b549d0a2d777d"
+    },
+    {
+      "node_type": "section",
+      "layer": "text",
+      "name": "3.2 Compliance Committee",
+      "doc_name": "Governance_Policy_2025",
+      "depth": 2,
+      "id": "section::Governance_Policy_2025::3. Specialized Committees > 3.2 Compliance Committee"
+    },
+    {
+      "node_type": "chunk",
+      "layer": "text",
+      "element_type": "text",
+      "doc_name": "Governance_Policy_2025",
+      "section_path": [
+        "3. Specialized Committees",
+        "3.3 Treasury Committee"
+      ],
+      "content": "[Governance_Policy_2025 | 3. Specialized Committees > 3.3 Treasury Committee]\n\nThe Treasury Committee is chaired by the Head of Treasury and includes: CRO, CFO, and Head of Market Risk. It meets daily for FX position reviews and weekly for ALM reviews. The Treasury Committee has authority to approve exotic currency pair trading (see FX Policy Section 3) and manages the Bank's liquidity buffer requirements.",
+      "language": "en",
+      "id": "092cd22cee288978"
+    },
+    {
+      "node_type": "section",
+      "layer": "text",
+      "name": "3.3 Treasury Committee",
+      "doc_name": "Governance_Policy_2025",
+      "depth": 2,
+      "id": "section::Governance_Policy_2025::3. Specialized Committees > 3.3 Treasury Committee"
+    },
+    {
+      "node_type": "chunk",
+      "layer": "text",
+      "element_type": "text",
+      "doc_name": "Governance_Policy_2025",
+      "section_path": [
+        "4. Chief Risk Officer (CRO) Mandate"
+      ],
+      "content": "[Governance_Policy_2025 | 4. Chief Risk Officer (CRO) Mandate]\n\nThe CRO has a dual reporting line: operationally to the CEO and functionally to the BRC Chair. The CRO's mandate includes: (a) oversight of credit, market, operational, and liquidity risk, (b) ultimate authority over risk limit setting subject to BRC approval, (c) AML/CTF compliance oversight (delegated from the Board), (d) quarterly risk appetite review, and (e) veto power on transactions exceeding 50% of any risk limit.",
+      "language": "en",
+      "id": "10660abe9d044f5f"
+    },
+    {
+      "node_type": "section",
+      "layer": "text",
+      "name": "4. Chief Risk Officer (CRO) Mandate",
+      "doc_name": "Governance_Policy_2025",
+      "depth": 1,
+      "id": "section::Governance_Policy_2025::4. Chief Risk Officer (CRO) Mandate"
+    },
+    {
+      "node_type": "chunk",
+      "layer": "text",
+      "element_type": "text",
+      "doc_name": "Governance_Policy_2025",
+      "section_path": [
+        "5. Escalation Chain"
+      ],
+      "content": "[Governance_Policy_2025 | 5. Escalation Chain]\n\nRisk events must be escalated through the following chain: Line Manager → Department Head → relevant Committee → ERC → BRC → Board of Directors. Critical events (fraud, regulatory breach, loss >EGP 10M) skip directly to ERC and BRC. The CRO has authority to invoke emergency escalation at any level.",
+      "language": "en",
+      "id": "78d3a9017bb97695"
+    },
+    {
+      "node_type": "section",
+      "layer": "text",
+      "name": "5. Escalation Chain",
+      "doc_name": "Governance_Policy_2025",
+      "depth": 1,
+      "id": "section::Governance_Policy_2025::5. Escalation Chain"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "Anti-Money Laundering and Counter-Terrorism Financing Policy",
+      "value": null,
+      "mentions": [
+        "Anti-Money Laundering and Counter-Terrorism Financing Policy"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::b2587534ef58"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "AML_Policy_2025",
+      "value": null,
+      "mentions": [
+        "AML_Policy_2025"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::13d7213667c6"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "Document ID",
+      "value": null,
+      "mentions": [
+        "Document ID"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "cross_document": true,
+      "id": "entity::577ffaa03a2d"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "POL-AML-2025-004",
+      "value": null,
+      "mentions": [
+        "POL-AML-2025-004"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::ed45a6d72d70"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "Effective Date",
+      "value": null,
+      "mentions": [
+        "Effective Date"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "cross_document": true,
+      "id": "entity::cf2f890099ab"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "date",
+      "name": "January 1, 2025",
+      "value": null,
+      "mentions": [
+        "January 1, 2025"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::b77aad83b46b"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "Classification",
+      "value": null,
+      "mentions": [
+        "Classification"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::d0a91b87db21"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "Strictly Confidential",
+      "value": null,
+      "mentions": [
+        "Strictly Confidential"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::7d856c267a2e"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "Central Bank Circular No. 2024/AML/012",
+      "value": null,
+      "mentions": [
+        "Central Bank Circular No. 2024/AML/012"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::13d219d7f5a3"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "Anti-Money Laundering Law No. 80 of 2002",
+      "value": null,
+      "mentions": [
+        "Anti-Money Laundering Law No. 80 of 2002"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::602150f84727"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "FATF Recommendations",
+      "value": null,
+      "mentions": [
+        "FATF Recommendations"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::4cc75d716890"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "condition",
+      "name": "AML/CTF",
+      "value": null,
+      "mentions": [
+        "AML/CTF"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::6c909b63a556"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "organization",
+      "name": "Bank",
+      "value": null,
+      "mentions": [
+        "Bank"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::34239d5a2af9"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "risk-based approach",
+      "value": null,
+      "mentions": [
+        "risk-based approach"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::97cd74f5e9a4"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "condition",
+      "name": "Customer Due Diligence (CDD)",
+      "value": null,
+      "mentions": [
+        "Customer Due Diligence (CDD)"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::204290debbe4"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "condition",
+      "name": "Standard CDD",
+      "value": null,
+      "mentions": [
+        "Standard CDD"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::009ff58d28ff"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "new customers",
+      "value": null,
+      "mentions": [
+        "new customers"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::bca84b77b7a4"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "product",
+      "name": "identity verification",
+      "value": null,
+      "mentions": [
+        "identity verification"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::791f02abca00"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "product",
+      "name": "beneficial ownership identification",
+      "value": null,
+      "mentions": [
+        "beneficial ownership identification"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::f04790bac6f8"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "product",
+      "name": "understanding the purpose of the business relationship",
+      "value": null,
+      "mentions": [
+        "understanding the purpose of the business relationship"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::68d53c28092c"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "product",
+      "name": "individual accounts",
+      "value": null,
+      "mentions": [
+        "individual accounts"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::48e588cb42cc"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "product",
+      "name": "valid national ID",
+      "value": null,
+      "mentions": [
+        "valid national ID"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::6f858051a2f6"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "product",
+      "name": "passport",
+      "value": null,
+      "mentions": [
+        "passport"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::e04da3a25d7a"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "product",
+      "name": "proof of address",
+      "value": null,
+      "mentions": [
+        "proof of address"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::eee27260c48e"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "limit",
+      "name": "3 months",
+      "value": "3",
+      "mentions": [
+        "3 months"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::a27282e797f1"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "last",
+      "value": null,
+      "mentions": [
+        "last"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::9276b78996f6"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "loan_type|product",
+      "name": "Enhanced Due Diligence",
+      "value": null,
+      "mentions": [
+        "Enhanced Due Diligence"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::bf68158215f3"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "Politically Exposed Persons",
+      "value": null,
+      "mentions": [
+        "Politically Exposed Persons"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::f23411db8518"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "high-risk jurisdictions",
+      "value": null,
+      "mentions": [
+        "high-risk jurisdictions"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::a66d82b1e263"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "Appendix A of the Country Risk Assessment",
+      "value": null,
+      "mentions": [
+        "Appendix A of the Country Risk Assessment"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::fc3d3a82641a"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "correspondent banking relationships",
+      "value": null,
+      "mentions": [
+        "correspondent banking relationships"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::0d8279fbb60e"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "product",
+      "name": "Transaction Monitoring System (TMS)",
+      "value": null,
+      "mentions": [
+        "Transaction Monitoring System (TMS)"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::dfe10380d286"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "organization",
+      "name": "Compliance Committee",
+      "value": null,
+      "mentions": [
+        "Compliance Committee"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "cross_document": true,
+      "id": "entity::3d01e5a59597"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "Governance Policy",
+      "value": null,
+      "mentions": [
+        "Governance Policy"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::ee360cb51923"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "Section 3.2",
+      "value": null,
+      "mentions": [
+        "Section 3.2"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::afff88c91dc7"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "Appendix A",
+      "value": null,
+      "mentions": [
+        "Appendix A"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::59ddc21d825d"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "Country Risk Assessment",
+      "value": null,
+      "mentions": [
+        "Country Risk Assessment"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::bea9a7efdf0f"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "limit",
+      "name": "EGP 300,000",
+      "value": "300000",
+      "mentions": [
+        "EGP 300,000"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::d25ede6d3dcc"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "limit",
+      "name": "EGP 500,000",
+      "value": "500000",
+      "mentions": [
+        "EGP 500,000"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::68fca758817d"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "30-day rolling window",
+      "value": null,
+      "mentions": [
+        "30-day rolling window"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::21a1ce898c8e"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "daily FX rates",
+      "value": null,
+      "mentions": [
+        "daily FX rates"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::90ebd5299b97"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "organization",
+      "name": "Treasury Department",
+      "value": null,
+      "mentions": [
+        "Treasury Department"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::15137bf1e2f8"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "FX Policy Section 3",
+      "value": null,
+      "mentions": [
+        "FX Policy Section 3"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "cross_document": true,
+      "id": "entity::ca09f6393f88"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "Money Laundering Reporting Officer (MLRO)",
+      "value": null,
+      "mentions": [
+        "Money Laundering Reporting Officer (MLRO)"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::4665f62eafe0"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "product",
+      "name": "cash transactions",
+      "value": null,
+      "mentions": [
+        "cash transactions"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::f91b7a074a56"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "Transaction Monitoring",
+      "value": null,
+      "mentions": [
+        "Transaction Monitoring"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::bafb6de7c735"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "product",
+      "name": "Suspicious Activity Reporting",
+      "value": null,
+      "mentions": [
+        "Suspicious Activity Reporting"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::6a0bdc93589a"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "organization",
+      "name": "TMS",
+      "value": null,
+      "mentions": [
+        "TMS"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::c7058bb0cebd"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "MLRO",
+      "value": null,
+      "mentions": [
+        "MLRO"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "cross_document": true,
+      "id": "entity::87502ea8890a"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "organization",
+      "name": "branch",
+      "value": null,
+      "mentions": [
+        "branch"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::5dd70b3e4e81"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "limit",
+      "name": "24 hours",
+      "value": "24",
+      "mentions": [
+        "24 hours"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::978daa0311d2"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "limit",
+      "name": "3 business days",
+      "value": "3",
+      "mentions": [
+        "3 business days"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::41efebd6b721"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "Chief Risk Officer (CRO)",
+      "value": null,
+      "mentions": [
+        "Chief Risk Officer (CRO)"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "cross_document": true,
+      "id": "entity::a106a92ae9e2"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "Risk Governance Policy",
+      "value": null,
+      "mentions": [
+        "Risk Governance Policy"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::35a0cce7390d"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "Section 2.1",
+      "value": null,
+      "mentions": [
+        "Section 2.1"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::a92365826c1b"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "product",
+      "name": "Suspicious Transaction Report (STR)",
+      "value": null,
+      "mentions": [
+        "Suspicious Transaction Report (STR)"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::6f62d917afef"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "organization",
+      "name": "Financial Intelligence Unit (FIU)",
+      "value": null,
+      "mentions": [
+        "Financial Intelligence Unit (FIU)"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::d56d751d55dc"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "UN Security Council sanctions lists",
+      "value": null,
+      "mentions": [
+        "UN Security Council sanctions lists"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::310f3418c1a4"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "OFAC SDN list",
+      "value": null,
+      "mentions": [
+        "OFAC SDN list"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::77f8f365d563"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "EU sanctions lists",
+      "value": null,
+      "mentions": [
+        "EU sanctions lists"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::bfdb862eee8c"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "local Central Bank restricted lists",
+      "value": null,
+      "mentions": [
+        "local Central Bank restricted lists"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::7d2ac55493e7"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "customers",
+      "value": null,
+      "mentions": [
+        "customers"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::9cb47fb5cbee"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "product",
+      "name": "transactions",
+      "value": null,
+      "mentions": [
+        "transactions"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::7c35420fa8ad"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "condition",
+      "name": "onboarding",
+      "value": null,
+      "mentions": [
+        "onboarding"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::601b980db1c7"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "condition",
+      "name": "periodically",
+      "value": null,
+      "mentions": [
+        "periodically"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::830b6871255e"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "at least quarterly",
+      "value": null,
+      "mentions": [
+        "at least quarterly"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::231af2420865"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "product",
+      "name": "wire transfer",
+      "value": null,
+      "mentions": [
+        "wire transfer"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::7e97e42b10c4"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "condition",
+      "name": "positive match",
+      "value": null,
+      "mentions": [
+        "positive match"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::4845ba96f45a"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "limit",
+      "name": "2 hours",
+      "value": "2",
+      "mentions": [
+        "2 hours"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::275fddd12821"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "product",
+      "name": "CDD records",
+      "value": null,
+      "mentions": [
+        "CDD records"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::515668338ece"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "limit",
+      "name": "5 years",
+      "value": "5",
+      "mentions": [
+        "5 years"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::6cd03d973da5"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "customer relationship",
+      "value": null,
+      "mentions": [
+        "customer relationship"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::bea8769ab618"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "product",
+      "name": "Transaction records",
+      "value": null,
+      "mentions": [
+        "Transaction records"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::78e4b2aae8ae"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "limit",
+      "name": "10 years",
+      "value": "10",
+      "mentions": [
+        "10 years"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::d65802124539"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "product",
+      "name": "STR-related records",
+      "value": null,
+      "mentions": [
+        "STR-related records"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::633cd75c5882"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "organization",
+      "name": "FIU",
+      "value": null,
+      "mentions": [
+        "FIU"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::1431c1295569"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "Bank's Data Governance Policy",
+      "value": null,
+      "mentions": [
+        "Bank's Data Governance Policy"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::5b24a7269987"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "POL-DG-2025-009",
+      "value": null,
+      "mentions": [
+        "POL-DG-2025-009"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::98068b6b1058"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "Section 4",
+      "value": null,
+      "mentions": [
+        "Section 4"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::7a44172a9d6f"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "سياسة مكافحة غسل الأموال",
+      "value": null,
+      "mentions": [
+        "سياسة مكافحة غسل الأموال"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::4ac6faced526"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "موظف",
+      "value": null,
+      "mentions": [
+        "موظف"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::0032562ae478"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "product",
+      "name": "إجراءات تأديبية",
+      "value": null,
+      "mentions": [
+        "إجراءات تأديبية"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::2c83a0b6087a"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "سياسة الموارد البشرية",
+      "value": null,
+      "mentions": [
+        "سياسة الموارد البشرية"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::192b742a217c"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "condition",
+      "name": "مخالفات جسيمة",
+      "value": null,
+      "mentions": [
+        "مخالفات جسيمة"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::dc5a72e227d6"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "organization",
+      "name": "جهات رقابية",
+      "value": null,
+      "mentions": [
+        "جهات رقابية"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::4bbadec15f6e"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "مدير المخاطر التنفيذي (CRO)",
+      "value": null,
+      "mentions": [
+        "مدير المخاطر التنفيذي (CRO)"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::d79cd0e771b7"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "متطلبات مكافحة غسل الأموال",
+      "value": null,
+      "mentions": [
+        "متطلبات مكافحة غسل الأموال"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::a2c9a9046dff"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "condition",
+      "name": "الامتثال",
+      "value": null,
+      "mentions": [
+        "الامتثال"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::e7770cb7e9d2"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "percentage",
+      "name": "النسبة المئوية",
+      "value": null,
+      "mentions": [
+        "النسبة المئوية"
+      ],
+      "source_doc": "AML_Policy_2025",
+      "id": "entity::158b7cc44a96"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "Corporate Governance",
+      "value": null,
+      "mentions": [
+        "Corporate Governance"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::8478112a77c1"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "Committee Structure",
+      "value": null,
+      "mentions": [
+        "Committee Structure"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::a3771081e921"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "month",
+      "name": "January",
+      "value": null,
+      "mentions": [
+        "January"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::5fbcb9e0e961"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "year",
+      "name": "2025",
+      "value": null,
+      "mentions": [
+        "2025"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::09068ac65d89"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "document",
+      "name": "Governance_Policy_2025",
+      "value": null,
+      "mentions": [
+        "Governance_Policy_2025"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::b26076630854"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "organization",
+      "name": "Board of Directors",
+      "value": null,
+      "mentions": [
+        "Board of Directors"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::db84d0965a09"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "limit",
+      "name": "11",
+      "value": "11",
+      "mentions": [
+        "11"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::4e239c4ec8a4"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "limit",
+      "name": "4",
+      "value": "4",
+      "mentions": [
+        "4"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::087cd989b927"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "quarterly",
+      "value": null,
+      "mentions": [
+        "quarterly"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::2d1317c3591e"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "risk management",
+      "value": null,
+      "mentions": [
+        "risk management"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::2b9fb197d58e"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "operational risk management",
+      "value": null,
+      "mentions": [
+        "operational risk management"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::db80041989c6"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "organization",
+      "name": "Board Risk Committee",
+      "value": null,
+      "mentions": [
+        "Board Risk Committee"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::504258a5fd2d"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "Board members",
+      "value": null,
+      "mentions": [
+        "Board members"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::8a234f4be711"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "independent Board members",
+      "value": null,
+      "mentions": [
+        "independent Board members"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::60c346318004"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "frequency",
+      "name": "monthly",
+      "value": null,
+      "mentions": [
+        "monthly"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::6b0215cc249d"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "product",
+      "name": "aggregate risk exposure reports",
+      "value": null,
+      "mentions": [
+        "aggregate risk exposure reports"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::9b4507b9e086"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "product",
+      "name": "risk appetite framework compliance",
+      "value": null,
+      "mentions": [
+        "risk appetite framework compliance"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::b3500dde64f5"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "product",
+      "name": "capital adequacy assessments",
+      "value": null,
+      "mentions": [
+        "capital adequacy assessments"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::8d4c6d994421"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "FX Policy Section 2.2",
+      "value": null,
+      "mentions": [
+        "FX Policy Section 2.2"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::4984aa21ad11"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "Credit Risk Policy Section 3",
+      "value": null,
+      "mentions": [
+        "Credit Risk Policy Section 3"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::608cefef6ba0"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "product",
+      "name": "temporary trading halts",
+      "value": null,
+      "mentions": [
+        "temporary trading halts"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::2bf436d8255b"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "organization",
+      "name": "business unit",
+      "value": null,
+      "mentions": [
+        "business unit"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::dc6ad344cef2"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "limit",
+      "name": "risk limits",
+      "value": null,
+      "mentions": [
+        "risk limits",
+        "risk limit"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::aec24edce129"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "quantity",
+      "name": "5",
+      "value": "5",
+      "mentions": [
+        "5"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::a66414fa7509"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "quantity",
+      "name": "3",
+      "value": "3",
+      "mentions": [
+        "3"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::b37f1701181d"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "organization",
+      "name": "Executive Risk Committee",
+      "value": null,
+      "mentions": [
+        "Executive Risk Committee"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::1539aced2878"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "CEO",
+      "value": null,
+      "mentions": [
+        "CEO"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::6594072fad35"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "CRO",
+      "value": null,
+      "mentions": [
+        "CRO"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::cf9cbad4d204"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "CFO",
+      "value": null,
+      "mentions": [
+        "CFO"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::f66adc1bae94"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "Chief Compliance Officer",
+      "value": null,
+      "mentions": [
+        "Chief Compliance Officer"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::829d86c4d418"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "Head of Treasury",
+      "value": null,
+      "mentions": [
+        "Head of Treasury"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::80ec87ebfe92"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "Head of Credit",
+      "value": null,
+      "mentions": [
+        "Head of Credit"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::2b6f196add56"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "organization",
+      "name": "BRC",
+      "value": null,
+      "mentions": [
+        "BRC"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::9c22f49b9780"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "Risk Management Committees",
+      "value": null,
+      "mentions": [
+        "Risk Management Committees"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::7489878e0072"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "percentage",
+      "name": "10%",
+      "value": "10",
+      "mentions": [
+        "10%"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::88d1375194dc"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "existing limits",
+      "value": null,
+      "mentions": [
+        "existing limits"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::dbc6f291f2b1"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "committee",
+      "name": "Branch Credit Committee",
+      "value": null,
+      "mentions": [
+        "Branch Credit Committee"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::ea1fc27ad32e"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "committee",
+      "name": "Regional Credit Committee",
+      "value": null,
+      "mentions": [
+        "Regional Credit Committee"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::d23db32b5cd1"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "committee",
+      "name": "Head Office Credit Committee",
+      "value": null,
+      "mentions": [
+        "Head Office Credit Committee"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::97de8f5b2abc"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "Credit Risk Policy",
+      "value": null,
+      "mentions": [
+        "Credit Risk Policy"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::b669a7a2f64d"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "Credit Risk Policy Section 2.1",
+      "value": null,
+      "mentions": [
+        "Credit Risk Policy Section 2.1"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::55c3d28d7397"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "currency",
+      "name": "EGP",
+      "value": null,
+      "mentions": [
+        "EGP"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::add318b5ba5b"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "limit",
+      "name": "5M",
+      "value": "5000000",
+      "mentions": [
+        "5M"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::bb9c69f043d3"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "limit",
+      "name": "25M",
+      "value": "25000000",
+      "mentions": [
+        "25M"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::12a49522e22b"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "limit",
+      "name": "100M",
+      "value": "100000000",
+      "mentions": [
+        "100M"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::f9f12e7f8c57"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "process",
+      "name": "Credit approval",
+      "value": null,
+      "mentions": [
+        "Credit approval"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::f2fee9e25a61"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "tiered committee structure",
+      "value": null,
+      "mentions": [
+        "tiered committee structure"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::debfb157848c"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "CCO",
+      "value": null,
+      "mentions": [
+        "CCO"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::5a38a8a926b7"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "Head of Legal",
+      "value": null,
+      "mentions": [
+        "Head of Legal"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::1ac300d73dc1"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "Head of Internal Audit",
+      "value": null,
+      "mentions": [
+        "Head of Internal Audit"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::58091aceb0b4"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "Board-appointed independent member",
+      "value": null,
+      "mentions": [
+        "Board-appointed independent member"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::7b64b28fe40e"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "AML Policy",
+      "value": null,
+      "mentions": [
+        "AML Policy"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::99abf30b7753"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "condition",
+      "name": "AML/CTF compliance",
+      "value": null,
+      "mentions": [
+        "AML/CTF compliance"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::9783c16570a4"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "condition",
+      "name": "sanctions screening",
+      "value": null,
+      "mentions": [
+        "sanctions screening"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::e46787595088"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "condition",
+      "name": "regulatory reporting",
+      "value": null,
+      "mentions": [
+        "regulatory reporting"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::c189a3326ebf"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "condition",
+      "name": "customer complaints",
+      "value": null,
+      "mentions": [
+        "customer complaints"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::612c70766de3"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "bi-weekly",
+      "value": null,
+      "mentions": [
+        "bi-weekly"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::8052df38f213"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "organization",
+      "name": "Treasury Committee",
+      "value": null,
+      "mentions": [
+        "Treasury Committee"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::6e91ce1db1b0"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "Head of Market Risk",
+      "value": null,
+      "mentions": [
+        "Head of Market Risk"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::09e55cb7e8ad"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "FX position reviews",
+      "value": null,
+      "mentions": [
+        "FX position reviews"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::1b8ce1ac27f4"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "ALM reviews",
+      "value": null,
+      "mentions": [
+        "ALM reviews"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::9263acef0cc9"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "product",
+      "name": "exotic currency pair trading",
+      "value": null,
+      "mentions": [
+        "exotic currency pair trading"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::979c232c8a71"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "regulation",
+      "name": "Bank's liquidity buffer requirements",
+      "value": null,
+      "mentions": [
+        "Bank's liquidity buffer requirements"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::06b358c2dd1c"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "frequency",
+      "name": "daily",
+      "value": null,
+      "mentions": [
+        "daily"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::03447a3e4691"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "frequency",
+      "name": "weekly",
+      "value": null,
+      "mentions": [
+        "weekly"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::cdc2f1012a1e"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "BRC Chair",
+      "value": null,
+      "mentions": [
+        "BRC Chair"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::ea1476942aca"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "organization",
+      "name": "Board",
+      "value": null,
+      "mentions": [
+        "Board"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::61704bf2fada"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "risk",
+      "name": "credit risk",
+      "value": null,
+      "mentions": [
+        "credit risk"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::4efba5e47248"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "risk",
+      "name": "market risk",
+      "value": null,
+      "mentions": [
+        "market risk"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::a6b3d9a33a15"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "risk",
+      "name": "operational risk",
+      "value": null,
+      "mentions": [
+        "operational risk"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::7e7b9032322d"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "risk",
+      "name": "liquidity risk",
+      "value": null,
+      "mentions": [
+        "liquidity risk"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::c11f68361068"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "definition",
+      "name": "quarterly risk appetite review",
+      "value": null,
+      "mentions": [
+        "quarterly risk appetite review"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::67dac1f11b48"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "percentage",
+      "name": "50%",
+      "value": "50",
+      "mentions": [
+        "50%"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::bebf96f4d1d3"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "Line Manager",
+      "value": null,
+      "mentions": [
+        "Line Manager"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::7bcf8fb940eb"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "role",
+      "name": "Department Head",
+      "value": null,
+      "mentions": [
+        "Department Head"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::d87756e89f6f"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "organization",
+      "name": "relevant Committee",
+      "value": null,
+      "mentions": [
+        "relevant Committee"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::31510fb68990"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "organization",
+      "name": "ERC",
+      "value": null,
+      "mentions": [
+        "ERC"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::3866ea9ae213"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "condition",
+      "name": "fraud",
+      "value": null,
+      "mentions": [
+        "fraud"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::a21e89f06aaf"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "condition",
+      "name": "regulatory breach",
+      "value": null,
+      "mentions": [
+        "regulatory breach"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::11c8366f7eca"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "condition",
+      "name": "loss >EGP 10M",
+      "value": null,
+      "mentions": [
+        "loss >EGP 10M"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::980e1d324060"
+    },
+    {
+      "node_type": "entity",
+      "layer": "text",
+      "entity_type": "limit",
+      "name": "10M",
+      "value": "10000000",
+      "mentions": [
+        "10M"
+      ],
+      "source_doc": "Governance_Policy_2025",
+      "id": "entity::f94ab0436ea2"
+    }
+  ],
+  "edges": [
+    {
+      "relation_type": "belongs_to_document",
+      "source": "391a57a2f5f19847",
+      "target": "doc::AML_Policy_2025"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "391a57a2f5f19847",
+      "target": "entity::b2587534ef58"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "391a57a2f5f19847",
+      "target": "entity::13d7213667c6"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "391a57a2f5f19847",
+      "target": "entity::577ffaa03a2d"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "391a57a2f5f19847",
+      "target": "entity::ed45a6d72d70"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "391a57a2f5f19847",
+      "target": "entity::cf2f890099ab"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "391a57a2f5f19847",
+      "target": "entity::b77aad83b46b"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "391a57a2f5f19847",
+      "target": "entity::d0a91b87db21"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "391a57a2f5f19847",
+      "target": "entity::7d856c267a2e"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "2ea2b89179db03dd",
+      "target": "doc::AML_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_section",
+      "source": "2ea2b89179db03dd",
+      "target": "section::AML_Policy_2025::1. Regulatory Framework"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "2ea2b89179db03dd",
+      "target": "entity::13d219d7f5a3"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "2ea2b89179db03dd",
+      "target": "entity::602150f84727"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "2ea2b89179db03dd",
+      "target": "entity::4cc75d716890"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "2ea2b89179db03dd",
+      "target": "entity::6c909b63a556"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "2ea2b89179db03dd",
+      "target": "entity::34239d5a2af9"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "2ea2b89179db03dd",
+      "target": "entity::97cd74f5e9a4"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "section::AML_Policy_2025::1. Regulatory Framework",
+      "target": "doc::AML_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "96e4353bcd420be1",
+      "target": "doc::AML_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_section",
+      "source": "96e4353bcd420be1",
+      "target": "section::AML_Policy_2025::2. Customer Due Diligence (CDD) > 2.1 Standard CDD"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "96e4353bcd420be1",
+      "target": "entity::13d7213667c6"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "96e4353bcd420be1",
+      "target": "entity::204290debbe4"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "96e4353bcd420be1",
+      "target": "entity::009ff58d28ff"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "96e4353bcd420be1",
+      "target": "entity::bca84b77b7a4"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "96e4353bcd420be1",
+      "target": "entity::791f02abca00"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "96e4353bcd420be1",
+      "target": "entity::f04790bac6f8"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "96e4353bcd420be1",
+      "target": "entity::68d53c28092c"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "96e4353bcd420be1",
+      "target": "entity::48e588cb42cc"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "96e4353bcd420be1",
+      "target": "entity::6f858051a2f6"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "96e4353bcd420be1",
+      "target": "entity::e04da3a25d7a"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "96e4353bcd420be1",
+      "target": "entity::eee27260c48e"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "96e4353bcd420be1",
+      "target": "entity::a27282e797f1"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "96e4353bcd420be1",
+      "target": "entity::9276b78996f6"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "section::AML_Policy_2025::2. Customer Due Diligence (CDD)",
+      "target": "doc::AML_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "section::AML_Policy_2025::2. Customer Due Diligence (CDD) > 2.1 Standard CDD",
+      "target": "doc::AML_Policy_2025"
+    },
+    {
+      "relation_type": "child_of_section",
+      "source": "section::AML_Policy_2025::2. Customer Due Diligence (CDD) > 2.1 Standard CDD",
+      "target": "section::AML_Policy_2025::2. Customer Due Diligence (CDD)"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "28e7dda967b3e03f",
+      "target": "doc::AML_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_section",
+      "source": "28e7dda967b3e03f",
+      "target": "section::AML_Policy_2025::2. Customer Due Diligence (CDD) > 2.2 Enhanced Due Diligence (EDD)"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "28e7dda967b3e03f",
+      "target": "entity::bf68158215f3"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "28e7dda967b3e03f",
+      "target": "entity::f23411db8518"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "28e7dda967b3e03f",
+      "target": "entity::a66d82b1e263"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "28e7dda967b3e03f",
+      "target": "entity::fc3d3a82641a"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "28e7dda967b3e03f",
+      "target": "entity::0d8279fbb60e"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "28e7dda967b3e03f",
+      "target": "entity::dfe10380d286"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "28e7dda967b3e03f",
+      "target": "entity::3d01e5a59597"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "28e7dda967b3e03f",
+      "target": "entity::ee360cb51923"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "28e7dda967b3e03f",
+      "target": "entity::afff88c91dc7"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "28e7dda967b3e03f",
+      "target": "entity::204290debbe4"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "28e7dda967b3e03f",
+      "target": "entity::59ddc21d825d"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "28e7dda967b3e03f",
+      "target": "entity::bea9a7efdf0f"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "28e7dda967b3e03f",
+      "target": "entity::13d7213667c6"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "section::AML_Policy_2025::2. Customer Due Diligence (CDD) > 2.2 Enhanced Due Diligence (EDD)",
+      "target": "doc::AML_Policy_2025"
+    },
+    {
+      "relation_type": "child_of_section",
+      "source": "section::AML_Policy_2025::2. Customer Due Diligence (CDD) > 2.2 Enhanced Due Diligence (EDD)",
+      "target": "section::AML_Policy_2025::2. Customer Due Diligence (CDD)"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "3b869b27f851e316",
+      "target": "doc::AML_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_section",
+      "source": "3b869b27f851e316",
+      "target": "section::AML_Policy_2025::3. Transaction Monitoring > 3.1 Monitoring Thresholds"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3b869b27f851e316",
+      "target": "entity::d25ede6d3dcc"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3b869b27f851e316",
+      "target": "entity::68fca758817d"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3b869b27f851e316",
+      "target": "entity::21a1ce898c8e"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3b869b27f851e316",
+      "target": "entity::90ebd5299b97"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3b869b27f851e316",
+      "target": "entity::15137bf1e2f8"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3b869b27f851e316",
+      "target": "entity::ca09f6393f88"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3b869b27f851e316",
+      "target": "entity::4665f62eafe0"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3b869b27f851e316",
+      "target": "entity::f91b7a074a56"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3b869b27f851e316",
+      "target": "entity::bafb6de7c735"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3b869b27f851e316",
+      "target": "entity::13d7213667c6"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "section::AML_Policy_2025::3. Transaction Monitoring",
+      "target": "doc::AML_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "section::AML_Policy_2025::3. Transaction Monitoring > 3.1 Monitoring Thresholds",
+      "target": "doc::AML_Policy_2025"
+    },
+    {
+      "relation_type": "child_of_section",
+      "source": "section::AML_Policy_2025::3. Transaction Monitoring > 3.1 Monitoring Thresholds",
+      "target": "section::AML_Policy_2025::3. Transaction Monitoring"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "39ae210e0e657198",
+      "target": "doc::AML_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_section",
+      "source": "39ae210e0e657198",
+      "target": "section::AML_Policy_2025::3. Transaction Monitoring > 3.2 Suspicious Activity Reporting"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "39ae210e0e657198",
+      "target": "entity::13d7213667c6"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "39ae210e0e657198",
+      "target": "entity::bafb6de7c735"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "39ae210e0e657198",
+      "target": "entity::6a0bdc93589a"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "39ae210e0e657198",
+      "target": "entity::c7058bb0cebd"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "39ae210e0e657198",
+      "target": "entity::87502ea8890a"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "39ae210e0e657198",
+      "target": "entity::5dd70b3e4e81"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "39ae210e0e657198",
+      "target": "entity::978daa0311d2"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "39ae210e0e657198",
+      "target": "entity::41efebd6b721"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "39ae210e0e657198",
+      "target": "entity::a106a92ae9e2"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "39ae210e0e657198",
+      "target": "entity::35a0cce7390d"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "39ae210e0e657198",
+      "target": "entity::a92365826c1b"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "39ae210e0e657198",
+      "target": "entity::6f62d917afef"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "39ae210e0e657198",
+      "target": "entity::d56d751d55dc"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "section::AML_Policy_2025::3. Transaction Monitoring > 3.2 Suspicious Activity Reporting",
+      "target": "doc::AML_Policy_2025"
+    },
+    {
+      "relation_type": "child_of_section",
+      "source": "section::AML_Policy_2025::3. Transaction Monitoring > 3.2 Suspicious Activity Reporting",
+      "target": "section::AML_Policy_2025::3. Transaction Monitoring"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "a12cd8599687e560",
+      "target": "doc::AML_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_section",
+      "source": "a12cd8599687e560",
+      "target": "section::AML_Policy_2025::4. Sanctions Screening"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "a12cd8599687e560",
+      "target": "entity::310f3418c1a4"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "a12cd8599687e560",
+      "target": "entity::77f8f365d563"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "a12cd8599687e560",
+      "target": "entity::bfdb862eee8c"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "a12cd8599687e560",
+      "target": "entity::7d2ac55493e7"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "a12cd8599687e560",
+      "target": "entity::9cb47fb5cbee"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "a12cd8599687e560",
+      "target": "entity::7c35420fa8ad"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "a12cd8599687e560",
+      "target": "entity::601b980db1c7"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "a12cd8599687e560",
+      "target": "entity::830b6871255e"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "a12cd8599687e560",
+      "target": "entity::231af2420865"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "a12cd8599687e560",
+      "target": "entity::7e97e42b10c4"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "a12cd8599687e560",
+      "target": "entity::4845ba96f45a"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "a12cd8599687e560",
+      "target": "entity::3d01e5a59597"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "a12cd8599687e560",
+      "target": "entity::275fddd12821"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "section::AML_Policy_2025::4. Sanctions Screening",
+      "target": "doc::AML_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "8bf9a4b958e97838",
+      "target": "doc::AML_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_section",
+      "source": "8bf9a4b958e97838",
+      "target": "section::AML_Policy_2025::5. Record Retention"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8bf9a4b958e97838",
+      "target": "entity::515668338ece"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8bf9a4b958e97838",
+      "target": "entity::6cd03d973da5"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8bf9a4b958e97838",
+      "target": "entity::bea8769ab618"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8bf9a4b958e97838",
+      "target": "entity::78e4b2aae8ae"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8bf9a4b958e97838",
+      "target": "entity::d65802124539"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8bf9a4b958e97838",
+      "target": "entity::633cd75c5882"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8bf9a4b958e97838",
+      "target": "entity::1431c1295569"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8bf9a4b958e97838",
+      "target": "entity::5b24a7269987"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8bf9a4b958e97838",
+      "target": "entity::98068b6b1058"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8bf9a4b958e97838",
+      "target": "entity::7a44172a9d6f"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "section::AML_Policy_2025::5. Record Retention",
+      "target": "doc::AML_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "aeb57c8ebbfd060d",
+      "target": "doc::AML_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_section",
+      "source": "aeb57c8ebbfd060d",
+      "target": "section::AML_Policy_2025::6. العقوبات والمخالفات"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "aeb57c8ebbfd060d",
+      "target": "entity::13d7213667c6"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "aeb57c8ebbfd060d",
+      "target": "entity::4ac6faced526"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "aeb57c8ebbfd060d",
+      "target": "entity::0032562ae478"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "aeb57c8ebbfd060d",
+      "target": "entity::2c83a0b6087a"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "aeb57c8ebbfd060d",
+      "target": "entity::192b742a217c"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "aeb57c8ebbfd060d",
+      "target": "entity::dc5a72e227d6"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "aeb57c8ebbfd060d",
+      "target": "entity::4bbadec15f6e"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "aeb57c8ebbfd060d",
+      "target": "entity::d79cd0e771b7"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "aeb57c8ebbfd060d",
+      "target": "entity::a2c9a9046dff"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "aeb57c8ebbfd060d",
+      "target": "entity::e7770cb7e9d2"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "aeb57c8ebbfd060d",
+      "target": "entity::158b7cc44a96"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "section::AML_Policy_2025::6. العقوبات والمخالفات",
+      "target": "doc::AML_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "069f23d83f3d1a05",
+      "target": "doc::Governance_Policy_2025"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "069f23d83f3d1a05",
+      "target": "entity::8478112a77c1"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "069f23d83f3d1a05",
+      "target": "entity::a3771081e921"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "069f23d83f3d1a05",
+      "target": "entity::577ffaa03a2d"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "069f23d83f3d1a05",
+      "target": "entity::cf2f890099ab"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "069f23d83f3d1a05",
+      "target": "entity::5fbcb9e0e961"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "069f23d83f3d1a05",
+      "target": "entity::09068ac65d89"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "069f23d83f3d1a05",
+      "target": "entity::b26076630854"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "50991272f918f291",
+      "target": "doc::Governance_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_section",
+      "source": "50991272f918f291",
+      "target": "section::Governance_Policy_2025::1. Board of Directors"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "50991272f918f291",
+      "target": "entity::db84d0965a09"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "50991272f918f291",
+      "target": "entity::4e239c4ec8a4"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "50991272f918f291",
+      "target": "entity::087cd989b927"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "50991272f918f291",
+      "target": "entity::2d1317c3591e"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "50991272f918f291",
+      "target": "entity::2b9fb197d58e"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "50991272f918f291",
+      "target": "entity::db80041989c6"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "50991272f918f291",
+      "target": "entity::b26076630854"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "section::Governance_Policy_2025::1. Board of Directors",
+      "target": "doc::Governance_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "3941b121a2970ea3",
+      "target": "doc::Governance_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_section",
+      "source": "3941b121a2970ea3",
+      "target": "section::Governance_Policy_2025::2. Risk Management Committees > 2.1 Board Risk Committee (BRC)"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3941b121a2970ea3",
+      "target": "entity::504258a5fd2d"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3941b121a2970ea3",
+      "target": "entity::8a234f4be711"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3941b121a2970ea3",
+      "target": "entity::60c346318004"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3941b121a2970ea3",
+      "target": "entity::6b0215cc249d"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3941b121a2970ea3",
+      "target": "entity::9b4507b9e086"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3941b121a2970ea3",
+      "target": "entity::b3500dde64f5"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3941b121a2970ea3",
+      "target": "entity::8d4c6d994421"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3941b121a2970ea3",
+      "target": "entity::4984aa21ad11"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3941b121a2970ea3",
+      "target": "entity::608cefef6ba0"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3941b121a2970ea3",
+      "target": "entity::2bf436d8255b"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3941b121a2970ea3",
+      "target": "entity::dc6ad344cef2"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3941b121a2970ea3",
+      "target": "entity::aec24edce129"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3941b121a2970ea3",
+      "target": "entity::a66414fa7509"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "3941b121a2970ea3",
+      "target": "entity::b37f1701181d"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "section::Governance_Policy_2025::2. Risk Management Committees",
+      "target": "doc::Governance_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "section::Governance_Policy_2025::2. Risk Management Committees > 2.1 Board Risk Committee (BRC)",
+      "target": "doc::Governance_Policy_2025"
+    },
+    {
+      "relation_type": "child_of_section",
+      "source": "section::Governance_Policy_2025::2. Risk Management Committees > 2.1 Board Risk Committee (BRC)",
+      "target": "section::Governance_Policy_2025::2. Risk Management Committees"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "03fd0ef9ccfce38b",
+      "target": "doc::Governance_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_section",
+      "source": "03fd0ef9ccfce38b",
+      "target": "section::Governance_Policy_2025::2. Risk Management Committees > 2.2 Executive Risk Committee (ERC)"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "03fd0ef9ccfce38b",
+      "target": "entity::1539aced2878"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "03fd0ef9ccfce38b",
+      "target": "entity::6594072fad35"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "03fd0ef9ccfce38b",
+      "target": "entity::cf9cbad4d204"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "03fd0ef9ccfce38b",
+      "target": "entity::f66adc1bae94"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "03fd0ef9ccfce38b",
+      "target": "entity::829d86c4d418"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "03fd0ef9ccfce38b",
+      "target": "entity::80ec87ebfe92"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "03fd0ef9ccfce38b",
+      "target": "entity::2b6f196add56"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "03fd0ef9ccfce38b",
+      "target": "entity::9c22f49b9780"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "03fd0ef9ccfce38b",
+      "target": "entity::7489878e0072"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "03fd0ef9ccfce38b",
+      "target": "entity::b26076630854"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "03fd0ef9ccfce38b",
+      "target": "entity::88d1375194dc"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "03fd0ef9ccfce38b",
+      "target": "entity::dbc6f291f2b1"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "section::Governance_Policy_2025::2. Risk Management Committees > 2.2 Executive Risk Committee (ERC)",
+      "target": "doc::Governance_Policy_2025"
+    },
+    {
+      "relation_type": "child_of_section",
+      "source": "section::Governance_Policy_2025::2. Risk Management Committees > 2.2 Executive Risk Committee (ERC)",
+      "target": "section::Governance_Policy_2025::2. Risk Management Committees"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "8c9bed3427e5c833",
+      "target": "doc::Governance_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_section",
+      "source": "8c9bed3427e5c833",
+      "target": "section::Governance_Policy_2025::3. Specialized Committees > 3.1 Credit Committee Structure"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8c9bed3427e5c833",
+      "target": "entity::ea1fc27ad32e"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8c9bed3427e5c833",
+      "target": "entity::d23db32b5cd1"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8c9bed3427e5c833",
+      "target": "entity::97de8f5b2abc"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8c9bed3427e5c833",
+      "target": "entity::db84d0965a09"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8c9bed3427e5c833",
+      "target": "entity::b669a7a2f64d"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8c9bed3427e5c833",
+      "target": "entity::55c3d28d7397"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8c9bed3427e5c833",
+      "target": "entity::add318b5ba5b"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8c9bed3427e5c833",
+      "target": "entity::bb9c69f043d3"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8c9bed3427e5c833",
+      "target": "entity::12a49522e22b"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8c9bed3427e5c833",
+      "target": "entity::f9f12e7f8c57"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8c9bed3427e5c833",
+      "target": "entity::b26076630854"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8c9bed3427e5c833",
+      "target": "entity::f2fee9e25a61"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "8c9bed3427e5c833",
+      "target": "entity::debfb157848c"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "section::Governance_Policy_2025::3. Specialized Committees",
+      "target": "doc::Governance_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "section::Governance_Policy_2025::3. Specialized Committees > 3.1 Credit Committee Structure",
+      "target": "doc::Governance_Policy_2025"
+    },
+    {
+      "relation_type": "child_of_section",
+      "source": "section::Governance_Policy_2025::3. Specialized Committees > 3.1 Credit Committee Structure",
+      "target": "section::Governance_Policy_2025::3. Specialized Committees"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "ef9b549d0a2d777d",
+      "target": "doc::Governance_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_section",
+      "source": "ef9b549d0a2d777d",
+      "target": "section::Governance_Policy_2025::3. Specialized Committees > 3.2 Compliance Committee"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "ef9b549d0a2d777d",
+      "target": "entity::3d01e5a59597"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "ef9b549d0a2d777d",
+      "target": "entity::5a38a8a926b7"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "ef9b549d0a2d777d",
+      "target": "entity::87502ea8890a"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "ef9b549d0a2d777d",
+      "target": "entity::1ac300d73dc1"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "ef9b549d0a2d777d",
+      "target": "entity::58091aceb0b4"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "ef9b549d0a2d777d",
+      "target": "entity::7b64b28fe40e"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "ef9b549d0a2d777d",
+      "target": "entity::9c22f49b9780"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "ef9b549d0a2d777d",
+      "target": "entity::99abf30b7753"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "ef9b549d0a2d777d",
+      "target": "entity::9783c16570a4"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "ef9b549d0a2d777d",
+      "target": "entity::e46787595088"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "ef9b549d0a2d777d",
+      "target": "entity::c189a3326ebf"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "ef9b549d0a2d777d",
+      "target": "entity::612c70766de3"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "ef9b549d0a2d777d",
+      "target": "entity::8052df38f213"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "section::Governance_Policy_2025::3. Specialized Committees > 3.2 Compliance Committee",
+      "target": "doc::Governance_Policy_2025"
+    },
+    {
+      "relation_type": "child_of_section",
+      "source": "section::Governance_Policy_2025::3. Specialized Committees > 3.2 Compliance Committee",
+      "target": "section::Governance_Policy_2025::3. Specialized Committees"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "092cd22cee288978",
+      "target": "doc::Governance_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_section",
+      "source": "092cd22cee288978",
+      "target": "section::Governance_Policy_2025::3. Specialized Committees > 3.3 Treasury Committee"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "092cd22cee288978",
+      "target": "entity::6e91ce1db1b0"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "092cd22cee288978",
+      "target": "entity::80ec87ebfe92"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "092cd22cee288978",
+      "target": "entity::cf9cbad4d204"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "092cd22cee288978",
+      "target": "entity::f66adc1bae94"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "092cd22cee288978",
+      "target": "entity::09e55cb7e8ad"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "092cd22cee288978",
+      "target": "entity::1b8ce1ac27f4"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "092cd22cee288978",
+      "target": "entity::9263acef0cc9"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "092cd22cee288978",
+      "target": "entity::979c232c8a71"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "092cd22cee288978",
+      "target": "entity::ca09f6393f88"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "092cd22cee288978",
+      "target": "entity::06b358c2dd1c"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "092cd22cee288978",
+      "target": "entity::03447a3e4691"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "092cd22cee288978",
+      "target": "entity::cdc2f1012a1e"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "section::Governance_Policy_2025::3. Specialized Committees > 3.3 Treasury Committee",
+      "target": "doc::Governance_Policy_2025"
+    },
+    {
+      "relation_type": "child_of_section",
+      "source": "section::Governance_Policy_2025::3. Specialized Committees > 3.3 Treasury Committee",
+      "target": "section::Governance_Policy_2025::3. Specialized Committees"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "10660abe9d044f5f",
+      "target": "doc::Governance_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_section",
+      "source": "10660abe9d044f5f",
+      "target": "section::Governance_Policy_2025::4. Chief Risk Officer (CRO) Mandate"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "10660abe9d044f5f",
+      "target": "entity::a106a92ae9e2"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "10660abe9d044f5f",
+      "target": "entity::6594072fad35"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "10660abe9d044f5f",
+      "target": "entity::ea1476942aca"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "10660abe9d044f5f",
+      "target": "entity::61704bf2fada"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "10660abe9d044f5f",
+      "target": "entity::4efba5e47248"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "10660abe9d044f5f",
+      "target": "entity::a6b3d9a33a15"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "10660abe9d044f5f",
+      "target": "entity::7e7b9032322d"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "10660abe9d044f5f",
+      "target": "entity::c11f68361068"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "10660abe9d044f5f",
+      "target": "entity::9783c16570a4"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "10660abe9d044f5f",
+      "target": "entity::aec24edce129"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "10660abe9d044f5f",
+      "target": "entity::67dac1f11b48"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "10660abe9d044f5f",
+      "target": "entity::b26076630854"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "10660abe9d044f5f",
+      "target": "entity::bebf96f4d1d3"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "section::Governance_Policy_2025::4. Chief Risk Officer (CRO) Mandate",
+      "target": "doc::Governance_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "78d3a9017bb97695",
+      "target": "doc::Governance_Policy_2025"
+    },
+    {
+      "relation_type": "belongs_to_section",
+      "source": "78d3a9017bb97695",
+      "target": "section::Governance_Policy_2025::5. Escalation Chain"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "78d3a9017bb97695",
+      "target": "entity::7bcf8fb940eb"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "78d3a9017bb97695",
+      "target": "entity::d87756e89f6f"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "78d3a9017bb97695",
+      "target": "entity::31510fb68990"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "78d3a9017bb97695",
+      "target": "entity::3866ea9ae213"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "78d3a9017bb97695",
+      "target": "entity::9c22f49b9780"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "78d3a9017bb97695",
+      "target": "entity::db84d0965a09"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "78d3a9017bb97695",
+      "target": "entity::cf9cbad4d204"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "78d3a9017bb97695",
+      "target": "entity::a21e89f06aaf"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "78d3a9017bb97695",
+      "target": "entity::11c8366f7eca"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "78d3a9017bb97695",
+      "target": "entity::980e1d324060"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "78d3a9017bb97695",
+      "target": "entity::b26076630854"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "78d3a9017bb97695",
+      "target": "entity::add318b5ba5b"
+    },
+    {
+      "relation_type": "mentions_entity",
+      "source": "78d3a9017bb97695",
+      "target": "entity::f94ab0436ea2"
+    },
+    {
+      "relation_type": "belongs_to_document",
+      "source": "section::Governance_Policy_2025::5. Escalation Chain",
+      "target": "doc::Governance_Policy_2025"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::b2587534ef58",
+      "target": "391a57a2f5f19847"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::13d7213667c6",
+      "target": "391a57a2f5f19847"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::13d7213667c6",
+      "target": "96e4353bcd420be1"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::13d7213667c6",
+      "target": "28e7dda967b3e03f"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::13d7213667c6",
+      "target": "3b869b27f851e316"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::13d7213667c6",
+      "target": "39ae210e0e657198"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::13d7213667c6",
+      "target": "aeb57c8ebbfd060d"
+    },
+    {
+      "relation_type": "defines",
+      "source": "entity::13d7213667c6",
+      "target": "entity::b2587534ef58"
+    },
+    {
+      "relation_type": "governs",
+      "source": "entity::13d7213667c6",
+      "target": "entity::204290debbe4"
+    },
+    {
+      "relation_type": "defines",
+      "source": "entity::13d7213667c6",
+      "target": "entity::bf68158215f3"
+    },
+    {
+      "relation_type": "defines",
+      "source": "entity::13d7213667c6",
+      "target": "entity::bafb6de7c735"
+    },
+    {
+      "relation_type": "governs",
+      "source": "entity::13d7213667c6",
+      "target": "entity::0032562ae478"
+    },
+    {
+      "relation_type": "defines",
+      "source": "entity::13d7213667c6",
+      "target": "entity::2c83a0b6087a"
+    },
+    {
+      "relation_type": "refers_to",
+      "source": "entity::13d7213667c6",
+      "target": "entity::192b742a217c"
+    },
+    {
+      "relation_type": "depends_on",
+      "source": "entity::13d7213667c6",
+      "target": "entity::dc5a72e227d6"
+    },
+    {
+      "relation_type": "depends_on",
+      "source": "entity::13d7213667c6",
+      "target": "entity::4bbadec15f6e"
+    },
+    {
+      "relation_type": "governs",
+      "source": "entity::13d7213667c6",
+      "target": "entity::d79cd0e771b7"
+    },
+    {
+      "relation_type": "depends_on",
+      "source": "entity::13d7213667c6",
+      "target": "entity::e7770cb7e9d2"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::577ffaa03a2d",
+      "target": "391a57a2f5f19847"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::577ffaa03a2d",
+      "target": "069f23d83f3d1a05"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::ed45a6d72d70",
+      "target": "391a57a2f5f19847"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::cf2f890099ab",
+      "target": "391a57a2f5f19847"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::cf2f890099ab",
+      "target": "069f23d83f3d1a05"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::b77aad83b46b",
+      "target": "391a57a2f5f19847"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::d0a91b87db21",
+      "target": "391a57a2f5f19847"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::7d856c267a2e",
+      "target": "391a57a2f5f19847"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::13d219d7f5a3",
+      "target": "2ea2b89179db03dd"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::602150f84727",
+      "target": "2ea2b89179db03dd"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::4cc75d716890",
+      "target": "2ea2b89179db03dd"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::6c909b63a556",
+      "target": "2ea2b89179db03dd"
+    },
+    {
+      "relation_type": "depends_on",
+      "source": "entity::6c909b63a556",
+      "target": "entity::97cd74f5e9a4"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::34239d5a2af9",
+      "target": "2ea2b89179db03dd"
+    },
+    {
+      "relation_type": "governs",
+      "source": "entity::34239d5a2af9",
+      "target": "entity::13d219d7f5a3"
+    },
+    {
+      "relation_type": "governs",
+      "source": "entity::34239d5a2af9",
+      "target": "entity::602150f84727"
+    },
+    {
+      "relation_type": "governs",
+      "source": "entity::34239d5a2af9",
+      "target": "entity::4cc75d716890"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::97cd74f5e9a4",
+      "target": "2ea2b89179db03dd"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::204290debbe4",
+      "target": "96e4353bcd420be1"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::204290debbe4",
+      "target": "28e7dda967b3e03f"
+    },
+    {
+      "relation_type": "defines",
+      "source": "entity::204290debbe4",
+      "target": "entity::009ff58d28ff"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::009ff58d28ff",
+      "target": "96e4353bcd420be1"
+    },
+    {
+      "relation_type": "requires",
+      "source": "entity::009ff58d28ff",
+      "target": "entity::bca84b77b7a4"
+    },
+    {
+      "relation_type": "requires",
+      "source": "entity::009ff58d28ff",
+      "target": "entity::791f02abca00"
+    },
+    {
+      "relation_type": "requires",
+      "source": "entity::009ff58d28ff",
+      "target": "entity::f04790bac6f8"
+    },
+    {
+      "relation_type": "requires",
+      "source": "entity::009ff58d28ff",
+      "target": "entity::68d53c28092c"
+    },
+    {
+      "relation_type": "refers_to",
+      "source": "entity::009ff58d28ff",
+      "target": "entity::48e588cb42cc"
+    },
+    {
+      "relation_type": "requires",
+      "source": "entity::009ff58d28ff",
+      "target": "entity::6f858051a2f6"
+    },
+    {
+      "relation_type": "requires",
+      "source": "entity::009ff58d28ff",
+      "target": "entity::e04da3a25d7a"
+    },
+    {
+      "relation_type": "requires",
+      "source": "entity::009ff58d28ff",
+      "target": "entity::eee27260c48e"
+    },
+    {
+      "relation_type": "has_limit",
+      "source": "entity::009ff58d28ff",
+      "target": "entity::a27282e797f1"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::bca84b77b7a4",
+      "target": "96e4353bcd420be1"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::791f02abca00",
+      "target": "96e4353bcd420be1"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::f04790bac6f8",
+      "target": "96e4353bcd420be1"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::68d53c28092c",
+      "target": "96e4353bcd420be1"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::48e588cb42cc",
+      "target": "96e4353bcd420be1"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::6f858051a2f6",
+      "target": "96e4353bcd420be1"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::e04da3a25d7a",
+      "target": "96e4353bcd420be1"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::eee27260c48e",
+      "target": "96e4353bcd420be1"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::a27282e797f1",
+      "target": "96e4353bcd420be1"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::9276b78996f6",
+      "target": "96e4353bcd420be1"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::bf68158215f3",
+      "target": "28e7dda967b3e03f"
+    },
+    {
+      "relation_type": "requires",
+      "source": "entity::bf68158215f3",
+      "target": "entity::f23411db8518"
+    },
+    {
+      "relation_type": "requires",
+      "source": "entity::bf68158215f3",
+      "target": "entity::a66d82b1e263"
+    },
+    {
+      "relation_type": "requires",
+      "source": "entity::bf68158215f3",
+      "target": "entity::0d8279fbb60e"
+    },
+    {
+      "relation_type": "requires",
+      "source": "entity::bf68158215f3",
+      "target": "entity::dfe10380d286"
+    },
+    {
+      "relation_type": "requires",
+      "source": "entity::bf68158215f3",
+      "target": "entity::3d01e5a59597"
+    },
+    {
+      "relation_type": "refers_to",
+      "source": "entity::bf68158215f3",
+      "target": "entity::ee360cb51923"
+    },
+    {
+      "relation_type": "refers_to",
+      "source": "entity::bf68158215f3",
+      "target": "entity::afff88c91dc7"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::f23411db8518",
+      "target": "28e7dda967b3e03f"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::a66d82b1e263",
+      "target": "28e7dda967b3e03f"
+    },
+    {
+      "relation_type": "defines",
+      "source": "entity::a66d82b1e263",
+      "target": "entity::fc3d3a82641a"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::fc3d3a82641a",
+      "target": "28e7dda967b3e03f"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::0d8279fbb60e",
+      "target": "28e7dda967b3e03f"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::dfe10380d286",
+      "target": "28e7dda967b3e03f"
+    },
+    {
+      "relation_type": "depends_on",
+      "source": "entity::dfe10380d286",
+      "target": "entity::204290debbe4"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::3d01e5a59597",
+      "target": "28e7dda967b3e03f"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::3d01e5a59597",
+      "target": "a12cd8599687e560"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::3d01e5a59597",
+      "target": "ef9b549d0a2d777d"
+    },
+    {
+      "relation_type": "has_role",
+      "source": "entity::3d01e5a59597",
+      "target": "entity::5a38a8a926b7"
+    },
+    {
+      "relation_type": "has_role",
+      "source": "entity::3d01e5a59597",
+      "target": "entity::87502ea8890a"
+    },
+    {
+      "relation_type": "has_role",
+      "source": "entity::3d01e5a59597",
+      "target": "entity::1ac300d73dc1"
+    },
+    {
+      "relation_type": "has_role",
+      "source": "entity::3d01e5a59597",
+      "target": "entity::58091aceb0b4"
+    },
+    {
+      "relation_type": "has_role",
+      "source": "entity::3d01e5a59597",
+      "target": "entity::7b64b28fe40e"
+    },
+    {
+      "relation_type": "reports_to",
+      "source": "entity::3d01e5a59597",
+      "target": "entity::9c22f49b9780"
+    },
+    {
+      "relation_type": "refers_to",
+      "source": "entity::3d01e5a59597",
+      "target": "entity::99abf30b7753"
+    },
+    {
+      "relation_type": "oversees",
+      "source": "entity::3d01e5a59597",
+      "target": "entity::e46787595088"
+    },
+    {
+      "relation_type": "oversees",
+      "source": "entity::3d01e5a59597",
+      "target": "entity::c189a3326ebf"
+    },
+    {
+      "relation_type": "oversees",
+      "source": "entity::3d01e5a59597",
+      "target": "entity::612c70766de3"
+    },
+    {
+      "relation_type": "meets",
+      "source": "entity::3d01e5a59597",
+      "target": "entity::8052df38f213"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::ee360cb51923",
+      "target": "28e7dda967b3e03f"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::afff88c91dc7",
+      "target": "28e7dda967b3e03f"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::59ddc21d825d",
+      "target": "28e7dda967b3e03f"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::bea9a7efdf0f",
+      "target": "28e7dda967b3e03f"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::d25ede6d3dcc",
+      "target": "3b869b27f851e316"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::68fca758817d",
+      "target": "3b869b27f851e316"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::21a1ce898c8e",
+      "target": "3b869b27f851e316"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::90ebd5299b97",
+      "target": "3b869b27f851e316"
+    },
+    {
+      "relation_type": "defines",
+      "source": "entity::90ebd5299b97",
+      "target": "entity::d25ede6d3dcc"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::15137bf1e2f8",
+      "target": "3b869b27f851e316"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::ca09f6393f88",
+      "target": "3b869b27f851e316"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::ca09f6393f88",
+      "target": "092cd22cee288978"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::4665f62eafe0",
+      "target": "3b869b27f851e316"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::f91b7a074a56",
+      "target": "3b869b27f851e316"
+    },
+    {
+      "relation_type": "requires",
+      "source": "entity::f91b7a074a56",
+      "target": "entity::4665f62eafe0"
+    },
+    {
+      "relation_type": "has_limit",
+      "source": "entity::f91b7a074a56",
+      "target": "entity::d25ede6d3dcc"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::bafb6de7c735",
+      "target": "3b869b27f851e316"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::bafb6de7c735",
+      "target": "39ae210e0e657198"
+    },
+    {
+      "relation_type": "defines",
+      "source": "entity::bafb6de7c735",
+      "target": "entity::6a0bdc93589a"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::6a0bdc93589a",
+      "target": "39ae210e0e657198"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::c7058bb0cebd",
+      "target": "39ae210e0e657198"
+    },
+    {
+      "relation_type": "refers_to",
+      "source": "entity::c7058bb0cebd",
+      "target": "entity::5dd70b3e4e81"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::87502ea8890a",
+      "target": "39ae210e0e657198"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::87502ea8890a",
+      "target": "ef9b549d0a2d777d"
+    },
+    {
+      "relation_type": "reports_to",
+      "source": "entity::87502ea8890a",
+      "target": "entity::a106a92ae9e2"
+    },
+    {
+      "relation_type": "has_limit",
+      "source": "entity::87502ea8890a",
+      "target": "entity::41efebd6b721"
+    },
+    {
+      "relation_type": "depends_on",
+      "source": "entity::87502ea8890a",
+      "target": "entity::6f62d917afef"
+    },
+    {
+      "relation_type": "refers_to",
+      "source": "entity::87502ea8890a",
+      "target": "entity::d56d751d55dc"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::5dd70b3e4e81",
+      "target": "39ae210e0e657198"
+    },
+    {
+      "relation_type": "depends_on",
+      "source": "entity::5dd70b3e4e81",
+      "target": "entity::87502ea8890a"
+    },
+    {
+      "relation_type": "has_limit",
+      "source": "entity::5dd70b3e4e81",
+      "target": "entity::978daa0311d2"
+    },
+    {
+      "relation_type": "depends_on",
+      "source": "entity::5dd70b3e4e81",
+      "target": "entity::6f62d917afef"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::978daa0311d2",
+      "target": "39ae210e0e657198"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::41efebd6b721",
+      "target": "39ae210e0e657198"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::a106a92ae9e2",
+      "target": "39ae210e0e657198"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::a106a92ae9e2",
+      "target": "10660abe9d044f5f"
+    },
+    {
+      "relation_type": "reports_to",
+      "source": "entity::a106a92ae9e2",
+      "target": "entity::6594072fad35"
+    },
+    {
+      "relation_type": "reports_to",
+      "source": "entity::a106a92ae9e2",
+      "target": "entity::ea1476942aca"
+    },
+    {
+      "relation_type": "has_delegated_authority",
+      "source": "entity::a106a92ae9e2",
+      "target": "entity::61704bf2fada"
+    },
+    {
+      "relation_type": "oversees",
+      "source": "entity::a106a92ae9e2",
+      "target": "entity::9783c16570a4"
+    },
+    {
+      "relation_type": "conducts",
+      "source": "entity::a106a92ae9e2",
+      "target": "entity::67dac1f11b48"
+    },
+    {
+      "relation_type": "has_authority_over",
+      "source": "entity::a106a92ae9e2",
+      "target": "entity::aec24edce129"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::35a0cce7390d",
+      "target": "39ae210e0e657198"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::a92365826c1b",
+      "target": "39ae210e0e657198"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::6f62d917afef",
+      "target": "39ae210e0e657198"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::d56d751d55dc",
+      "target": "39ae210e0e657198"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::310f3418c1a4",
+      "target": "a12cd8599687e560"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::77f8f365d563",
+      "target": "a12cd8599687e560"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::bfdb862eee8c",
+      "target": "a12cd8599687e560"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::7d2ac55493e7",
+      "target": "a12cd8599687e560"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::9cb47fb5cbee",
+      "target": "a12cd8599687e560"
+    },
+    {
+      "relation_type": "refers_to",
+      "source": "entity::9cb47fb5cbee",
+      "target": "entity::310f3418c1a4"
+    },
+    {
+      "relation_type": "refers_to",
+      "source": "entity::9cb47fb5cbee",
+      "target": "entity::77f8f365d563"
+    },
+    {
+      "relation_type": "refers_to",
+      "source": "entity::9cb47fb5cbee",
+      "target": "entity::bfdb862eee8c"
+    },
+    {
+      "relation_type": "refers_to",
+      "source": "entity::9cb47fb5cbee",
+      "target": "entity::7d2ac55493e7"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::7c35420fa8ad",
+      "target": "a12cd8599687e560"
+    },
+    {
+      "relation_type": "refers_to",
+      "source": "entity::7c35420fa8ad",
+      "target": "entity::310f3418c1a4"
+    },
+    {
+      "relation_type": "refers_to",
+      "source": "entity::7c35420fa8ad",
+      "target": "entity::77f8f365d563"
+    },
+    {
+      "relation_type": "refers_to",
+      "source": "entity::7c35420fa8ad",
+      "target": "entity::bfdb862eee8c"
+    },
+    {
+      "relation_type": "refers_to",
+      "source": "entity::7c35420fa8ad",
+      "target": "entity::7d2ac55493e7"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::601b980db1c7",
+      "target": "a12cd8599687e560"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::830b6871255e",
+      "target": "a12cd8599687e560"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::231af2420865",
+      "target": "a12cd8599687e560"
+    },
+    {
+      "relation_type": "defines",
+      "source": "entity::231af2420865",
+      "target": "entity::830b6871255e"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::7e97e42b10c4",
+      "target": "a12cd8599687e560"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::4845ba96f45a",
+      "target": "a12cd8599687e560"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::275fddd12821",
+      "target": "a12cd8599687e560"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::515668338ece",
+      "target": "8bf9a4b958e97838"
+    },
+    {
+      "relation_type": "has_limit",
+      "source": "entity::515668338ece",
+      "target": "entity::6cd03d973da5"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::6cd03d973da5",
+      "target": "8bf9a4b958e97838"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::bea8769ab618",
+      "target": "8bf9a4b958e97838"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::78e4b2aae8ae",
+      "target": "8bf9a4b958e97838"
+    },
+    {
+      "relation_type": "has_limit",
+      "source": "entity::78e4b2aae8ae",
+      "target": "entity::d65802124539"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::d65802124539",
+      "target": "8bf9a4b958e97838"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::633cd75c5882",
+      "target": "8bf9a4b958e97838"
+    },
+    {
+      "relation_type": "depends_on",
+      "source": "entity::633cd75c5882",
+      "target": "entity::1431c1295569"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::1431c1295569",
+      "target": "8bf9a4b958e97838"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::5b24a7269987",
+      "target": "8bf9a4b958e97838"
+    },
+    {
+      "relation_type": "defines",
+      "source": "entity::5b24a7269987",
+      "target": "entity::7a44172a9d6f"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::98068b6b1058",
+      "target": "8bf9a4b958e97838"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::7a44172a9d6f",
+      "target": "8bf9a4b958e97838"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::4ac6faced526",
+      "target": "aeb57c8ebbfd060d"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::0032562ae478",
+      "target": "aeb57c8ebbfd060d"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::2c83a0b6087a",
+      "target": "aeb57c8ebbfd060d"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::192b742a217c",
+      "target": "aeb57c8ebbfd060d"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::dc5a72e227d6",
+      "target": "aeb57c8ebbfd060d"
+    },
+    {
+      "relation_type": "prohibits",
+      "source": "entity::dc5a72e227d6",
+      "target": "entity::4bbadec15f6e"
+    },
+    {
+      "relation_type": "requires",
+      "source": "entity::dc5a72e227d6",
+      "target": "entity::2c83a0b6087a"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::4bbadec15f6e",
+      "target": "aeb57c8ebbfd060d"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::d79cd0e771b7",
+      "target": "aeb57c8ebbfd060d"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::a2c9a9046dff",
+      "target": "aeb57c8ebbfd060d"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::e7770cb7e9d2",
+      "target": "aeb57c8ebbfd060d"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::158b7cc44a96",
+      "target": "aeb57c8ebbfd060d"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::8478112a77c1",
+      "target": "069f23d83f3d1a05"
+    },
+    {
+      "relation_type": "defines",
+      "source": "entity::8478112a77c1",
+      "target": "entity::a3771081e921"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::a3771081e921",
+      "target": "069f23d83f3d1a05"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::5fbcb9e0e961",
+      "target": "069f23d83f3d1a05"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::09068ac65d89",
+      "target": "069f23d83f3d1a05"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::b26076630854",
+      "target": "069f23d83f3d1a05"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::b26076630854",
+      "target": "50991272f918f291"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::b26076630854",
+      "target": "03fd0ef9ccfce38b"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::b26076630854",
+      "target": "8c9bed3427e5c833"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::b26076630854",
+      "target": "10660abe9d044f5f"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::b26076630854",
+      "target": "78d3a9017bb97695"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::db84d0965a09",
+      "target": "50991272f918f291"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::db84d0965a09",
+      "target": "8c9bed3427e5c833"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::db84d0965a09",
+      "target": "78d3a9017bb97695"
+    },
+    {
+      "relation_type": "has_limit",
+      "source": "entity::db84d0965a09",
+      "target": "entity::4e239c4ec8a4"
+    },
+    {
+      "relation_type": "has_limit",
+      "source": "entity::db84d0965a09",
+      "target": "entity::087cd989b927"
+    },
+    {
+      "relation_type": "refers_to",
+      "source": "entity::db84d0965a09",
+      "target": "entity::2d1317c3591e"
+    },
+    {
+      "relation_type": "refers_to",
+      "source": "entity::db84d0965a09",
+      "target": "entity::2b9fb197d58e"
+    },
+    {
+      "relation_type": "refers_to",
+      "source": "entity::db84d0965a09",
+      "target": "entity::db80041989c6"
+    },
+    {
+      "relation_type": "governs",
+      "source": "entity::db84d0965a09",
+      "target": "entity::b26076630854"
+    },
+    {
+      "relation_type": "governs",
+      "source": "entity::db84d0965a09",
+      "target": "entity::b669a7a2f64d"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::4e239c4ec8a4",
+      "target": "50991272f918f291"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::087cd989b927",
+      "target": "50991272f918f291"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::2d1317c3591e",
+      "target": "50991272f918f291"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::2b9fb197d58e",
+      "target": "50991272f918f291"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::db80041989c6",
+      "target": "50991272f918f291"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::504258a5fd2d",
+      "target": "3941b121a2970ea3"
+    },
+    {
+      "relation_type": "consists_of",
+      "source": "entity::504258a5fd2d",
+      "target": "entity::8a234f4be711"
+    },
+    {
+      "relation_type": "requires",
+      "source": "entity::504258a5fd2d",
+      "target": "entity::60c346318004"
+    },
+    {
+      "relation_type": "meets",
+      "source": "entity::504258a5fd2d",
+      "target": "entity::6b0215cc249d"
+    },
+    {
+      "relation_type": "reviews",
+      "source": "entity::504258a5fd2d",
+      "target": "entity::9b4507b9e086"
+    },
+    {
+      "relation_type": "reviews",
+      "source": "entity::504258a5fd2d",
+      "target": "entity::b3500dde64f5"
+    },
+    {
+      "relation_type": "reviews",
+      "source": "entity::504258a5fd2d",
+      "target": "entity::8d4c6d994421"
+    },
+    {
+      "relation_type": "refers_to",
+      "source": "entity::504258a5fd2d",
+      "target": "entity::4984aa21ad11"
+    },
+    {
+      "relation_type": "refers_to",
+      "source": "entity::504258a5fd2d",
+      "target": "entity::608cefef6ba0"
+    },
+    {
+      "relation_type": "has_authority_to_impose",
+      "source": "entity::504258a5fd2d",
+      "target": "entity::2bf436d8255b"
+    },
+    {
+      "relation_type": "affects",
+      "source": "entity::504258a5fd2d",
+      "target": "entity::dc6ad344cef2"
+    },
+    {
+      "relation_type": "governs",
+      "source": "entity::504258a5fd2d",
+      "target": "entity::aec24edce129"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::8a234f4be711",
+      "target": "3941b121a2970ea3"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::60c346318004",
+      "target": "3941b121a2970ea3"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::6b0215cc249d",
+      "target": "3941b121a2970ea3"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::9b4507b9e086",
+      "target": "3941b121a2970ea3"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::b3500dde64f5",
+      "target": "3941b121a2970ea3"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::8d4c6d994421",
+      "target": "3941b121a2970ea3"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::4984aa21ad11",
+      "target": "3941b121a2970ea3"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::608cefef6ba0",
+      "target": "3941b121a2970ea3"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::2bf436d8255b",
+      "target": "3941b121a2970ea3"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::dc6ad344cef2",
+      "target": "3941b121a2970ea3"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::aec24edce129",
+      "target": "3941b121a2970ea3"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::aec24edce129",
+      "target": "10660abe9d044f5f"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::a66414fa7509",
+      "target": "3941b121a2970ea3"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::b37f1701181d",
+      "target": "3941b121a2970ea3"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::1539aced2878",
+      "target": "03fd0ef9ccfce38b"
+    },
+    {
+      "relation_type": "has_member",
+      "source": "entity::1539aced2878",
+      "target": "entity::6594072fad35"
+    },
+    {
+      "relation_type": "has_member",
+      "source": "entity::1539aced2878",
+      "target": "entity::cf9cbad4d204"
+    },
+    {
+      "relation_type": "has_member",
+      "source": "entity::1539aced2878",
+      "target": "entity::f66adc1bae94"
+    },
+    {
+      "relation_type": "has_member",
+      "source": "entity::1539aced2878",
+      "target": "entity::829d86c4d418"
+    },
+    {
+      "relation_type": "has_member",
+      "source": "entity::1539aced2878",
+      "target": "entity::80ec87ebfe92"
+    },
+    {
+      "relation_type": "has_member",
+      "source": "entity::1539aced2878",
+      "target": "entity::2b6f196add56"
+    },
+    {
+      "relation_type": "requires_approval",
+      "source": "entity::1539aced2878",
+      "target": "entity::9c22f49b9780"
+    },
+    {
+      "relation_type": "governs",
+      "source": "entity::1539aced2878",
+      "target": "entity::7489878e0072"
+    },
+    {
+      "relation_type": "governs",
+      "source": "entity::1539aced2878",
+      "target": "entity::b26076630854"
+    },
+    {
+      "relation_type": "has_limit",
+      "source": "entity::1539aced2878",
+      "target": "entity::88d1375194dc"
+    },
+    {
+      "relation_type": "has_limit",
+      "source": "entity::1539aced2878",
+      "target": "entity::dbc6f291f2b1"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::6594072fad35",
+      "target": "03fd0ef9ccfce38b"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::6594072fad35",
+      "target": "10660abe9d044f5f"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::cf9cbad4d204",
+      "target": "03fd0ef9ccfce38b"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::cf9cbad4d204",
+      "target": "092cd22cee288978"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::cf9cbad4d204",
+      "target": "78d3a9017bb97695"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::f66adc1bae94",
+      "target": "03fd0ef9ccfce38b"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::f66adc1bae94",
+      "target": "092cd22cee288978"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::829d86c4d418",
+      "target": "03fd0ef9ccfce38b"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::80ec87ebfe92",
+      "target": "03fd0ef9ccfce38b"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::80ec87ebfe92",
+      "target": "092cd22cee288978"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::2b6f196add56",
+      "target": "03fd0ef9ccfce38b"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::9c22f49b9780",
+      "target": "03fd0ef9ccfce38b"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::9c22f49b9780",
+      "target": "ef9b549d0a2d777d"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::9c22f49b9780",
+      "target": "78d3a9017bb97695"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::7489878e0072",
+      "target": "03fd0ef9ccfce38b"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::88d1375194dc",
+      "target": "03fd0ef9ccfce38b"
+    },
+    {
+      "relation_type": "depends_on",
+      "source": "entity::88d1375194dc",
+      "target": "entity::dbc6f291f2b1"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::dbc6f291f2b1",
+      "target": "03fd0ef9ccfce38b"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::ea1fc27ad32e",
+      "target": "8c9bed3427e5c833"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::d23db32b5cd1",
+      "target": "8c9bed3427e5c833"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::97de8f5b2abc",
+      "target": "8c9bed3427e5c833"
+    },
+    {
+      "relation_type": "depends_on",
+      "source": "entity::97de8f5b2abc",
+      "target": "entity::db84d0965a09"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::b669a7a2f64d",
+      "target": "8c9bed3427e5c833"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::55c3d28d7397",
+      "target": "8c9bed3427e5c833"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::add318b5ba5b",
+      "target": "8c9bed3427e5c833"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::add318b5ba5b",
+      "target": "78d3a9017bb97695"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::bb9c69f043d3",
+      "target": "8c9bed3427e5c833"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::12a49522e22b",
+      "target": "8c9bed3427e5c833"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::f9f12e7f8c57",
+      "target": "8c9bed3427e5c833"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::f2fee9e25a61",
+      "target": "8c9bed3427e5c833"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::debfb157848c",
+      "target": "8c9bed3427e5c833"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::5a38a8a926b7",
+      "target": "ef9b549d0a2d777d"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::1ac300d73dc1",
+      "target": "ef9b549d0a2d777d"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::58091aceb0b4",
+      "target": "ef9b549d0a2d777d"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::7b64b28fe40e",
+      "target": "ef9b549d0a2d777d"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::99abf30b7753",
+      "target": "ef9b549d0a2d777d"
+    },
+    {
+      "relation_type": "defines",
+      "source": "entity::99abf30b7753",
+      "target": "entity::9783c16570a4"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::9783c16570a4",
+      "target": "ef9b549d0a2d777d"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::9783c16570a4",
+      "target": "10660abe9d044f5f"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::e46787595088",
+      "target": "ef9b549d0a2d777d"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::c189a3326ebf",
+      "target": "ef9b549d0a2d777d"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::612c70766de3",
+      "target": "ef9b549d0a2d777d"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::8052df38f213",
+      "target": "ef9b549d0a2d777d"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::6e91ce1db1b0",
+      "target": "092cd22cee288978"
+    },
+    {
+      "relation_type": "governs",
+      "source": "entity::6e91ce1db1b0",
+      "target": "entity::80ec87ebfe92"
+    },
+    {
+      "relation_type": "includes",
+      "source": "entity::6e91ce1db1b0",
+      "target": "entity::cf9cbad4d204"
+    },
+    {
+      "relation_type": "includes",
+      "source": "entity::6e91ce1db1b0",
+      "target": "entity::f66adc1bae94"
+    },
+    {
+      "relation_type": "includes",
+      "source": "entity::6e91ce1db1b0",
+      "target": "entity::09e55cb7e8ad"
+    },
+    {
+      "relation_type": "meets_for",
+      "source": "entity::6e91ce1db1b0",
+      "target": "entity::1b8ce1ac27f4"
+    },
+    {
+      "relation_type": "meets_for",
+      "source": "entity::6e91ce1db1b0",
+      "target": "entity::9263acef0cc9"
+    },
+    {
+      "relation_type": "approves",
+      "source": "entity::6e91ce1db1b0",
+      "target": "entity::979c232c8a71"
+    },
+    {
+      "relation_type": "manages",
+      "source": "entity::6e91ce1db1b0",
+      "target": "entity::06b358c2dd1c"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::09e55cb7e8ad",
+      "target": "092cd22cee288978"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::1b8ce1ac27f4",
+      "target": "092cd22cee288978"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::9263acef0cc9",
+      "target": "092cd22cee288978"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::979c232c8a71",
+      "target": "092cd22cee288978"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::06b358c2dd1c",
+      "target": "092cd22cee288978"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::03447a3e4691",
+      "target": "092cd22cee288978"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::cdc2f1012a1e",
+      "target": "092cd22cee288978"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::ea1476942aca",
+      "target": "10660abe9d044f5f"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::61704bf2fada",
+      "target": "10660abe9d044f5f"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::4efba5e47248",
+      "target": "10660abe9d044f5f"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::a6b3d9a33a15",
+      "target": "10660abe9d044f5f"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::7e7b9032322d",
+      "target": "10660abe9d044f5f"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::c11f68361068",
+      "target": "10660abe9d044f5f"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::67dac1f11b48",
+      "target": "10660abe9d044f5f"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::bebf96f4d1d3",
+      "target": "10660abe9d044f5f"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::7bcf8fb940eb",
+      "target": "78d3a9017bb97695"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::d87756e89f6f",
+      "target": "78d3a9017bb97695"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::31510fb68990",
+      "target": "78d3a9017bb97695"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::3866ea9ae213",
+      "target": "78d3a9017bb97695"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::a21e89f06aaf",
+      "target": "78d3a9017bb97695"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::11c8366f7eca",
+      "target": "78d3a9017bb97695"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::980e1d324060",
+      "target": "78d3a9017bb97695"
+    },
+    {
+      "relation_type": "mentioned_in",
+      "source": "entity::f94ab0436ea2",
+      "target": "78d3a9017bb97695"
+    }
+  ]
+}

@@ -1,0 +1,608 @@
+[
+  {
+    "element_id": "e658e2840c2174f2",
+    "doc_name": "AML_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\AML_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "Anti-Money Laundering and Counter-Terrorism Financing Policy",
+    "section_path": [],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "34f4b6a8c9b432a8",
+    "doc_name": "AML_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\AML_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "Document ID: POL-AML-2025-004",
+    "section_path": [],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "ad95b7b96768d958",
+    "doc_name": "AML_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\AML_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "Effective Date: January 1, 2025",
+    "section_path": [],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "bdb16c23e78b68bb",
+    "doc_name": "AML_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\AML_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "Classification: Strictly Confidential",
+    "section_path": [],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "7a226567f53f5756",
+    "doc_name": "AML_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\AML_Policy_2025.docx",
+    "element_type": "heading",
+    "content": "1. Regulatory Framework",
+    "section_path": [
+      "1. Regulatory Framework"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "53aa4f42c7298437",
+    "doc_name": "AML_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\AML_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "This policy is issued in compliance with Central Bank Circular No. 2024/AML/012 and the Anti-Money Laundering Law No. 80 of 2002 (as amended). The Bank must maintain a risk-based approach to AML/CTF in accordance with FATF Recommendations.",
+    "section_path": [
+      "1. Regulatory Framework"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "9d130ff2fa964ec0",
+    "doc_name": "AML_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\AML_Policy_2025.docx",
+    "element_type": "heading",
+    "content": "2. Customer Due Diligence (CDD)",
+    "section_path": [
+      "2. Customer Due Diligence (CDD)"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "170e7191d2925df8",
+    "doc_name": "AML_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\AML_Policy_2025.docx",
+    "element_type": "heading",
+    "content": "2.1 Standard CDD",
+    "section_path": [
+      "2. Customer Due Diligence (CDD)",
+      "2.1 Standard CDD"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "2ab774ddcb2f84e7",
+    "doc_name": "AML_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\AML_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "Standard CDD must be performed for all new customers. This includes identity verification, beneficial ownership identification, and understanding the purpose of the business relationship. For individual accounts, a valid national ID or passport is required along with proof of address dated within the last 3 months.",
+    "section_path": [
+      "2. Customer Due Diligence (CDD)",
+      "2.1 Standard CDD"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "67ad5be70942cee8",
+    "doc_name": "AML_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\AML_Policy_2025.docx",
+    "element_type": "heading",
+    "content": "2.2 Enhanced Due Diligence (EDD)",
+    "section_path": [
+      "2. Customer Due Diligence (CDD)",
+      "2.2 Enhanced Due Diligence (EDD)"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "73105cfff1816c9d",
+    "doc_name": "AML_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\AML_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "Enhanced Due Diligence is mandatory for: (a) Politically Exposed Persons (PEPs), (b) customers from high-risk jurisdictions as defined in Appendix A of the Country Risk Assessment, (c) correspondent banking relationships, and (d) any customer with transactions flagged by the Transaction Monitoring System (TMS). EDD requires approval from the Compliance Committee (see Governance Policy, Section 3.2 for committee composition).",
+    "section_path": [
+      "2. Customer Due Diligence (CDD)",
+      "2.2 Enhanced Due Diligence (EDD)"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "7d0759d3ab90fe8f",
+    "doc_name": "AML_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\AML_Policy_2025.docx",
+    "element_type": "heading",
+    "content": "3. Transaction Monitoring",
+    "section_path": [
+      "3. Transaction Monitoring"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "02a0f5f157723307",
+    "doc_name": "AML_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\AML_Policy_2025.docx",
+    "element_type": "heading",
+    "content": "3.1 Monitoring Thresholds",
+    "section_path": [
+      "3. Transaction Monitoring",
+      "3.1 Monitoring Thresholds"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "25ea5bdb7302459d",
+    "doc_name": "AML_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\AML_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "All cash transactions exceeding EGP 300,000 (or equivalent in foreign currency, calculated using the daily FX rates published by the Treasury Department as per FX Policy Section 3) must be reported to the Money Laundering Reporting Officer (MLRO). Multiple transactions by the same customer aggregating to EGP 500,000 within a 30-day rolling window must trigger an automatic alert.",
+    "section_path": [
+      "3. Transaction Monitoring",
+      "3.1 Monitoring Thresholds"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "501ec0e7069f33c0",
+    "doc_name": "AML_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\AML_Policy_2025.docx",
+    "element_type": "heading",
+    "content": "3.2 Suspicious Activity Reporting",
+    "section_path": [
+      "3. Transaction Monitoring",
+      "3.2 Suspicious Activity Reporting"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "7b3c3c35e73f694c",
+    "doc_name": "AML_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\AML_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "IF a transaction is flagged as suspicious by the TMS, THEN the branch must file a preliminary report to the MLRO within 24 hours. IF the MLRO confirms the suspicion, THEN a Suspicious Transaction Report (STR) must be filed with the Financial Intelligence Unit (FIU) within 3 business days. The MLRO reports to the Chief Risk Officer (CRO) who has ultimate responsibility for AML compliance oversight (see Risk Governance Policy, Section 2.1).",
+    "section_path": [
+      "3. Transaction Monitoring",
+      "3.2 Suspicious Activity Reporting"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "742964ca8ce1047d",
+    "doc_name": "AML_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\AML_Policy_2025.docx",
+    "element_type": "heading",
+    "content": "4. Sanctions Screening",
+    "section_path": [
+      "4. Sanctions Screening"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "709641b6e37e819c",
+    "doc_name": "AML_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\AML_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "All customers and transactions must be screened against: UN Security Council sanctions lists, OFAC SDN list, EU sanctions lists, and local Central Bank restricted lists. Sanctions screening must occur at onboarding, periodically (at least quarterly), and for every wire transfer. Any positive match must freeze the transaction and be escalated to the Compliance Committee within 2 hours.",
+    "section_path": [
+      "4. Sanctions Screening"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "605423460f09a63c",
+    "doc_name": "AML_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\AML_Policy_2025.docx",
+    "element_type": "heading",
+    "content": "5. Record Retention",
+    "section_path": [
+      "5. Record Retention"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "e9286467580f1660",
+    "doc_name": "AML_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\AML_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "All CDD records must be retained for a minimum of 5 years after the end of the customer relationship. Transaction records must be retained for 10 years. STR-related records must be retained indefinitely until cleared by the FIU. These requirements align with the Bank's Data Governance Policy (POL-DG-2025-009, Section 4).",
+    "section_path": [
+      "5. Record Retention"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "1c704d4b267efcb6",
+    "doc_name": "AML_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\AML_Policy_2025.docx",
+    "element_type": "heading",
+    "content": "6. العقوبات والمخالفات",
+    "section_path": [
+      "6. العقوبات والمخالفات"
+    ],
+    "metadata": {},
+    "language": "ar",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "64d96fdb89630d81",
+    "doc_name": "AML_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\AML_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "أي موظف يخالف أحكام سياسة مكافحة غسل الأموال يتعرض لإجراءات تأديبية وفقاً لسياسة الموارد البشرية. في حالة المخالفات الجسيمة، يتم إبلاغ الجهات الرقابية المختصة. يتحمل مدير المخاطر التنفيذي (CRO) المسؤولية النهائية عن الامتثال لمتطلبات مكافحة غسل الأموال.",
+    "section_path": [
+      "6. العقوبات والمخالفات"
+    ],
+    "metadata": {},
+    "language": "ar",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "a2e2d80c03da99f4",
+    "doc_name": "Governance_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\Governance_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "Corporate Governance and Committee Structure",
+    "section_path": [],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "6ee6c09aa1b7fb15",
+    "doc_name": "Governance_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\Governance_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "Document ID: POL-GOV-2025-005",
+    "section_path": [],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "ec28a34adafdaea6",
+    "doc_name": "Governance_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\Governance_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "Effective Date: January 1, 2025",
+    "section_path": [],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "5bb2a34ec9eee726",
+    "doc_name": "Governance_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\Governance_Policy_2025.docx",
+    "element_type": "heading",
+    "content": "1. Board of Directors",
+    "section_path": [
+      "1. Board of Directors"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "ad28596510e79316",
+    "doc_name": "Governance_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\Governance_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "The Board of Directors consists of 11 members including 4 independent directors. The Board meets at least quarterly and has ultimate oversight responsibility for all risk management activities. The Board delegates operational risk management to the following committees.",
+    "section_path": [
+      "1. Board of Directors"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "96cedc4bf157acff",
+    "doc_name": "Governance_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\Governance_Policy_2025.docx",
+    "element_type": "heading",
+    "content": "2. Risk Management Committees",
+    "section_path": [
+      "2. Risk Management Committees"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "7c57f8dfa6557543",
+    "doc_name": "Governance_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\Governance_Policy_2025.docx",
+    "element_type": "heading",
+    "content": "2.1 Board Risk Committee (BRC)",
+    "section_path": [
+      "2. Risk Management Committees",
+      "2.1 Board Risk Committee (BRC)"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "d5665ece16e0f82e",
+    "doc_name": "Governance_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\Governance_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "The Board Risk Committee consists of 5 Board members (minimum 3 independent). It meets monthly and reviews: aggregate risk exposure reports, risk appetite framework compliance, and capital adequacy assessments. The BRC has authority to impose temporary trading halts on any business unit when risk limits are breached (see FX Policy Section 2.2 and Credit Risk Policy Section 3).",
+    "section_path": [
+      "2. Risk Management Committees",
+      "2.1 Board Risk Committee (BRC)"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "ea7dbe869e70bafb",
+    "doc_name": "Governance_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\Governance_Policy_2025.docx",
+    "element_type": "heading",
+    "content": "2.2 Executive Risk Committee (ERC)",
+    "section_path": [
+      "2. Risk Management Committees",
+      "2.2 Executive Risk Committee (ERC)"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "7030a45ebf6130f5",
+    "doc_name": "Governance_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\Governance_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "The Executive Risk Committee is chaired by the CEO and includes: CRO, CFO, Chief Compliance Officer (CCO), Head of Treasury, and Head of Credit. It meets weekly and oversees day-to-day risk management. The ERC approves risk limit changes up to 10% of existing limits; changes exceeding 10% require BRC approval.",
+    "section_path": [
+      "2. Risk Management Committees",
+      "2.2 Executive Risk Committee (ERC)"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "9793d8c67b8930dc",
+    "doc_name": "Governance_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\Governance_Policy_2025.docx",
+    "element_type": "heading",
+    "content": "3. Specialized Committees",
+    "section_path": [
+      "3. Specialized Committees"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "10af370928d79c4f",
+    "doc_name": "Governance_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\Governance_Policy_2025.docx",
+    "element_type": "heading",
+    "content": "3.1 Credit Committee Structure",
+    "section_path": [
+      "3. Specialized Committees",
+      "3.1 Credit Committee Structure"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "2cacf5f792a4ee2b",
+    "doc_name": "Governance_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\Governance_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "Credit approval follows a tiered committee structure: Branch Credit Committee (up to EGP 5M), Regional Credit Committee (up to EGP 25M), Head Office Credit Committee (up to EGP 100M), Board of Directors (above EGP 100M). See Credit Risk Policy Section 2.1 for detailed approval matrix and conditions.",
+    "section_path": [
+      "3. Specialized Committees",
+      "3.1 Credit Committee Structure"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "073d060d4c8e529f",
+    "doc_name": "Governance_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\Governance_Policy_2025.docx",
+    "element_type": "heading",
+    "content": "3.2 Compliance Committee",
+    "section_path": [
+      "3. Specialized Committees",
+      "3.2 Compliance Committee"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "e84c1e014cca574c",
+    "doc_name": "Governance_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\Governance_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "The Compliance Committee is chaired by the CCO and includes: MLRO, Head of Legal, Head of Internal Audit, and a Board-appointed independent member. It meets bi-weekly and oversees: AML/CTF compliance (see AML Policy), sanctions screening, regulatory reporting, and customer complaints. The Compliance Committee reports to the BRC.",
+    "section_path": [
+      "3. Specialized Committees",
+      "3.2 Compliance Committee"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "1847aaf07102d74c",
+    "doc_name": "Governance_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\Governance_Policy_2025.docx",
+    "element_type": "heading",
+    "content": "3.3 Treasury Committee",
+    "section_path": [
+      "3. Specialized Committees",
+      "3.3 Treasury Committee"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "c9e5d72452538d5e",
+    "doc_name": "Governance_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\Governance_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "The Treasury Committee is chaired by the Head of Treasury and includes: CRO, CFO, and Head of Market Risk. It meets daily for FX position reviews and weekly for ALM reviews. The Treasury Committee has authority to approve exotic currency pair trading (see FX Policy Section 3) and manages the Bank's liquidity buffer requirements.",
+    "section_path": [
+      "3. Specialized Committees",
+      "3.3 Treasury Committee"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "2a4f6bf13d9514f8",
+    "doc_name": "Governance_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\Governance_Policy_2025.docx",
+    "element_type": "heading",
+    "content": "4. Chief Risk Officer (CRO) Mandate",
+    "section_path": [
+      "4. Chief Risk Officer (CRO) Mandate"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "d7445ebcb51a8786",
+    "doc_name": "Governance_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\Governance_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "The CRO has a dual reporting line: operationally to the CEO and functionally to the BRC Chair. The CRO's mandate includes: (a) oversight of credit, market, operational, and liquidity risk, (b) ultimate authority over risk limit setting subject to BRC approval, (c) AML/CTF compliance oversight (delegated from the Board), (d) quarterly risk appetite review, and (e) veto power on transactions exceeding 50% of any risk limit.",
+    "section_path": [
+      "4. Chief Risk Officer (CRO) Mandate"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "37b57501a112373f",
+    "doc_name": "Governance_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\Governance_Policy_2025.docx",
+    "element_type": "heading",
+    "content": "5. Escalation Chain",
+    "section_path": [
+      "5. Escalation Chain"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  },
+  {
+    "element_id": "7464ed0d083d41ef",
+    "doc_name": "Governance_Policy_2025",
+    "doc_path": "test_data\\raw_docs_test\\Governance_Policy_2025.docx",
+    "element_type": "paragraph",
+    "content": "Risk events must be escalated through the following chain: Line Manager → Department Head → relevant Committee → ERC → BRC → Board of Directors. Critical events (fraud, regulatory breach, loss >EGP 10M) skip directly to ERC and BRC. The CRO has authority to invoke emergency escalation at any level.",
+    "section_path": [
+      "5. Escalation Chain"
+    ],
+    "metadata": {},
+    "language": "en",
+    "page_number": null,
+    "table_data": null
+  }
+]

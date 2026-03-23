@@ -1,0 +1,66 @@
+============================================================
+Banking Knowledge AI — Index Builder (LOGGED)
+Environment: HARDCODED
+LLM: openai/gpt-3.5-turbo
+Embedding: openai/text-embedding-ada-002
+============================================================
+
+[1/5] Parsing documents...
+  Total elements: 43
+  Types: {'paragraph': 23, 'heading': 20}
+
+[2/5] Chunking...
+  Total chunks: 18
+  Types: {'text': 18}
+  Access levels: {3: 18}  (1=Public, 2=Confidential, 3=Restricted)
+  Saved chunks to test_data\parsed_test\chunks.json
+
+[3/5] Embedding and indexing into vector store...
+  Collection: {'name': 'banking_chunks', 'points_count': 18}
+
+[4/5] Extracting entities...
+
+[5/5] Building knowledge graph...
+  Graph stats: {
+  "total_nodes": 210,
+  "total_edges": 584,
+  "node_types": {
+    "chunk": 18,
+    "document": 2,
+    "section": 20,
+    "entity": 170
+  },
+  "edge_types": {
+    "belongs_to_document": 38,
+    "mentions_entity": 201,
+    "belongs_to_section": 16,
+    "child_of_section": 9,
+    "mentioned_in": 201,
+    "defines": 11,
+    "governs": 12,
+    "refers_to": 21,
+    "depends_on": 11,
+    "requires": 15,
+    "has_limit": 10,
+    "has_role": 5,
+    "reports_to": 4,
+    "oversees": 4,
+    "meets": 2,
+    "has_delegated_authority": 1,
+    "conducts": 1,
+    "has_authority_over": 1,
+    "prohibits": 1,
+    "consists_of": 1,
+    "reviews": 3,
+    "has_authority_to_impose": 1,
+    "affects": 1,
+    "has_member": 6,
+    "requires_approval": 1,
+    "includes": 3,
+    "meets_for": 2,
+    "approves": 1,
+    "manages": 1
+  },
+  "dropped_relations": 0,
+  "orphan_entities": 0
+}
