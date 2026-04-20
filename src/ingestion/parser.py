@@ -52,6 +52,9 @@ def _detect_language(text: str) -> str:
     return "en"
 
 
+
+
+
 def parse_document(doc_path: str | Path) -> list[ParsedElement]:
     """
     Parse a single Word document into structured elements.
@@ -87,8 +90,7 @@ def parse_document(doc_path: str | Path) -> list[ParsedElement]:
                     current_section_path = current_section_path[:level - 1]
                 current_section_path.append(heading_text)
 
-                #Adding heaidings fel document
-
+                # Adding headings in the document
                 elem = ParsedElement(
                     element_id=_generate_element_id(doc_name, "heading", heading_text, element_index),
                     doc_name=doc_name,
@@ -103,7 +105,7 @@ def parse_document(doc_path: str | Path) -> list[ParsedElement]:
 
         elif hasattr(item, 'text') and item.text and item.text.strip():
             text = item.text.strip()
-            #law mesh heading default to paragraph
+            # law mesh heading default to paragraph
             elem = ParsedElement(
                 element_id=_generate_element_id(doc_name, "paragraph", text, element_index),
                 doc_name=doc_name,
@@ -132,7 +134,8 @@ def parse_document(doc_path: str | Path) -> list[ParsedElement]:
                             }
                         except Exception:
                             pass
-                    #Tables handled
+
+                    # Tables handled
                     elem = ParsedElement(
                         element_id=_generate_element_id(doc_name, "table", table_md, element_index),
                         doc_name=doc_name,
@@ -145,6 +148,7 @@ def parse_document(doc_path: str | Path) -> list[ParsedElement]:
                     )
                     elements.append(elem)
                     element_index += 1
+
             except Exception as e:
                 warnings.warn(
                     f"Table extraction failed in {doc_name} "
@@ -208,7 +212,7 @@ def parse_document_fallback(doc_path: str | Path) -> list[ParsedElement]:
         elements.append(elem)
         element_index += 1
 
-    # Extract tables
+    # Extract tables (IMPORTANT — restored)
     for table in doc.tables:
         rows = []
         headers = []
@@ -219,7 +223,6 @@ def parse_document_fallback(doc_path: str | Path) -> list[ParsedElement]:
             else:
                 rows.append(cells)
 
-        # Build markdown representation
         if headers:
             md_lines = ["| " + " | ".join(headers) + " |"]
             md_lines.append("| " + " | ".join(["---"] * len(headers)) + " |")
@@ -251,24 +254,34 @@ def parse_all_documents(docs_dir: str | Path, output_dir: Optional[str | Path] =
     """
     Parse all Word documents in a directory.
     Optionally saves parsed output as JSON.
+    Handles .docx and .doc files only; OCR JSON files are handled separately.
     """
     docs_dir = Path(docs_dir)
     PARSE_FAILURES.clear()  # Reset from previous runs
     all_elements: list[ParsedElement] = []
 
-    doc_files = list(docs_dir.glob("*.docx")) + list(docs_dir.glob("*.doc"))
-    print(f"Found {len(doc_files)} documents in {docs_dir}")
+    # Only parse Word documents
+    doc_files = (
+        list(docs_dir.glob("*.docx")) +
+        list(docs_dir.glob("*.doc"))
+    )
+
+    print(f"Found {len(doc_files)} Word documents in {docs_dir}")
 
     for doc_file in sorted(doc_files):
         if doc_file.name.startswith("~$"):
             continue  # Skip temp Word files
+
         print(f"  Parsing: {doc_file.name}")
+
         try:
             elements = parse_document(doc_file)
+
         except Exception as e:
-            print(f"    Docling failed ({e}), trying fallback parser...")
+            print(f"    Primary parser failed ({e}), trying fallback parser...")
             try:
                 elements = parse_document_fallback(doc_file)
+
             except Exception as e2:
                 warnings.warn(f"Both parsers failed for {doc_file.name}: {e2}. Skipping.")
                 PARSE_FAILURES.append((doc_file.name, str(e2)))
@@ -281,8 +294,10 @@ def parse_all_documents(docs_dir: str | Path, output_dir: Optional[str | Path] =
         output_dir = Path(output_dir)
         output_dir.mkdir(parents=True, exist_ok=True)
         output_path = output_dir / "parsed_elements.json"
+
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump([e.to_dict() for e in all_elements], f, ensure_ascii=False, indent=2)
+
         print(f"Saved {len(all_elements)} elements to {output_path}")
 
     # ── Report any parse failures ──

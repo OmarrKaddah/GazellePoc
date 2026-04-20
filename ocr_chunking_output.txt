@@ -1,0 +1,76 @@
+============================================================
+Testing OCR → Chunking Pipeline
+============================================================
+
+[1] Parsing OCR JSON files from data/raw_docs...
+✓ Parsed 7 elements
+
+[2] Parsed Elements Summary:
+
+  Element 1:
+    Type: paragraph
+    Content: م...
+    Confidence: 0.536
+
+  Element 2:
+    Type: paragraph
+    Content: تع ثاته ١٢
+وN 2اهمة الرقم
+مشلفه وَزارة الحم لوالأر مرقات ١٢٥٦
+٢٧ ٢٠٢٥
+قرار وارة لا الأار الوزير
+وزير...
+    Confidence: 0.759
+
+  Element 3:
+    Type: heading
+    Content: بعد الاطلاع على قانون المنشأت الفندقية والسياحية الصادر بالقانون رقم ٨ لسنة ٤٢٠٢٢
+وعلى قانون إنشاء ا...
+    Confidence: 0.892
+
+  Element 4:
+    Type: heading
+    Content: في تطبيق أحكام هذا القرار يقصد بوحدات شقق الأجازات  ا كل وحدة مكونة من غرفة
+واحدة على الأقل إجناح اف...
+    Confidence: 0.94
+
+  Element 5:
+    Type: paragraph
+    Content: ونير المياة والأثار...
+    Confidence: 0.697
+
+  ... and 2 more elements
+
+[3] Chunking with token limit 512...
+✓ Created 2 chunks
+
+[4] Chunks Summary:
+
+  Chunk 1:
+    Type: text
+    Tokens: 80
+    Content: [batch_results]
+
+م
+
+تع ثاته ١٢
+وN 2اهمة الرقم
+مشلفه وَزارة الحم لوالأر مرقات ١٢٥٦
+٢٧ ٢٠٢٥
+قرار وارة ...
+
+  Chunk 2:
+    Type: text
+    Tokens: 193
+    Content: [batch_results | في تطبيق أحكام هذا القرار يقصد بوحدات شقق الأجازات  ا كل وحدة مكونة من غرفة
+واحدة ع...
+
+[5] Statistics:
+  Total input elements: 7
+  Total chunks: 2
+  Element types: {'paragraph': 5, 'heading': 2}
+  Chunk types: {'text': 2}
+
+============================================================
+✓ Test complete!
+============================================================

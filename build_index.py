@@ -11,7 +11,8 @@ import os
 from pathlib import Path
 
 from config import get_config
-from src.ingestion.parser import parse_all_documents, PARSE_FAILURES
+from src.ingestion.parser import parse_all_documents, PARSE_FAILURES as PARSER_FAILURES
+from src.ingestion.ocr_structuring import parse_all_ocr_documents, PARSE_FAILURES as OCR_FAILURES
 from src.ingestion.chunker import chunk_elements, Chunk
 from src.ingestion.embedder import VectorStore
 from src.graph.entity_extractor import extract_entities_from_chunks, align_entities, FAILED_EXTRACTIONS
@@ -35,7 +36,19 @@ def main():
 
     # ── Step 1: Parse documents ──
     print("\n[1/5] Parsing documents...")
-    elements = parse_all_documents(data_dir, output_dir=parsed_dir)
+    
+    # Parse Word documents
+    print("  [1a] Parsing Word documents...")
+    doc_elements = parse_all_documents(data_dir, output_dir=parsed_dir)
+    print(f"    Word documents: {len(doc_elements)} elements")
+    
+    # Parse OCR JSON files
+    print("  [1b] Parsing OCR JSON files...")
+    ocr_elements = parse_all_ocr_documents(data_dir, output_dir=parsed_dir)
+    print(f"    OCR documents: {len(ocr_elements)} elements")
+    
+    # Combine all elements
+    elements = doc_elements + ocr_elements
     print(f"  Total elements: {len(elements)}")
     print(f"  Types: { {t: sum(1 for e in elements if e.element_type == t) for t in set(e.element_type for e in elements)} }")
 
@@ -118,10 +131,13 @@ def main():
 
     issues_found = 0
 
-    if PARSE_FAILURES:
+    # Combine parse failures from both sources
+    all_parse_failures = list(PARSER_FAILURES) + list(OCR_FAILURES)
+
+    if all_parse_failures:
         issues_found += 1
-        print(f"  ⚠ Parse failures:         {len(PARSE_FAILURES)} doc(s) skipped")
-        for name, err in PARSE_FAILURES:
+        print(f"  ⚠ Parse failures:         {len(all_parse_failures)} doc(s) skipped")
+        for name, err in all_parse_failures:
             print(f"      • {name}: {err[:80]}")
 
     if oversized_chunks:
