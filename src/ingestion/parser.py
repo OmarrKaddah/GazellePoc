@@ -1,3 +1,5 @@
+import warnings
+
 """
 Document parser using Docling for structured extraction of Word documents.
 Extracts sections, paragraphs, tables, and figures with full metadata.
@@ -5,12 +7,13 @@ Extracts sections, paragraphs, tables, and figures with full metadata.
 
 import json
 import hashlib
-import warnings
+import importlib
 from pathlib import Path
 from typing import Optional
 from dataclasses import dataclass, field, asdict
 
 from docling.document_converter import DocumentConverter
+from config import get_config
 
 # Module-level tracker for parse failures —
 # lets build_index.py report skipped documents.
@@ -52,7 +55,7 @@ def _detect_language(text: str) -> str:
     return "en"
 
 
-def parse_document(doc_path: str | Path) -> list[ParsedElement]:
+def parse_document_docling(doc_path: str | Path) -> list[ParsedElement]:
     """
     Parse a single Word document into structured elements.
     
@@ -154,97 +157,118 @@ def parse_document(doc_path: str | Path) -> list[ParsedElement]:
     return elements
 
 
-def parse_document_fallback(doc_path: str | Path) -> list[ParsedElement]:
+def parse_document_unstructured(doc_path: str | Path) -> list[ParsedElement]:
     """
-    Fallback parser using python-docx directly.
-    Used when Docling has issues with specific document formats.
+    Parse a single Word document using unstructured.
+
+    Supports .docx directly and falls back to auto partition for other formats.
     """
-    from docx import Document
+    partition_docx_fn = None
+    partition_auto_fn = None
+
+    try:
+        partition_docx_fn = importlib.import_module("unstructured.partition.docx").partition_docx
+    except Exception:
+        pass
+
+    try:
+        partition_auto_fn = importlib.import_module("unstructured.partition.auto").partition
+    except Exception:
+        pass
+
+    if partition_docx_fn is None and partition_auto_fn is None:
+        raise ImportError(
+            "unstructured is not installed. Install with `pip install unstructured`."
+        )
 
     doc_path = Path(doc_path)
     doc_name = doc_path.stem
-    doc = Document(str(doc_path))
+    suffix = doc_path.suffix.lower()
+
+    if suffix == ".docx" and partition_docx_fn is not None:
+        raw_elements = partition_docx_fn(filename=str(doc_path))
+    elif partition_auto_fn is not None:
+        raw_elements = partition_auto_fn(filename=str(doc_path))
+    else:
+        raise ImportError(
+            "unstructured auto partition is unavailable for non-.docx documents."
+        )
 
     elements: list[ParsedElement] = []
     current_section_path: list[str] = []
     element_index = 0
 
-    for para in doc.paragraphs:
-        text = para.text.strip()
+    for item in raw_elements:
+        text = (getattr(item, "text", "") or "").strip()
         if not text:
             continue
 
-        # Detect headings by style
-        style_name = para.style.name.lower() if para.style else ""
-        if "heading" in style_name:
-            level = 1
-            for ch in style_name:
-                if ch.isdigit():
-                    level = int(ch)
-                    break
-            current_section_path = current_section_path[:level - 1]
+        item_type = str(getattr(item, "category", type(item).__name__)).lower()
+        item_metadata = {}
+        page_number = None
+
+        raw_metadata = getattr(item, "metadata", None)
+        if raw_metadata is not None:
+            if hasattr(raw_metadata, "to_dict"):
+                item_metadata = raw_metadata.to_dict()
+            elif isinstance(raw_metadata, dict):
+                item_metadata = raw_metadata
+            page_number = item_metadata.get("page_number")
+
+        if "title" in item_type or "header" in item_type:
+            element_type = "heading"
             current_section_path.append(text)
-
-            elem = ParsedElement(
-                element_id=_generate_element_id(doc_name, "heading", text, element_index),
-                doc_name=doc_name,
-                doc_path=str(doc_path),
-                element_type="heading",
-                content=text,
-                section_path=list(current_section_path),
-                language=_detect_language(text),
-            )
+            section_path = list(current_section_path)
+        elif "table" in item_type:
+            element_type = "table"
+            section_path = list(current_section_path)
+        elif "list" in item_type:
+            element_type = "list_item"
+            section_path = list(current_section_path)
         else:
-            elem = ParsedElement(
-                element_id=_generate_element_id(doc_name, "paragraph", text, element_index),
-                doc_name=doc_name,
-                doc_path=str(doc_path),
-                element_type="paragraph",
-                content=text,
-                section_path=list(current_section_path),
-                language=_detect_language(text),
-            )
+            element_type = "paragraph"
+            section_path = list(current_section_path)
 
-        elements.append(elem)
-        element_index += 1
-
-    # Extract tables
-    for table in doc.tables:
-        rows = []
-        headers = []
-        for i, row in enumerate(table.rows):
-            cells = [cell.text.strip() for cell in row.cells]
-            if i == 0:
-                headers = cells
-            else:
-                rows.append(cells)
-
-        # Build markdown representation
-        if headers:
-            md_lines = ["| " + " | ".join(headers) + " |"]
-            md_lines.append("| " + " | ".join(["---"] * len(headers)) + " |")
-            for row in rows:
-                md_lines.append("| " + " | ".join(row) + " |")
-            table_md = "\n".join(md_lines)
-
-            elem = ParsedElement(
-                element_id=_generate_element_id(doc_name, "table", table_md, element_index),
-                doc_name=doc_name,
-                doc_path=str(doc_path),
-                element_type="table",
-                content=table_md,
-                section_path=list(current_section_path),
-                language=_detect_language(table_md),
-                table_data={
+        table_data = None
+        if element_type == "table":
+            table_cells = item_metadata.get("table_as_cells")
+            if isinstance(table_cells, list) and table_cells:
+                headers = [str(cell).strip() for cell in table_cells[0]]
+                rows = [[str(cell).strip() for cell in row] for row in table_cells[1:]]
+                table_data = {
                     "headers": headers,
                     "rows": rows,
                     "shape": [len(rows), len(headers)],
-                },
-            )
-            elements.append(elem)
-            element_index += 1
+                }
+
+        elem = ParsedElement(
+            element_id=_generate_element_id(doc_name, element_type, text, element_index),
+            doc_name=doc_name,
+            doc_path=str(doc_path),
+            element_type=element_type,
+            content=text,
+            section_path=section_path,
+            metadata=item_metadata,
+            language=_detect_language(text),
+            page_number=page_number,
+            table_data=table_data,
+        )
+        elements.append(elem)
+        element_index += 1
 
     return elements
+
+
+def parse_document(doc_path: str | Path, parser_backend: Optional[str] = None) -> list[ParsedElement]:
+    """Parse a single document using the configured parser backend."""
+    backend = (parser_backend or get_config().doc_parser).strip().lower()
+
+    if backend == "docling":
+        return parse_document_docling(doc_path)
+    if backend == "unstructured":
+        return parse_document_unstructured(doc_path)
+
+    raise ValueError(f"Unsupported parser backend '{backend}'. Use 'docling' or 'unstructured'.")
 
 
 def parse_all_documents(docs_dir: str | Path, output_dir: Optional[str | Path] = None) -> list[ParsedElement]:
@@ -256,23 +280,22 @@ def parse_all_documents(docs_dir: str | Path, output_dir: Optional[str | Path] =
     PARSE_FAILURES.clear()  # Reset from previous runs
     all_elements: list[ParsedElement] = []
 
-    doc_files = list(docs_dir.glob("*.docx")) + list(docs_dir.glob("*.doc"))
-    print(f"Found {len(doc_files)} documents in {docs_dir}")
 
-    for doc_file in sorted(doc_files):
+    doc_files = list(docs_dir.glob("*.docx")) + list(docs_dir.glob("*.doc"))
+    all_files = list(sorted(set(doc_files)))
+    print(f"Found {len(all_files)} documents in {docs_dir}")
+
+    for doc_file in sorted(all_files):
         if doc_file.name.startswith("~$"):
             continue  # Skip temp Word files
         print(f"  Parsing: {doc_file.name}")
         try:
             elements = parse_document(doc_file)
         except Exception as e:
-            print(f"    Docling failed ({e}), trying fallback parser...")
-            try:
-                elements = parse_document_fallback(doc_file)
-            except Exception as e2:
-                warnings.warn(f"Both parsers failed for {doc_file.name}: {e2}. Skipping.")
-                PARSE_FAILURES.append((doc_file.name, str(e2)))
-                continue
+            warnings.warn(f"Document parser failed for {doc_file.name}: {e}. Skipping.")
+            PARSE_FAILURES.append((doc_file.name, str(e)))
+            continue
+            
 
         all_elements.extend(elements)
         print(f"    Extracted {len(elements)} elements")

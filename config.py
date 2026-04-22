@@ -5,6 +5,7 @@ Switch between dev (Groq + local Ollama) and prod (fully on-prem vLLM).
 
 import os
 import threading
+import warnings
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
@@ -86,12 +87,20 @@ class Config:
     data_dir: str = "data/raw_docs"
     parsed_dir: str = "data/parsed"
     graph_dir: str = "data/graph"
+    doc_parser: str = "docling"  # "docling" or "unstructured"
 
     def __post_init__(self):
         if self.env == "dev":
             self._init_dev()
         elif self.env == "prod":
             self._init_prod()
+
+        self.doc_parser = os.environ.get("DOC_PARSER", self.doc_parser).strip().lower()
+        if self.doc_parser not in {"docling", "unstructured"}:
+            warnings.warn(
+                f"Invalid DOC_PARSER='{self.doc_parser}', defaulting to 'docling'."
+            )
+            self.doc_parser = "docling"
 
     def _init_dev(self):
         """Development config: Groq APIs + local Ollama embeddings.
@@ -127,7 +136,18 @@ class Config:
             provider="ollama",
             model="nomic-embed-text",
         )
-        self.vector_db = VectorDBConfig(use_in_memory=True)
+        use_in_memory = os.environ.get("QDRANT_USE_IN_MEMORY", "false").strip().lower() in {
+            "1",
+            "true",
+            "yes",
+            "on",
+        }
+        self.vector_db = VectorDBConfig(
+            host=os.environ.get("QDRANT_HOST", "localhost"),
+            port=int(os.environ.get("QDRANT_PORT", "6333")),
+            collection_name=os.environ.get("QDRANT_COLLECTION", "banking_chunks"),
+            use_in_memory=use_in_memory,
+        )
         self.graph = GraphConfig(
             backend=os.environ.get("GRAPH_BACKEND", "networkx"),
             neo4j_uri=os.environ.get("NEO4J_URI", "bolt://localhost:7687"),
