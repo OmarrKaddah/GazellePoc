@@ -8,3 +8,9 @@ data/graph/
 dist/
 build/
 .streamlit/secrets.toml
+*.jpg
+*.json
+*.pt
+models/
+*.txt
+data/
