@@ -15,3 +15,5 @@ build/
 models/
 *.txt
 data/
+.env
+config.py
