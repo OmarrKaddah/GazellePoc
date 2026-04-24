@@ -9,3 +9,9 @@ dist/
 build/
 .streamlit/secrets.toml
 *.docx
+*.jpg
+*.json
+*.pt
+models/
+*.txt
+data/

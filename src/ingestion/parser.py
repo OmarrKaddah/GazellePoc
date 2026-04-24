@@ -120,17 +120,19 @@ def parse_document_docling(doc_path: str | Path) -> list[ParsedElement]:
             element_index += 1
 
         # Handle tables
-        if item_type == "TableItem" or (hasattr(item, 'export_to_markdown') and 'table' in item_type.lower()):
+        elif item_type == "TableItem" or (hasattr(item, 'export_to_markdown') and 'table' in item_type.lower()):
             try:
                 table_md = item.export_to_markdown() if hasattr(item, 'export_to_markdown') else None
                 if table_md:
+                    print(f"Extracted table from {doc_name}: {table_md}")
                     table_data = None
                     if hasattr(item, 'export_to_dataframe'):
                         try:
                             df = item.export_to_dataframe()
+                            print(f"Converted table to DataFrame =\n {df}")
                             table_data = {
-                                "headers": list(df.columns),
-                                "rows": df.values.tolist(),
+                                "headers": [str(col) for col in df.columns],
+                                "rows": [[str(cell) for cell in row] for row in df.values.tolist()],
                                 "shape": list(df.shape),
                             }
                         except Exception:
@@ -284,7 +286,7 @@ def parse_all_documents(docs_dir: str | Path, output_dir: Optional[str | Path] =
     doc_files = list(docs_dir.glob("*.docx")) + list(docs_dir.glob("*.doc"))
     all_files = list(sorted(set(doc_files)))
     print(f"Found {len(all_files)} documents in {docs_dir}")
-
+    print(doc_files)
     for doc_file in sorted(all_files):
         if doc_file.name.startswith("~$"):
             continue  # Skip temp Word files

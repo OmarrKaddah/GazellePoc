@@ -84,7 +84,7 @@ class Config:
     graph: GraphConfig = None
     retrieval: RetrievalConfig = None
     chunking: ChunkingConfig = None
-    data_dir: str = "data/raw_docs"
+    data_dir: str = "data/testdoc"
     parsed_dir: str = "data/parsed"
     graph_dir: str = "data/graph"
     doc_parser: str = "docling"  # "docling" or "unstructured"
