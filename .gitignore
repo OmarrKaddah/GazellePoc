@@ -17,3 +17,5 @@ models/
 data/
 .env
 config.py
+*.docx
+config.py
