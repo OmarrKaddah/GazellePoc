@@ -31,7 +31,7 @@ class Chunk:
         return asdict(self)
 
 
-def _estimate_tokens(text: str) -> int:
+def _count_tokens(text: str) -> int:
     """Rough token estimate: ~4 chars per token for English, ~2 for Arabic."""
     '''
     Currently simple heurtic ma bein statistical estimates of bpe (byte pair encoding)
@@ -70,7 +70,7 @@ def _split_text_at_sentences(text: str, max_tokens: int) -> list[str]:
     buf_tokens = 0
 
     for sent in sentences:
-        sent_tokens = _estimate_tokens(sent)
+        sent_tokens = _count_tokens(sent)
         if buf and buf_tokens + sent_tokens > max_tokens:
             pieces.append(" ".join(buf))
             buf, buf_tokens = [], 0
@@ -100,7 +100,7 @@ def _split_table_rows(table_md: str, max_tokens: int) -> list[str]:
     header_line = lines[0]
     separator_line = lines[1]
     header_block = f"{header_line}\n{separator_line}"
-    header_tokens = _estimate_tokens(header_block)
+    header_tokens = _count_tokens(header_block)
     row_budget = max_tokens - header_tokens
     if row_budget < 10:
         row_budget = max_tokens  # degenerate case — just try
@@ -111,7 +111,7 @@ def _split_table_rows(table_md: str, max_tokens: int) -> list[str]:
     current_tokens = 0
 
     for row in data_rows:
-        row_tokens = _estimate_tokens(row)
+        row_tokens = _count_tokens(row)
         if current_rows and current_tokens + row_tokens > row_budget:
             parts.append(f"{header_block}\n" + "\n".join(current_rows))
             current_rows, current_tokens = [], 0
@@ -163,7 +163,7 @@ def chunk_elements(
         current_tokens = 0
 
         for elem in paragraph_buffer:
-            elem_tokens = _estimate_tokens(elem.content)
+            elem_tokens = _count_tokens(elem.content)
 
             # ── FIX: split oversized single paragraphs ──
             if elem_tokens > max_chunk_tokens:
@@ -175,7 +175,7 @@ def chunk_elements(
                 sub_texts = _split_text_at_sentences(elem.content, max_chunk_tokens)
                 for sub in sub_texts:
                     # Treat each piece as its own pseudo-element
-                    if current_tokens + _estimate_tokens(sub) > max_chunk_tokens and current_texts:
+                    if current_tokens + _count_tokens(sub) > max_chunk_tokens and current_texts:
                         # flush current buffer first
                         merged = "\n\n".join(current_texts)
                         section_ctx = paragraph_buffer[0].section_path
@@ -193,14 +193,14 @@ def chunk_elements(
                             section_path=list(section_ctx),
                             source_element_ids=list(current_ids),
                             language=paragraph_buffer[0].language,
-                            token_estimate=_estimate_tokens(content_with_ctx),
+                            token_estimate=_count_tokens(content_with_ctx),
                             metadata={"section_path_str": " > ".join(section_ctx) if section_ctx else "root"},
                         ))
                         chunk_index += 1
                         current_texts, current_ids, current_tokens = [], [], 0
                     current_texts.append(sub)
                     current_ids.append(elem.element_id)
-                    current_tokens += _estimate_tokens(sub)
+                    current_tokens += _count_tokens(sub)
                 continue  # already handled — skip normal append below
 
             if current_tokens + elem_tokens > max_chunk_tokens and current_texts:
@@ -222,7 +222,7 @@ def chunk_elements(
                     section_path=list(section_ctx),
                     source_element_ids=list(current_ids),
                     language=paragraph_buffer[0].language,
-                    token_estimate=_estimate_tokens(content_with_ctx),
+                    token_estimate=_count_tokens(content_with_ctx),
                     metadata={
                         "section_path_str": " > ".join(section_ctx) if section_ctx else "root",
                     },
@@ -236,7 +236,7 @@ def chunk_elements(
                     last_id = current_ids[-1]
                     current_texts = [last_text]
                     current_ids = [last_id]
-                    current_tokens = _estimate_tokens(last_text)
+                    current_tokens = _count_tokens(last_text)
                 else:
                     current_texts = []
                     current_ids = []
@@ -265,7 +265,7 @@ def chunk_elements(
                 section_path=list(section_ctx),
                 source_element_ids=list(current_ids),
                 language=paragraph_buffer[0].language,
-                token_estimate=_estimate_tokens(content_with_ctx),
+                token_estimate=_count_tokens(content_with_ctx),
                 metadata={
                     "section_path_str": " > ".join(section_ctx) if section_ctx else "root",
                 },
@@ -292,7 +292,7 @@ def chunk_elements(
 
             section_prefix = " > ".join(elem.section_path) if elem.section_path else ""
             table_token_ceiling = max_chunk_tokens * _TABLE_TOKEN_CEILING_FACTOR
-            table_tokens = _estimate_tokens(elem.content)
+            table_tokens = _count_tokens(elem.content)
 
             # ── FIX: split oversized tables by rows ──
             if table_tokens > table_token_ceiling:
@@ -317,7 +317,7 @@ def chunk_elements(
                         section_path=list(elem.section_path),
                         source_element_ids=[elem.element_id],
                         language=elem.language,
-                        token_estimate=_estimate_tokens(content_with_ctx),
+                        token_estimate=_count_tokens(content_with_ctx),
                         metadata={
                             "section_path_str": section_prefix or "root",
                             "table_data": elem.table_data,
@@ -342,7 +342,7 @@ def chunk_elements(
                     section_path=list(elem.section_path),
                     source_element_ids=[elem.element_id],
                     language=elem.language,
-                    token_estimate=_estimate_tokens(content_with_ctx),
+                    token_estimate=_count_tokens(content_with_ctx),
                     metadata={
                         "section_path_str": section_prefix or "root",
                         "table_data": elem.table_data,

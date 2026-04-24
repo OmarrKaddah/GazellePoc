@@ -5,7 +5,8 @@ Switch between dev (Groq + local Ollama) and prod (fully on-prem vLLM).
 
 import os
 import threading
-from dataclasses import dataclass, field
+import warnings
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
 
@@ -91,13 +92,91 @@ class Config:
     def __post_init__(self):
         if self.env == "dev":
             self._init_dev()
-        elif self.env == "prod":
+        else:
             self._init_prod()
 
+        self._apply_offline_overrides_if_needed()
+
+    # ---- Env helpers ----
+    @staticmethod
+    def _env(key: str, default: str) -> str:
+        return os.environ.get(key, default).strip()
+
+    @staticmethod
+    def _env_int(key: str, default: int) -> int:
+        raw = os.environ.get(key, str(default)).strip()
+        try:
+            return int(raw)
+        except ValueError:
+            warnings.warn(f"Invalid {key}='{raw}', defaulting to {default}.")
+            return default
+
+    @staticmethod
+    def _env_bool(key: str, default: bool = False) -> bool:
+        raw = os.environ.get(key, "1" if default else "0").strip().lower()
+        return raw in {"1", "true", "yes", "on"}
+
+    # ---- Shared builders ----
+    def _build_embedding_config(self) -> EmbedConfig:
+        provider = self._env("EMBEDDING_PROVIDER", "local").lower()
+        model = self._env("EMBEDDING_MODEL", "BAAI/bge-m3")
+        tokenizer_model = self._env("EMBEDDING_TOKENIZER_MODEL", "") or None
+        dimensions = self._env_int("EMBEDDING_DIMENSIONS", 1024)
+        base_url = self._env("OLLAMA_BASE_URL", "http://localhost:11434")
+        return EmbedConfig(
+            provider=provider,
+            model=model,
+            tokenizer_model=tokenizer_model,
+            base_url=base_url,
+            dimensions=dimensions,
+        )
+
+    def _build_graph_config(self, default_backend: str) -> GraphConfig:
+        return GraphConfig(
+            backend=self._env("GRAPH_BACKEND", default_backend),
+            neo4j_uri=self._env("NEO4J_URI", "bolt://localhost:7687"),
+            neo4j_user=self._env("NEO4J_USER", "neo4j"),
+            neo4j_password=self._env("NEO4J_PASSWORD", "password"),
+            neo4j_database=self._env("NEO4J_DATABASE", "neo4j"),
+        )
+
+    def _offline_mode_enabled(self) -> bool:
+        return (
+            self._env_bool("GP_OFFLINE")
+            or self._env_bool("HF_HUB_OFFLINE")
+            or self._env_bool("TRANSFORMERS_OFFLINE")
+        )
+
+    def _apply_offline_overrides_if_needed(self):
+        """Force internet-free LLM settings when offline flags are enabled."""
+        if not self._offline_mode_enabled():
+            return
+
+        provider = self._env("OFFLINE_LLM_PROVIDER", "ollama_chat").lower()
+        model = self._env("OFFLINE_LLM_MODEL", "qwen2.5:7b")
+        base_url = self._env("OFFLINE_LLM_BASE_URL", "http://localhost:11434")
+        api_key = self._env("OFFLINE_LLM_API_KEY", "not-needed")
+
+        if provider not in {"ollama_chat", "openai_compatible"}:
+            warnings.warn(
+                f"Unsupported OFFLINE_LLM_PROVIDER='{provider}', using ollama_chat instead."
+            )
+            provider = "ollama_chat"
+
+        llm = LLMConfig(
+            provider=provider,
+            model=model,
+            base_url=base_url,
+            api_key=None if provider == "ollama_chat" else api_key,
+            temperature=self.main_llm.temperature,
+            max_tokens=self.main_llm.max_tokens,
+        )
+        self.main_llm = llm
+        self.fast_llm = llm
+
     def _init_dev(self):
-        """Development config: Groq APIs + local Ollama embeddings.
-        Falls back to local Ollama LLM if no Groq key is set."""
-        groq_key = os.environ.get("GROQ_API_KEY", "")
+        """Development config: Groq if available, else local Ollama."""
+        groq_key = self._env("GROQ_API_KEY", "")
 
         if groq_key:
             self.main_llm = LLMConfig(
@@ -124,25 +203,15 @@ class Config:
                 model="qwen2.5:7b",
                 base_url="http://localhost:11434",
             )
-        embed_provider = os.environ.get("EMBEDDING_PROVIDER", "local").strip().lower()
-        embed_model = os.environ.get("EMBEDDING_MODEL", "BAAI/bge-m3").strip()
-        embed_tokenizer_model = os.environ.get("EMBEDDING_TOKENIZER_MODEL", "").strip() or None
-        embed_dims = int(os.environ.get("EMBEDDING_DIMENSIONS", "1024"))
-        self.embedding = EmbedConfig(
-            provider=embed_provider,
-            model=embed_model,
-            tokenizer_model=embed_tokenizer_model,
-            base_url=os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434"),
-            dimensions=embed_dims,
+
+        self.embedding = self._build_embedding_config()
+        self.vector_db = VectorDBConfig(
+            host=self._env("QDRANT_HOST", "localhost"),
+            port=self._env_int("QDRANT_PORT", 6333),
+            collection_name=self._env("QDRANT_COLLECTION", "banking_chunks"),
+            use_in_memory=self._env_bool("QDRANT_USE_IN_MEMORY", True),
         )
-        self.vector_db = VectorDBConfig(use_in_memory=True)
-        self.graph = GraphConfig(
-            backend=os.environ.get("GRAPH_BACKEND", "networkx"),
-            neo4j_uri=os.environ.get("NEO4J_URI", "bolt://localhost:7687"),
-            neo4j_user=os.environ.get("NEO4J_USER", "neo4j"),
-            neo4j_password=os.environ.get("NEO4J_PASSWORD", "password"),
-            neo4j_database=os.environ.get("NEO4J_DATABASE", "neo4j"),
-        )
+        self.graph = self._build_graph_config(default_backend="networkx")
         self.retrieval = RetrievalConfig()
         self.chunking = ChunkingConfig()
 
@@ -160,25 +229,15 @@ class Config:
             base_url="http://machine2:8000/v1",
             api_key="not-needed",
         )
-        embed_provider = os.environ.get("EMBEDDING_PROVIDER", "local").strip().lower()
-        embed_model = os.environ.get("EMBEDDING_MODEL", "BAAI/bge-m3").strip()
-        embed_tokenizer_model = os.environ.get("EMBEDDING_TOKENIZER_MODEL", "").strip() or None
-        embed_dims = int(os.environ.get("EMBEDDING_DIMENSIONS", "1024"))
-        self.embedding = EmbedConfig(
-            provider=embed_provider,
-            model=embed_model,
-            tokenizer_model=embed_tokenizer_model,
-            base_url=os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434"),
-            dimensions=embed_dims,
+
+        self.embedding = self._build_embedding_config()
+        self.vector_db = VectorDBConfig(
+            host=self._env("QDRANT_HOST", "localhost"),
+            port=self._env_int("QDRANT_PORT", 6333),
+            collection_name=self._env("QDRANT_COLLECTION", "banking_chunks"),
+            use_in_memory=self._env_bool("QDRANT_USE_IN_MEMORY", False),
         )
-        self.vector_db = VectorDBConfig(use_in_memory=False)
-        self.graph = GraphConfig(
-            backend=os.environ.get("GRAPH_BACKEND", "neo4j"),
-            neo4j_uri=os.environ.get("NEO4J_URI", "bolt://localhost:7687"),
-            neo4j_user=os.environ.get("NEO4J_USER", "neo4j"),
-            neo4j_password=os.environ.get("NEO4J_PASSWORD", "password"),
-            neo4j_database=os.environ.get("NEO4J_DATABASE", "neo4j"),
-        )
+        self.graph = self._build_graph_config(default_backend="neo4j")
         self.retrieval = RetrievalConfig()
         self.chunking = ChunkingConfig()
 

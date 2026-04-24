@@ -1,13 +1,16 @@
 """
 Embedding and vector store indexing.
-Embeds chunks using Ollama (dev) or local model (prod) and stores in Qdrant.
+Embeds chunks using local Hugging Face models and stores in Qdrant.
 """
 
 import re
 import warnings
+import hashlib
+import json
+from datetime import datetime
+from pathlib import Path
 from typing import Optional
 
-import ollama as ollama_client
 from qdrant_client import QdrantClient
 from qdrant_client.models import (
     Distance,
@@ -25,7 +28,6 @@ from src.ingestion.chunker import Chunk
 
 # nomic-embed-text context limit = 8192 tokens.  Conservative safety margin.
 _EMBED_TOKEN_LIMIT = 7500
-_EMBED_CHAR_LIMIT = _EMBED_TOKEN_LIMIT * 3  # inverse of the //3 heuristic
 
 
 class Embedder:
@@ -35,14 +37,33 @@ class Embedder:
         self.config = config or get_config()
         self._local_model = None
         self._tokenizer = None
+        self._log_path = Path("data/parsed/embedding_debug.log")
+
+    def _log_embedding_event(self, text: str, token_count: int, vector: list[float]):
+        """Append embedding event line including full vector for verification/debugging."""
+        try:
+            text_hash = hashlib.sha256(text.encode("utf-8")).hexdigest()[:12]
+            self._log_path.parent.mkdir(parents=True, exist_ok=True)
+            payload = {
+                "timestamp_utc": f"{datetime.utcnow().isoformat()}Z",
+                "provider": self._provider(),
+                "model": self.config.embedding.model,
+                "tokens": token_count,
+                "dim": len(vector),
+                "text_sha": text_hash,
+                "vector": vector,
+            }
+            with self._log_path.open("a", encoding="utf-8") as f:
+                f.write(json.dumps(payload, ensure_ascii=False) + "\n")
+        except Exception:
+            # Logging must never break embeddings.
+            pass
 
     def _provider(self) -> str:
         provider = (self.config.embedding.provider or "").strip().lower()
         # Backwards compatibility for older config values.
         if provider in {"local", "hf", "huggingface"}:
             return "local"
-        if provider == "ollama":
-            return "ollama"
         return provider
 
     def _get_local_model(self):
@@ -73,24 +94,19 @@ class Embedder:
         self._tokenizer = AutoTokenizer.from_pretrained(tokenizer_model)
         return self._tokenizer
 
-    def _estimate_tokens(self, text: str) -> int:
-        """Estimate token count.
-
-        Uses exact tokenizer counts for local HF models, heuristic fallback for Ollama.
-        """
+    def _count_tokens(self, text: str) -> int:
+        """Count tokens using the configured local tokenizer."""
         provider = self._provider()
         if provider == "local":
             tokenizer = self._get_tokenizer()
             return len(tokenizer.encode(text, add_special_tokens=False))
-        # Fallback heuristic for providers without an exposed tokenizer.
-        return max(len(text) // 3, len(text.split()))
+        raise ValueError(
+            f"Unsupported embedding provider: {self.config.embedding.provider}. "
+            "This project uses local Hugging Face embeddings only."
+        )
 
     def _truncate_to_token_limit(self, text: str, max_tokens: int) -> str:
-        """Truncate text to max token budget.
-
-        For local HF models: exact token-aware truncation.
-        For Ollama: conservative character truncation.
-        """
+        """Truncate text to max token budget using the local tokenizer."""
         provider = self._provider()
         if provider == "local":
             tokenizer = self._get_tokenizer()
@@ -99,14 +115,16 @@ class Embedder:
                 return text
             truncated_ids = token_ids[:max_tokens]
             return tokenizer.decode(truncated_ids, skip_special_tokens=True)
-
-        return text[:_EMBED_CHAR_LIMIT]
+        raise ValueError(
+            f"Unsupported embedding provider: {self.config.embedding.provider}. "
+            "This project uses local Hugging Face embeddings only."
+        )
 
     def embed(self, text: str, max_retries: int = 3) -> list[float]:
         """Embed a single text string with retry logic for transient failures."""
         import time
 
-        est_tokens = self._estimate_tokens(text)
+        est_tokens = self._count_tokens(text)
         if est_tokens > _EMBED_TOKEN_LIMIT:
             warnings.warn(
                 f"Embedding input too long ({est_tokens} est. tokens, "
@@ -116,32 +134,17 @@ class Embedder:
             text = self._truncate_to_token_limit(text, _EMBED_TOKEN_LIMIT)
 
         provider = self._provider()
-
-        if provider == "local":
-            model = self._get_local_model()
-            embedding = model.encode([text], normalize_embeddings=True)[0]
-            return embedding.tolist() if hasattr(embedding, "tolist") else list(embedding)
-
-        if provider == "ollama":
-            for attempt in range(max_retries):
-                try:
-                    response = ollama_client.embeddings(
-                        model=self.config.embedding.model,
-                        prompt=text,
-                    )
-                    return response["embedding"]
-                except Exception as e:
-                    if attempt < max_retries - 1:
-                        wait = 2 ** attempt
-                        print(f"  ⚠ Ollama embed retry {attempt+1}/{max_retries} after {wait}s: {e}")
-                        time.sleep(wait)
-                    else:
-                        raise
-        else:
+        if provider != "local":
             raise ValueError(
                 f"Unsupported embedding provider: {self.config.embedding.provider}. "
-                "Supported: 'local' and 'ollama'."
+                "This project uses local Hugging Face embeddings only."
             )
+
+        model = self._get_local_model()
+        embedding = model.encode([text], normalize_embeddings=True)[0]
+        vector = embedding.tolist() if hasattr(embedding, "tolist") else list(embedding)
+        self._log_embedding_event(text, est_tokens, vector)
+        return vector
 
     def embed_batch(self, texts: list[str]) -> list[list[float]]:
         """Embed a batch of texts."""
@@ -220,6 +223,7 @@ class VectorStore:
                 "token_estimate": chunk.token_estimate,
                 "access_level": chunk.metadata.get("access_level", 1),
             }
+            
             #points heya fundamnetal unit of storage in qdrant vectordb
             #points contain an id, the embedding vector, and a payload (metadata) 
             #which can be used for filtering and retrieval
