@@ -23,7 +23,7 @@ from qdrant_client.models import (
 )
 
 from config import get_config, Config
-from src.ingestion.chunker import Chunk
+from src.ingestion.chunker_v2 import Chunk
 
 
 # nomic-embed-text context limit = 8192 tokens.  Conservative safety margin.
@@ -217,11 +217,11 @@ class VectorStore:
                 "element_type": chunk.element_type,
                 "content": chunk.content,
                 "section_path": chunk.section_path,
-                "section_path_str": chunk.metadata.get("section_path_str", ""),
+                "section_path_str": " > ".join(chunk.section_path) if chunk.section_path else "",
                 "source_element_ids": chunk.source_element_ids,
                 "language": chunk.language,
                 "token_estimate": chunk.token_estimate,
-                "access_level": chunk.metadata.get("access_level", 1),
+                "access_level": chunk.access_level if chunk.access_level is not None else 1,
             }
             
             #points heya fundamnetal unit of storage in qdrant vectordb

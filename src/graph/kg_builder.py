@@ -10,7 +10,7 @@ from typing import Optional, TYPE_CHECKING
 import networkx as nx
 
 from config import get_config, Config
-from src.ingestion.chunker import Chunk
+from src.ingestion.chunker_v2 import Chunk
 from src.graph.entity_extractor import Entity, Relation
 from src.graph.neo4j_store import Neo4jGraphStore
 

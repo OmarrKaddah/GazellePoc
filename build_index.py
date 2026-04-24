@@ -12,7 +12,7 @@ from pathlib import Path
 
 from config import get_config
 from src.ingestion.parser import parse_all_documents, PARSE_FAILURES
-from src.ingestion.chunker import chunk_elements, Chunk
+from src.ingestion.chunker_v2 import chunk_elements, Chunk
 from src.ingestion.embedder import VectorStore
 from src.graph.entity_extractor import extract_entities_from_chunks, align_entities, FAILED_EXTRACTIONS
 from src.graph.kg_builder import KnowledgeGraph
@@ -41,21 +41,16 @@ def main():
 
     # ── Step 2: Chunk ──
     print("\n[2/5] Chunking...")
-    chunks = chunk_elements(
-        elements,
-        max_chunk_tokens=config.chunking.max_chunk_tokens,
-        overlap_tokens=config.chunking.overlap_tokens,
-        preserve_tables=config.chunking.preserve_tables,
-    )
+    chunks = chunk_elements(elements, config.chunking)
     print(f"  Total chunks: {len(chunks)}")
     print(f"  Types: { {t: sum(1 for c in chunks if c.element_type == t) for t in set(c.element_type for c in chunks)} }")
 
-    # ── Step 2b: Stamp RBAC access levels onto chunk metadata ──
+    # ── Step 2b: Stamp RBAC access levels onto chunks ──
     for chunk in chunks:
-        chunk.metadata["access_level"] = get_access_level(chunk.doc_name)
-    level_counts = {}
+        chunk.access_level = get_access_level(chunk.doc_name)
+    level_counts: dict[int, int] = {}
     for c in chunks:
-        lvl = c.metadata["access_level"]
+        lvl = c.access_level or 0
         level_counts[lvl] = level_counts.get(lvl, 0) + 1
     print(f"  Access levels: {level_counts}  (1=Public, 2=Confidential, 3=Restricted)")
 

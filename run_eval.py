@@ -20,7 +20,7 @@ from src.evaluation.evaluator import (
     run_evaluation,
     print_report,
 )
-from src.ingestion.chunker import Chunk
+from src.ingestion.chunker_v2 import Chunk
 from src.ingestion.embedder import VectorStore
 from src.graph.kg_builder import KnowledgeGraph
 from src.retrieval.hybrid_retriever import HybridRetriever

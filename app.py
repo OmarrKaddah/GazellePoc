@@ -14,7 +14,7 @@ import streamlit.components.v1 as components
 from pathlib import Path
 
 from config import get_config
-from src.ingestion.chunker import Chunk
+from src.ingestion.chunker_v2 import Chunk
 from src.ingestion.embedder import VectorStore
 
 try:

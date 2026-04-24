@@ -20,3 +20,12 @@ data/
 *.docx
 config.py
 qdrant_storage/
+models/
+*.json
+data/
+*.txt
+*.example
+*.docx
+*.gitignore
+*.models
+*.txt
