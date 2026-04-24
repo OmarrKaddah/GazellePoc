@@ -26,6 +26,7 @@ class EmbedConfig:
     """Embedding model configuration."""
     provider: str  # "ollama", "local"
     model: str
+    tokenizer_model: Optional[str] = None
     base_url: str = "http://localhost:11434"
     dimensions: int = 768
 
@@ -123,9 +124,16 @@ class Config:
                 model="qwen2.5:7b",
                 base_url="http://localhost:11434",
             )
+        embed_provider = os.environ.get("EMBEDDING_PROVIDER", "local").strip().lower()
+        embed_model = os.environ.get("EMBEDDING_MODEL", "BAAI/bge-m3").strip()
+        embed_tokenizer_model = os.environ.get("EMBEDDING_TOKENIZER_MODEL", "").strip() or None
+        embed_dims = int(os.environ.get("EMBEDDING_DIMENSIONS", "1024"))
         self.embedding = EmbedConfig(
-            provider="ollama",
-            model="nomic-embed-text",
+            provider=embed_provider,
+            model=embed_model,
+            tokenizer_model=embed_tokenizer_model,
+            base_url=os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434"),
+            dimensions=embed_dims,
         )
         self.vector_db = VectorDBConfig(use_in_memory=True)
         self.graph = GraphConfig(
@@ -152,10 +160,16 @@ class Config:
             base_url="http://machine2:8000/v1",
             api_key="not-needed",
         )
+        embed_provider = os.environ.get("EMBEDDING_PROVIDER", "local").strip().lower()
+        embed_model = os.environ.get("EMBEDDING_MODEL", "BAAI/bge-m3").strip()
+        embed_tokenizer_model = os.environ.get("EMBEDDING_TOKENIZER_MODEL", "").strip() or None
+        embed_dims = int(os.environ.get("EMBEDDING_DIMENSIONS", "1024"))
         self.embedding = EmbedConfig(
-            provider="local",
-            model="BAAI/bge-m3",
-            dimensions=1024,
+            provider=embed_provider,
+            model=embed_model,
+            tokenizer_model=embed_tokenizer_model,
+            base_url=os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434"),
+            dimensions=embed_dims,
         )
         self.vector_db = VectorDBConfig(use_in_memory=False)
         self.graph = GraphConfig(

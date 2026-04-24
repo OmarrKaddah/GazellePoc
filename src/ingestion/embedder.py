@@ -3,9 +3,8 @@ Embedding and vector store indexing.
 Embeds chunks using Ollama (dev) or local model (prod) and stores in Qdrant.
 """
 
-import json
+import re
 import warnings
-from pathlib import Path
 from typing import Optional
 
 import ollama as ollama_client
@@ -34,22 +33,96 @@ class Embedder:
 
     def __init__(self, config: Optional[Config] = None):
         self.config = config or get_config()
+        self._local_model = None
+        self._tokenizer = None
+
+    def _provider(self) -> str:
+        provider = (self.config.embedding.provider or "").strip().lower()
+        # Backwards compatibility for older config values.
+        if provider in {"local", "hf", "huggingface"}:
+            return "local"
+        if provider == "ollama":
+            return "ollama"
+        return provider
+
+    def _get_local_model(self):
+        if self._local_model is not None:
+            return self._local_model
+        try:
+            from sentence_transformers import SentenceTransformer
+        except ImportError as e:
+            raise ImportError(
+                "Local embeddings require sentence-transformers. "
+                "Install dependencies from requirements.txt."
+            ) from e
+        self._local_model = SentenceTransformer(self.config.embedding.model)
+        return self._local_model
+
+    def _get_tokenizer(self):
+        if self._tokenizer is not None:
+            return self._tokenizer
+        try:
+            from transformers import AutoTokenizer
+        except ImportError as e:
+            raise ImportError(
+                "Exact tokenization requires transformers. "
+                "Install dependencies from requirements.txt."
+            ) from e
+
+        tokenizer_model = self.config.embedding.tokenizer_model or self.config.embedding.model
+        self._tokenizer = AutoTokenizer.from_pretrained(tokenizer_model)
+        return self._tokenizer
+
+    def _estimate_tokens(self, text: str) -> int:
+        """Estimate token count.
+
+        Uses exact tokenizer counts for local HF models, heuristic fallback for Ollama.
+        """
+        provider = self._provider()
+        if provider == "local":
+            tokenizer = self._get_tokenizer()
+            return len(tokenizer.encode(text, add_special_tokens=False))
+        # Fallback heuristic for providers without an exposed tokenizer.
+        return max(len(text) // 3, len(text.split()))
+
+    def _truncate_to_token_limit(self, text: str, max_tokens: int) -> str:
+        """Truncate text to max token budget.
+
+        For local HF models: exact token-aware truncation.
+        For Ollama: conservative character truncation.
+        """
+        provider = self._provider()
+        if provider == "local":
+            tokenizer = self._get_tokenizer()
+            token_ids = tokenizer.encode(text, add_special_tokens=False)
+            if len(token_ids) <= max_tokens:
+                return text
+            truncated_ids = token_ids[:max_tokens]
+            return tokenizer.decode(truncated_ids, skip_special_tokens=True)
+
+        return text[:_EMBED_CHAR_LIMIT]
 
     def embed(self, text: str, max_retries: int = 3) -> list[float]:
         """Embed a single text string with retry logic for transient failures."""
         import time
 
-        # ── FIX: guard against inputs that exceed the model context window ──
-        est_tokens = max(len(text) // 3, len(text.split()))
+        est_tokens = self._estimate_tokens(text)
         if est_tokens > _EMBED_TOKEN_LIMIT:
             warnings.warn(
                 f"Embedding input too long ({est_tokens} est. tokens, "
                 f"{len(text)} chars). Truncating to ~{_EMBED_TOKEN_LIMIT} tokens "
-                f"to avoid silent Ollama truncation."
+                f"before embedding."
             )
-            text = text[:_EMBED_CHAR_LIMIT]
+            text = self._truncate_to_token_limit(text, _EMBED_TOKEN_LIMIT)
 
-        if self.config.embedding.provider == "ollama":
+        provider = self._provider()
+
+        if provider == "local":
+            model = self._get_local_model()
+            embedding = model.encode([text], normalize_embeddings=True)[0]
+            return embedding.tolist() if hasattr(embedding, "tolist") else list(embedding)
+
+        if provider == "ollama":
             for attempt in range(max_retries):
                 try:
                     response = ollama_client.embeddings(
@@ -65,7 +138,10 @@ class Embedder:
                     else:
                         raise
         else:
-            raise ValueError(f"Unsupported embedding provider: {self.config.embedding.provider}")
+            raise ValueError(
+                f"Unsupported embedding provider: {self.config.embedding.provider}. "
+                "Supported: 'local' and 'ollama'."
+            )
 
     def embed_batch(self, texts: list[str]) -> list[list[float]]:
         """Embed a batch of texts."""
@@ -85,7 +161,8 @@ class VectorStore:
         else:
             self.client = QdrantClient(host=vc.host, port=vc.port)
 
-        self.collection_name = vc.collection_name
+        model_slug = re.sub(r"[^a-zA-Z0-9]+", "_", self.config.embedding.model).strip("_").lower()
+        self.collection_name = f"{vc.collection_name}__{model_slug}"
         self._embedder = Embedder(self.config)
         self._embedding_dim: Optional[int] = None
         # Cache: chunk_id -> embedding vector (for graph-discovered chunk scoring)
