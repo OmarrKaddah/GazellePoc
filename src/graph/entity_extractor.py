@@ -13,7 +13,7 @@ from dataclasses import dataclass, field, asdict
 from openai import OpenAI
 
 from config import get_config, Config, LLMConfig
-from src.ingestion.chunker import Chunk
+from src.ingestion.chunker_v2 import Chunk
 import ollama as ollama_client
 
 # Module-level tracker for chunks that failed entity extraction
