@@ -6,6 +6,9 @@ langchain-groq>=0.2.0
 langchain-qdrant>=0.2.0
 openai>=1.50.0
 ollama>=0.4.0
+sentence-transformers>=3.1.0
+transformers>=4.44.0
+torch>=2.3.0
 
 # ── Document Parsing ──
 docling>=2.5.0

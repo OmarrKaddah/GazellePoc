@@ -16,6 +16,7 @@ models/
 *.txt
 data/
 .env
-config.py
+
 *.docx
 config.py
+qdrant_storage/
