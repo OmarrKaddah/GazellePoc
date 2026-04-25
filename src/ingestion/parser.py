@@ -190,106 +190,6 @@ def parse_document(doc_path: str | Path) -> list[ParsedElement]:
     return elements
 
 
-def parse_document_fallback(doc_path: str | Path) -> list[ParsedElement]:
-    """
-    Fallback parser using python-docx directly.
-    Used when Docling has issues with specific document formats.
-    """
-    from docx import Document
-
-    doc_path = Path(doc_path)
-    doc_name = doc_path.stem
-    doc = Document(str(doc_path))
-
-    elements: list[ParsedElement] = []
-    current_section_path: list[str] = []
-    element_index = 0
-
-    # BUG 4 FIX: build element-id → object maps so we can iterate body children
-    # in document order and assign correct section context to each table.
-    para_map: dict[int, Any] = {id(p._element): p for p in doc.paragraphs}
-    table_map: dict[int, Any] = {id(t._element): t for t in doc.tables}
-
-    for child in doc.element.body:
-        child_id = id(child)
-
-        if child_id in para_map:
-            para = para_map[child_id]
-            text = para.text.strip()
-            if not text:
-                continue
-            style_name = para.style.name.lower() if para.style else ""
-            if "heading" in style_name:
-                level = 1
-                for ch in style_name:
-                    if ch.isdigit():
-                        level = int(ch)
-                        break
-                current_section_path = current_section_path[:level - 1]
-                current_section_path.append(text)
-                elem = ParsedElement(
-                    element_id=_generate_element_id(doc_name, "heading", text, element_index),
-                    doc_name=doc_name,
-                    doc_path=str(doc_path),
-                    element_type="heading",
-                    content=text,
-                    section_path=list(current_section_path),
-                    language=_detect_language(text),
-                )
-            else:
-                elem = ParsedElement(
-                    element_id=_generate_element_id(doc_name, "paragraph", text, element_index),
-                    doc_name=doc_name,
-                    doc_path=str(doc_path),
-                    element_type="paragraph",
-                    content=text,
-                    section_path=list(current_section_path),
-                    language=_detect_language(text),
-                )
-            elements.append(elem)
-            element_index += 1
-
-        elif child_id in table_map:
-            table = table_map[child_id]
-            headers: list[str] = []
-            rows: list[list[str]] = []
-            for i, row in enumerate(table.rows):
-                # BUG 5 FIX: skip merged-cell duplicates via underlying XML element identity.
-                seen_tcs: set[int] = set()
-                cells: list[str] = []
-                for cell in row.cells:
-                    tc_id = id(cell._tc)
-                    if tc_id not in seen_tcs:
-                        seen_tcs.add(tc_id)
-                        cells.append(cell.text.strip())
-                if i == 0:
-                    headers = cells
-                else:
-                    rows.append(cells)
-
-            if not headers:
-                continue
-
-            md_lines = ["| " + " | ".join(headers) + " |"]
-            md_lines.append("| " + " | ".join(["---"] * len(headers)) + " |")
-            for row in rows:
-                md_lines.append("| " + " | ".join(row) + " |")
-            table_md = "\n".join(md_lines)
-            elem = ParsedElement(
-                element_id=_generate_element_id(doc_name, "table", table_md, element_index),
-                doc_name=doc_name,
-                doc_path=str(doc_path),
-                element_type="table",
-                content=table_md,
-                section_path=list(current_section_path),
-                language=_detect_language(table_md),
-                table_data={"headers": headers, "rows": rows, "shape": [len(rows), len(headers)]},
-            )
-            elements.append(elem)
-            element_index += 1
-
-    return elements
-
 
 def parse_all_documents(docs_dir: str | Path, output_dir: Optional[str | Path] = None) -> list[ParsedElement]:
     """
@@ -310,12 +210,9 @@ def parse_all_documents(docs_dir: str | Path, output_dir: Optional[str | Path] =
         try:
             elements = parse_document(doc_file)
         except Exception as e:
-            print(f"    Docling failed ({e}), trying fallback parser...")
-            try:
-                elements = parse_document_fallback(doc_file)
-            except Exception as e2:
-                warnings.warn(f"Both parsers failed for {doc_file.name}: {e2}. Skipping.")
-                PARSE_FAILURES.append((doc_file.name, str(e2)))
+            
+                warnings.warn(f"Parser failed for {doc_file.name}: {e}. Skipping.")
+                PARSE_FAILURES.append((doc_file.name, str(e)))
                 continue
 
         all_elements.extend(elements)

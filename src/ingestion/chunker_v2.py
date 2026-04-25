@@ -16,9 +16,10 @@ Strategy:
 import hashlib
 import re
 import warnings
+from functools import lru_cache
 from dataclasses import dataclass, field, asdict
 
-from config import ChunkingConfig
+from config import ChunkingConfig, get_config
 from src.ingestion.parser import ParsedElement
 
 
@@ -56,11 +57,28 @@ class Chunk:
 # Token estimation
 # ---------------------------------------------------------------------------
 
-def _estimate_tokens(text: str) -> int:
-    """Rough BPE estimate: max(chars/3, word count). Errs high for Arabic."""
+@lru_cache(maxsize=1)
+def _get_tokenizer():
+    """Load and cache the same tokenizer configuration used by the embedder."""
+    try:
+        from transformers import AutoTokenizer
+    except ImportError as e:
+        raise ImportError(
+            "Exact tokenization requires transformers. "
+            "Install dependencies from requirements.txt."
+        ) from e
+
+    cfg = get_config()
+    tokenizer_model = cfg.embedding.tokenizer_model or cfg.embedding.model
+    return AutoTokenizer.from_pretrained(tokenizer_model)
+
+
+def _count_tokens(text: str) -> int:
+    """Count tokens using the embedding tokenizer for exact budgeting."""
     if not text:
         return 0
-    return max(len(text) // 3, len(text.split()))
+    tokenizer = _get_tokenizer()
+    return len(tokenizer.encode(text, add_special_tokens=False))
 
 
 # ---------------------------------------------------------------------------
@@ -94,11 +112,11 @@ def _enforce_embedding_ceiling(chunk: Chunk) -> Chunk:
         f"({chunk.token_estimate} > {_EMBEDDING_TOKEN_LIMIT}). Truncating. "
         f"Investigate splitter configuration."
     )
-    char_step = _EMBEDDING_TOKEN_LIMIT * 3
-    while char_step > 1 and _estimate_tokens(chunk.content[:char_step]) > _EMBEDDING_TOKEN_LIMIT:
-        char_step = max(1, char_step // 2)
-    chunk.content = chunk.content[:char_step].strip()
-    chunk.token_estimate = _estimate_tokens(chunk.content)
+    tokenizer = _get_tokenizer()
+    token_ids = tokenizer.encode(chunk.content, add_special_tokens=False)
+    truncated_ids = token_ids[:_EMBEDDING_TOKEN_LIMIT]
+    chunk.content = tokenizer.decode(truncated_ids, skip_special_tokens=True).strip()
+    chunk.token_estimate = _count_tokens(chunk.content)
     return chunk
 
 
@@ -115,7 +133,7 @@ def _split_paragraph_to_sentences(
 
     Sentences that still exceed the budget after splitting on punctuation are
     hard-cut at whitespace using a binary walk — guarantees no piece overflows
-    regardless of whether the chars/3 or word-count term of _estimate_tokens
+    regardless of whether the chars/3 or word-count term of _count_tokens
     dominates (important for dense Arabic text).
     """
     raw = re.split(r'(?<=[.!?؟])\s+', text.strip())
@@ -125,7 +143,7 @@ def _split_paragraph_to_sentences(
         sent = sent.strip()
         if not sent:
             continue
-        tokens = _estimate_tokens(sent)
+        tokens = _count_tokens(sent)
         if tokens <= effective_budget:
             result.append((sent, tokens))
             continue
@@ -134,7 +152,7 @@ def _split_paragraph_to_sentences(
         start = 0
         while start < len(sent):
             char_step = max(1, effective_budget * 3)
-            while char_step > 1 and _estimate_tokens(sent[start:start + char_step]) > effective_budget:
+            while char_step > 1 and _count_tokens(sent[start:start + char_step]) > effective_budget:
                 char_step = max(1, char_step // 2)
             end = start + char_step
             if end < len(sent):
@@ -143,10 +161,10 @@ def _split_paragraph_to_sentences(
                     end = ws
             piece = sent[start:end].strip()
             if piece:
-                result.append((piece, _estimate_tokens(piece)))
+                result.append((piece, _count_tokens(piece)))
             start = end
 
-    return result or [(text.strip(), _estimate_tokens(text.strip()))]
+    return result or [(text.strip(), _count_tokens(text.strip()))]
 
 
 def _split_table_rows(table_md: str, effective_budget: int) -> list[str]:
@@ -159,7 +177,7 @@ def _split_table_rows(table_md: str, effective_budget: int) -> list[str]:
         return [table_md]
 
     header_block = f"{lines[0]}\n{lines[1]}"
-    header_tokens = _estimate_tokens(header_block)
+    header_tokens = _count_tokens(header_block)
     row_budget = effective_budget - header_tokens
 
     if row_budget < 10:
@@ -174,7 +192,7 @@ def _split_table_rows(table_md: str, effective_budget: int) -> list[str]:
     current_tokens = 0
 
     for row in lines[2:]:
-        row_tokens = _estimate_tokens(row)
+        row_tokens = _count_tokens(row)
         if current_rows and current_tokens + row_tokens > row_budget:
             parts.append(header_block + "\n" + "\n".join(current_rows))
             current_rows, current_tokens = [], 0
@@ -210,7 +228,7 @@ def _emit_table_chunk(
         section_path=list(elem.section_path),
         source_element_ids=[elem.element_id],
         language=elem.language,
-        token_estimate=_estimate_tokens(content),
+        token_estimate=_count_tokens(content),
         table_data=elem.table_data,
     )
     return _enforce_embedding_ceiling(chunk)
@@ -243,7 +261,7 @@ class _ChunkBuilder:
         self._config = config
 
         self._prefix = _build_context_prefix(doc_name, section_path)
-        prefix_tokens = _estimate_tokens(self._prefix)
+        prefix_tokens = _count_tokens(self._prefix)
         # Sentence budget is the token allowance *after* the prefix is counted.
         self.effective_budget = max(config.max_chunk_tokens - prefix_tokens, 50)
 
@@ -283,7 +301,7 @@ class _ChunkBuilder:
             section_path=self.section_path,
             source_element_ids=source_ids,
             language=self.language,
-            token_estimate=_estimate_tokens(content),
+            token_estimate=_count_tokens(content),
         )
         chunk = _enforce_embedding_ceiling(chunk)
 
@@ -356,11 +374,11 @@ def chunk_elements(elements: list[ParsedElement], config: ChunkingConfig) -> lis
 
             prefix = _build_context_prefix(elem.doc_name, elem.section_path)
             table_ceiling = max(
-                config.max_chunk_tokens * _TABLE_TOKEN_CEILING_FACTOR - _estimate_tokens(prefix),
+                config.max_chunk_tokens * _TABLE_TOKEN_CEILING_FACTOR - _count_tokens(prefix),
                 50,
             )
 
-            if _estimate_tokens(elem.content) > table_ceiling:
+            if _count_tokens(elem.content) > table_ceiling:
                 warnings.warn(
                     f"Oversized table in {elem.doc_name} / "
                     f"{' > '.join(elem.section_path) or 'root'}. Splitting by rows."
