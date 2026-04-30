@@ -81,6 +81,14 @@ def _count_tokens(text: str) -> int:
     return len(tokenizer.encode(text, add_special_tokens=False))
 
 
+def _encode_tokens(text: str) -> list[int]:
+    """Encode text with the embedding tokenizer and return raw token ids."""
+    if not text:
+        return []
+    tokenizer = _get_tokenizer()
+    return tokenizer.encode(text, add_special_tokens=False)
+
+
 # ---------------------------------------------------------------------------
 # Pure helpers
 # ---------------------------------------------------------------------------
@@ -132,12 +140,12 @@ def _split_paragraph_to_sentences(
     Split text into (sentence, token_count) pairs each ≤ effective_budget.
 
     Sentences that still exceed the budget after splitting on punctuation are
-    hard-cut at whitespace using a binary walk — guarantees no piece overflows
-    regardless of whether the chars/3 or word-count term of _count_tokens
-    dominates (important for dense Arabic text).
+    split directly with the bge-m3 tokenizer so every emitted piece is bounded
+    by the exact token budget.
     """
     raw = re.split(r'(?<=[.!?؟])\s+', text.strip())
     result: list[tuple[str, int]] = []
+    tokenizer = _get_tokenizer()
 
     for sent in raw:
         sent = sent.strip()
@@ -148,21 +156,12 @@ def _split_paragraph_to_sentences(
             result.append((sent, tokens))
             continue
 
-        # Binary-walk: halve char_step until the slice fits
-        start = 0
-        while start < len(sent):
-            char_step = max(1, effective_budget * 3)
-            while char_step > 1 and _count_tokens(sent[start:start + char_step]) > effective_budget:
-                char_step = max(1, char_step // 2)
-            end = start + char_step
-            if end < len(sent):
-                ws = sent.rfind(' ', start, end)
-                if ws > start:
-                    end = ws
-            piece = sent[start:end].strip()
+        token_ids = _encode_tokens(sent)
+        for start in range(0, len(token_ids), effective_budget):
+            piece_ids = token_ids[start:start + effective_budget]
+            piece = tokenizer.decode(piece_ids, skip_special_tokens=True).strip()
             if piece:
-                result.append((piece, _count_tokens(piece)))
-            start = end
+                result.append((piece, len(piece_ids)))
 
     return result or [(text.strip(), _count_tokens(text.strip()))]
 

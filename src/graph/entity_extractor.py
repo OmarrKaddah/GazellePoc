@@ -52,7 +52,7 @@ class Relation:
 EXTRACTION_PROMPT = """You are a banking domain entity and relationship extractor.
 Given the following text chunk from a banking policy document, extract:
 
-1. ENTITIES: Named things like loan types, currencies, regulatory limits, percentages, roles, conditions, products, organizations, regulations.
+1. ENTITIES: Named things (e.g., "loan" ,"types", "currencies", "regulatory", "limits","regulations").
 2. RELATIONS: How entities relate to each other (e.g., "requires", "defines", "prohibits", "depends_on", "has_limit").
 
 Rules:
@@ -263,8 +263,8 @@ def extract_entities_from_chunks(
 
     print(f"Extracting entities from {len(chunks)} chunks...")
     for i, chunk in enumerate(chunks):
-        if i % 5 == 0:
-            print(f"  Processing chunk {i + 1}/{len(chunks)}...")
+    
+        print(f"  Processing chunk {i + 1}/{len(chunks)}...")
         entities, relations = extract_entities_from_chunk(chunk, config, use_fast_llm)
         all_entities.extend(entities)
         all_relations.extend(relations)
