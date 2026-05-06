@@ -6,6 +6,7 @@ Extracts sections, paragraphs, tables, and figures with full metadata.
 import json
 import hashlib
 import warnings
+import re
 from pathlib import Path
 from typing import Any, Optional
 from dataclasses import dataclass, field, asdict
@@ -50,6 +51,81 @@ def _detect_language(text: str) -> str:
     if ratio > 0.3:
         return "ar"
     return "en"
+
+
+def _clean_table_header(text: str) -> str:
+    text = text.strip()
+    text = text.strip("|")
+    text = re.sub(r"\*\*(.*?)\*\*", r"\1", text)
+    text = re.sub(r"\s+", " ", text)
+    return text.strip()
+
+
+def _sentence_case(text: str) -> str:
+    text = text.strip()
+    if not text:
+        return text
+    return text[0].upper() + text[1:]
+
+
+def _table_row_to_sentence(headers: list[str], row: list[str], lang: str = "en") -> str:
+    if len(headers) != len(row) or not headers:
+        return ""
+
+    cleaned_headers = [_clean_table_header(header) for header in headers]
+    cleaned_values = [value.strip() for value in row]
+
+    parts: list[str] = []
+    i = 0
+    while i < len(cleaned_headers):
+        h = cleaned_headers[i]
+        v = cleaned_values[i]
+        if not h or not v:
+            i += 1
+            continue
+
+        if i == 0:
+            parts.append(f"{h}: {v}")
+        else:
+            # English: "has <header> <value>"; Arabic: join with Arabic conjunction
+            if lang and lang.startswith("ar"):
+                parts.append(f"{h}: {v}")
+            else:
+                parts.append(f"has {h.lower()} {v}")
+        i += 1
+
+    if not parts:
+        return ""
+
+    if lang and lang.startswith("ar"):
+        return _sentence_case(" و ".join(parts) + " .")
+
+    return _sentence_case(" and ".join(parts) + ".")
+
+
+def _table_to_sentence_content(table_data: dict | None, table_md: str) -> str:
+    if not table_data:
+        return table_md
+
+    headers = table_data.get("headers") or []
+    rows = table_data.get("rows") or []
+    sentences: list[str] = []
+
+    # detect language for the whole table (headers + cells)
+    flat_text = " ".join(headers) + " " + " ".join([str(cell) for r in rows for cell in r])
+    table_lang = _detect_language(flat_text)
+
+    for row in rows:
+        if not isinstance(row, list):
+            continue
+        sentence = _table_row_to_sentence(list(headers), row, table_lang)
+        if sentence:
+            sentences.append(sentence)
+
+    if not sentences:
+        return table_md
+
+    return " ".join(sentences)
 
 
 def parse_document(doc_path: str | Path) -> list[ParsedElement]:
@@ -155,12 +231,13 @@ def parse_document(doc_path: str | Path) -> list[ParsedElement]:
                                 f"Table structured-data extraction failed in {doc_name} "
                                 f"(section: {' > '.join(current_section_path) or 'root'}): {df_err}"
                             )
+                    content = _table_to_sentence_content(table_data, table_md)
                     elem = ParsedElement(
                         element_id=_generate_element_id(doc_name, "table", table_md, element_index),
                         doc_name=doc_name,
                         doc_path=str(doc_path),
                         element_type="table",
-                        content=table_md,
+                        content=content,
                         section_path=list(current_section_path),
                         language=_detect_language(table_md),
                         table_data=table_data,

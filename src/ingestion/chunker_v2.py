@@ -210,16 +210,11 @@ def _split_table_rows(table_md: str, effective_budget: int) -> list[str]:
 
 def _emit_table_chunk(
     elem: ParsedElement,
-    part_md: str,
-    part_idx: int,
-    n_parts: int,
     chunk_index: int,
 ) -> Chunk:
-    suffix = f" (part {part_idx + 1}/{n_parts})" if n_parts > 1 else ""
-    prefix = _build_context_prefix(elem.doc_name, elem.section_path, f"TABLE{suffix}")
-    content = f"{prefix}\n\n{part_md}"
+    content = elem.content
     chunk = Chunk(
-        chunk_id=_generate_chunk_id(elem.doc_name, "table", part_md, chunk_index),
+        chunk_id=_generate_chunk_id(elem.doc_name, "table", content, chunk_index),
         doc_name=elem.doc_name,
         doc_path=elem.doc_path,
         element_type="table",
@@ -322,6 +317,10 @@ class _ChunkBuilder:
 
         return chunk, chunk_index + 1
 
+    def clear(self) -> None:
+        self._buffer = []
+        self._buffer_tokens = 0
+
 
 # ---------------------------------------------------------------------------
 # Public entry point
@@ -366,29 +365,15 @@ def chunk_elements(elements: list[ParsedElement], config: ChunkingConfig) -> lis
             continue
 
         if elem.element_type == "table":
-            # Flush any pending text before the table
+            # Flush any pending text before the table and keep the table standalone.
             chunk, chunk_index = builder.flush(chunk_index)  # type: ignore[union-attr]
             if chunk is not None:
                 chunks.append(chunk)
 
-            prefix = _build_context_prefix(elem.doc_name, elem.section_path)
-            table_ceiling = max(
-                config.max_chunk_tokens * _TABLE_TOKEN_CEILING_FACTOR - _count_tokens(prefix),
-                50,
-            )
+            builder.clear()  # type: ignore[union-attr]
 
-            if _count_tokens(elem.content) > table_ceiling:
-                warnings.warn(
-                    f"Oversized table in {elem.doc_name} / "
-                    f"{' > '.join(elem.section_path) or 'root'}. Splitting by rows."
-                )
-                parts = _split_table_rows(elem.content, table_ceiling)
-            else:
-                parts = [elem.content]
-
-            for part_idx, part_md in enumerate(parts):
-                chunks.append(_emit_table_chunk(elem, part_md, part_idx, len(parts), chunk_index))
-                chunk_index += 1
+            chunks.append(_emit_table_chunk(elem, chunk_index))
+            chunk_index += 1
 
         else:
             # Paragraph, list_item, or any other text element
