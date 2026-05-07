@@ -1,12 +1,13 @@
 """
-Semantic chunker using LangChain's SemanticChunker with OpenAI embeddings.
+Semantic chunker using LangChain's SemanticChunker with configured embeddings.
 
 Uses semantic similarity to find optimal chunk boundaries instead of fixed tokens.
+Supports local embedders (HuggingFace) and Ollama, no OpenAI key required.
 """
 
 import hashlib
 from langchain_text_splitters import SemanticChunker
-from langchain_openai import OpenAIEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings, OllamaEmbeddings
 
 from config import ChunkingConfig, get_config
 from src.ingestion.parser import ParsedElement
@@ -16,6 +17,25 @@ from src.ingestion.chunker_v2 import (
     _enforce_embedding_ceiling,
     Chunk,
 )
+
+
+def _get_embeddings():
+    """Get embeddings based on config (local or ollama)."""
+    app_config = get_config()
+    embedding_config = app_config.embedding
+    
+    if embedding_config.provider == "local":
+        return HuggingFaceEmbeddings(model_name=embedding_config.model)
+    elif embedding_config.provider == "ollama":
+        return OllamaEmbeddings(
+            model=embedding_config.model,
+            base_url=embedding_config.base_url,
+        )
+    else:
+        raise ValueError(
+            f"Unsupported embedding provider: {embedding_config.provider}. "
+            "Use 'local' or 'ollama'."
+        )
 
 
 def _generate_chunk_id(doc_name: str, content: str, index: int) -> str:
@@ -57,7 +77,7 @@ def chunk_elements_semantic(
     breakpoint_threshold_amount: float = 95.0,
 ) -> list[Chunk]:
     """
-    Split documents into semantic chunks using configured embeddings.
+    Split documents into semantic chunks using configured local embeddings.
 
     Args:
         elements: List of ParsedElement from parser
@@ -68,12 +88,10 @@ def chunk_elements_semantic(
     Returns:
         List of Chunk objects
     """
-    # Get embedding model from global config
-    app_config = get_config()
-    embedding_model = app_config.embedding.model
+    # Get embeddings from config (local or ollama, no OpenAI key needed)
+    embeddings = _get_embeddings()
     
-    # Initialize semantic chunker with configured embeddings
-    embeddings = OpenAIEmbeddings(model=embedding_model)
+    # Initialize semantic chunker
     splitter = SemanticChunker(
         embeddings=embeddings,
         breakpoint_threshold_type=breakpoint_threshold_type,
