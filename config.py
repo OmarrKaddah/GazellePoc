@@ -72,6 +72,11 @@ class ChunkingConfig:
     overlap_tokens: int = 50
     preserve_tables: bool = True
     preserve_sections: bool = True
+    # Chunker version: "v2" (token-based) or "v3" (semantic)
+    version: str = "v2"
+    # SemanticChunker (v3) settings
+    semantic_breakpoint_type: str = "percentile"  # "percentile", "standard_deviation", "interquartile"
+    semantic_breakpoint_amount: float = 95.0
 
 
 @dataclass

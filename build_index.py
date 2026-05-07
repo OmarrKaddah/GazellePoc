@@ -13,6 +13,7 @@ from pathlib import Path
 from config import get_config
 from src.ingestion.parser import parse_all_documents, PARSE_FAILURES
 from src.ingestion.chunker_v2 import chunk_elements, Chunk
+from src.ingestion.chunker_v3 import chunk_elements_semantic
 from src.ingestion.embedder import VectorStore
 from src.graph.entity_extractor import extract_entities_from_chunks, align_entities, FAILED_EXTRACTIONS
 from src.graph.kg_builder import KnowledgeGraph
@@ -41,7 +42,17 @@ def main():
 
     # ── Step 2: Chunk ──
     print("\n[2/5] Chunking...")
-    chunks = chunk_elements(elements, config.chunking)
+    if config.chunking.version == "v3":
+        print(f"  Using SemanticChunker (v3) with breakpoint_type={config.chunking.semantic_breakpoint_type}")
+        chunks = chunk_elements_semantic(
+            elements,
+            config.chunking,
+            breakpoint_threshold_type=config.chunking.semantic_breakpoint_type,
+            breakpoint_threshold_amount=config.chunking.semantic_breakpoint_amount,
+        )
+    else:
+        print(f"  Using token-based chunker (v2)")
+        chunks = chunk_elements(elements, config.chunking)
     print(f"  Total chunks: {len(chunks)}")
     print(f"  Types: { {t: sum(1 for c in chunks if c.element_type == t) for t in set(c.element_type for c in chunks)} }")
 
