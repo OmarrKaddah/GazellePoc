@@ -2,6 +2,7 @@
 Semantic chunker using LangChain's SemanticChunker with local embeddings.
 
 Uses semantic similarity to find optimal chunk boundaries instead of fixed tokens.
+Supports local embedders (HuggingFace) and Ollama, no OpenAI key required.
 """
 
 import hashlib
@@ -73,7 +74,7 @@ def chunk_elements_semantic(
     breakpoint_threshold_amount: float = 95.0,
 ) -> list[Chunk]:
     """
-    Split documents into semantic chunks using configured embeddings.
+    Split documents into semantic chunks using configured local embeddings.
 
     Args:
         elements: List of ParsedElement from parser
