@@ -80,6 +80,30 @@ def print_chunk_stats(chunks, title):
             print(f"    Tokens: {chunk.token_estimate}")
             print(f"    Content preview: {chunk.content[:100]}...")
 
+import json
+
+
+def save_chunks(chunks, output_dir: str, chunker_name: str):
+    """Save chunks to json files."""
+    out_path = Path(output_dir)
+    out_path.mkdir(parents=True, exist_ok=True)
+
+    for i, chunk in enumerate(chunks):
+        chunk_data = {
+            "chunk_id": chunk.chunk_id,
+            "element_type": chunk.element_type,
+            "token_estimate": chunk.token_estimate,
+            "doc_name": chunk.doc_name,
+            "content": chunk.content,
+            "metadata": getattr(chunk, "metadata", {}),
+        }
+
+        file_name = f"{chunker_name}_chunk_{i+1}.json"
+
+        with open(out_path / file_name, "w", encoding="utf-8") as f:
+            json.dump(chunk_data, f, ensure_ascii=False, indent=2)
+
+    print(f"✓ Saved {len(chunks)} chunks to {out_path}")
 
 def main():
     config = get_config()
@@ -116,6 +140,8 @@ def main():
         print(f"❌ V2 failed: {e}")
         chunks_v2 = []
     
+    print_chunk_stats(chunks_v2, "CHUNKER V2 Results")
+    save_chunks(chunks_v2, "test_results/chunks/v2", "v2")
     # Test V3
     print("\n[2/2] Testing chunker_v3...")
     try:
@@ -129,6 +155,9 @@ def main():
     except Exception as e:
         print(f"❌ V3 failed: {e}")
         chunks_v3 = []
+
+    print_chunk_stats(chunks_v3, "CHUNKER V3 Results")
+    save_chunks(chunks_v3, "test_results/chunks/v3", "v3")
     
     # Comparison
     print(f"\n{'='*60}")

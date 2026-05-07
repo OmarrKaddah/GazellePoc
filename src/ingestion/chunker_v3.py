@@ -1,12 +1,12 @@
 """
-Semantic chunker using LangChain's SemanticChunker with OpenAI embeddings.
+Semantic chunker using LangChain's SemanticChunker with local embeddings.
 
 Uses semantic similarity to find optimal chunk boundaries instead of fixed tokens.
 """
 
 import hashlib
-from langchain_text_splitters import SemanticChunker
-from langchain_openai import OpenAIEmbeddings
+from langchain_experimental.text_splitter import SemanticChunker
+from langchain_core.embeddings import Embeddings
 
 from config import ChunkingConfig, get_config
 from src.ingestion.parser import ParsedElement
@@ -16,6 +16,22 @@ from src.ingestion.chunker_v2 import (
     _enforce_embedding_ceiling,
     Chunk,
 )
+from src.ingestion.embedder import Embedder
+
+
+class LocalEmbeddings(Embeddings):
+    """LangChain Embeddings wrapper around the project's local embedder."""
+
+    def __init__(self, embedder: Embedder = None):
+        self.embedder = embedder or Embedder()
+
+    def embed_documents(self, texts: list[str]) -> list[list[float]]:
+        """Embed a list of documents."""
+        return self.embedder.embed_batch(texts)
+
+    def embed_query(self, text: str) -> list[float]:
+        """Embed a single query text."""
+        return self.embedder.embed(text)
 
 
 def _generate_chunk_id(doc_name: str, content: str, index: int) -> str:
@@ -71,9 +87,11 @@ def chunk_elements_semantic(
     # Get embedding model from global config
     app_config = get_config()
     embedding_model = app_config.embedding.model
+    print(f"Using embedding model: {embedding_model} for semantic chunking.")
     
-    # Initialize semantic chunker with configured embeddings
-    embeddings = OpenAIEmbeddings(model=embedding_model)
+    # Initialize semantic chunker with local embeddings
+    embedder = Embedder(app_config)
+    embeddings = LocalEmbeddings(embedder)
     splitter = SemanticChunker(
         embeddings=embeddings,
         breakpoint_threshold_type=breakpoint_threshold_type,
